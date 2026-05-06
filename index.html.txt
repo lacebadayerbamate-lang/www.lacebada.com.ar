@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>La Cebada</title>
+  <style>
+    :root{
+      --bg:#070707;
+      --panel:#111111;
+      --panel-2:#171717;
+      --line:rgba(255,255,255,.10);
+      --text:#ffffff;
+      --muted:rgba(255,255,255,.65);
+      --soft:rgba(255,255,255,.04);
+      --green:#39d98a;
+      --green-2:#2fc97d;
+      --danger:#c0392b;
+      --shadow:0 12px 40px rgba(0,0,0,.35);
+      --radius:22px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    body{
+      font-family:Segoe UI, Arial, sans-serif;
+      background:linear-gradient(180deg,#000 0%,#0a0a0a 40%,#111 100%);
+      color:var(--text);
+    }
+
+    img{max-width:100%;display:block}
+    button,input{font:inherit}
+
+    .container{
+      width:min(1180px, calc(100% - 32px));
+      margin:0 auto;
+    }
+
+    header{
+      position:sticky;
+      top:0;
+      z-index:40;
+      border-bottom:1px solid var(--line);
+      background:rgba(0,0,0,.86);
+      backdrop-filter:blur(10px);
+    }
+
+    .header-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:14px 0;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      cursor:pointer;
+      user-select:none;
+    }
+
+    .brand img{
+      width:56px;
+      height:56px;
+      object-fit:contain;
+      background:#000;
+      border-radius:50%;
+    }
+
+    .brand-title{
+      font-size:30px;
+      font-weight:800;
+      line-height:1;
+      margin:0;
+    }
+
+    .brand-sub{
+      font-size:13px;
+      color:var(--muted);
+      margin-top:4px;
+    }
+
+    .cart-btn{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.05);
+      color:#fff;
+      border-radius:999px;
+      padding:12px 18px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      cursor:pointer;
+      transition:.2s ease;
+    }
+
+    .cart-btn:hover{background:rgba(255,255,255,.10)}
+    .badge{
+      min-width:24px;
+      height:24px;
+      border-radius:999px;
+      background:#fff;
+      color:#000;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      font-size:12px;
+      font-weight:800;
+      padding:0 8px;
+    }
+
+    main{padding:28px 0 64px}
+
+    .hero{
+      margin-bottom:30px;
+      padding:28px;
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      border-radius:28px;
+      box-shadow:var(--shadow);
+    }
+
+    .hero h2{
+      margin:0 0 8px;
+      font-size:38px;
+      line-height:1.05;
+    }
+
+    .hero p{
+      margin:0;
+      color:var(--muted);
+      max-width:720px;
+      line-height:1.5;
+    }
+
+    .section-title{
+      margin:0 0 4px;
+      font-size:42px;
+      font-weight:800;
+    }
+
+    .section-sub{
+      margin:0 0 24px;
+      color:var(--muted);
+      font-size:18px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:20px;
+    }
+
+    .card{
+      border:1px solid var(--line);
+      background:var(--panel);
+      border-radius:24px;
+      overflow:hidden;
+      box-shadow:var(--shadow);
+      display:flex;
+      flex-direction:column;
+    }
+
+    .media{
+      position:relative;
+      aspect-ratio:1/1;
+      background:#000;
+      overflow:hidden;
+    }
+
+    .media img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .tag{
+      position:absolute;
+      top:12px;
+      left:12px;
+      z-index:2;
+      padding:8px 12px;
+      border-radius:999px;
+      background:#fff;
+      color:#000;
+      font-weight:800;
+      font-size:12px;
+      box-shadow:var(--shadow);
+    }
+
+    .content{
+      padding:18px;
+      display:flex;
+      flex-direction:column;
+      flex:1;
+    }
+
+    .content h3{
+      margin:0;
+      font-size:24px;
+      line-height:1.15;
+    }
+
+    .weight{
+      color:var(--muted);
+      font-size:15px;
+      font-weight:600;
+    }
+
+    .desc{
+      margin:10px 0 0;
+      color:var(--muted);
+      line-height:1.45;
+      font-size:15px;
+      min-height:66px;
+    }
+
+    .chips{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:12px;
+    }
+
+    .chip{
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      color:rgba(255,255,255,.75);
+    }
+
+    .price-row{
+      margin-top:16px;
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-end;
+      gap:10px;
+    }
+
+    .price{
+      font-size:36px;
+      font-weight:900;
+    }
+
+    .stock-ok{font-size:13px;color:#92ffb8}
+    .stock-no{font-size:13px;color:#ff8e8e}
+
+    .qty{
+      margin-top:16px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:14px;
+    }
+
+    .qty button,
+    .mini-btn{
+      width:38px;
+      height:38px;
+      border:none;
+      border-radius:999px;
+      background:rgba(255,255,255,.10);
+      color:#fff;
+      cursor:pointer;
+      font-size:20px;
+      transition:.2s ease;
+    }
+
+    .qty button:hover,
+    .mini-btn:hover{background:rgba(255,255,255,.18)}
+
+    .qty span{
+      min-width:24px;
+      text-align:center;
+      font-weight:800;
+      font-size:20px;
+    }
+
+    .primary-btn,
+    .secondary-btn,
+    .danger-btn{
+      width:100%;
+      border:none;
+      cursor:pointer;
+      border-radius:16px;
+      padding:14px 16px;
+      margin-top:16px;
+      font-weight:700;
+      transition:.2s ease;
+    }
+
+    .primary-btn{
+      background:#fff;
+      color:#000;
+    }
+    .primary-btn:hover{background:#eaeaea}
+
+    .secondary-btn{
+      background:rgba(255,255,255,.10);
+      color:#fff;
+    }
+    .secondary-btn:hover{background:rgba(255,255,255,.16)}
+
+    .danger-btn{
+      background:#6a1f1a;
+      color:#fff;
+    }
+    .danger-btn:hover{background:#7a241d}
+
+    .benefits{
+      margin-top:34px;
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:14px;
+    }
+
+    .benefit{
+      border:1px solid var(--line);
+      border-radius:20px;
+      background:rgba(255,255,255,.03);
+      padding:18px;
+    }
+
+    .benefit h4{
+      margin:0 0 8px;
+      font-size:18px;
+    }
+    .benefit p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.45;
+      font-size:15px;
+    }
+
+    .story{
+      margin-top:30px;
+      border:1px solid var(--line);
+      border-radius:28px;
+      padding:28px;
+      text-align:center;
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+    }
+
+    .story-top{
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.45);
+      font-size:12px;
+    }
+
+    .story h3{
+      margin:10px 0 10px;
+      font-size:42px;
+    }
+
+    .story p{
+      max-width:760px;
+      margin:0 auto;
+      color:var(--muted);
+      font-size:18px;
+      line-height:1.5;
+    }
+
+    .story-links{
+      margin-top:20px;
+      display:flex;
+      gap:12px;
+      justify-content:center;
+      flex-wrap:wrap;
+    }
+
+    .story-links a{
+      color:#fff;
+      text-decoration:none;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.05);
+      padding:12px 18px;
+      border-radius:999px;
+    }
+
+    footer{
+      margin-top:26px;
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:14px;
+      border:1px solid var(--line);
+      border-radius:28px;
+      background:rgba(255,255,255,.03);
+      padding:24px;
+    }
+
+    footer h4{
+      margin:0 0 10px;
+      font-size:18px;
+    }
+    footer p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.5;
+    }
+    footer a{color:#fff}
+
+    .overlay{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.72);
+      z-index:100;
+      display:none;
+    }
+
+    .overlay.show{display:block}
+
+    .drawer{
+      position:fixed;
+      left:0;
+      right:0;
+      bottom:0;
+      z-index:101;
+      background:#0d130f;
+      border-top:1px solid var(--line);
+      border-top-left-radius:28px;
+      border-top-right-radius:28px;
+      max-height:82vh;
+      overflow:auto;
+      padding:22px;
+      transform:translateY(110%);
+      transition:.25s ease;
+      box-shadow:0 -16px 40px rgba(0,0,0,.45);
+    }
+
+    .drawer.show{transform:translateY(0)}
+
+    .drawer-inner{
+      width:min(760px,100%);
+      margin:0 auto;
+    }
+
+    .drawer h3,
+    .modal h3{
+      margin:0 0 14px;
+      font-size:28px;
+    }
+
+    .cart-item{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      padding:12px;
+      border-radius:16px;
+      background:rgba(255,255,255,.05);
+      margin-bottom:10px;
+    }
+
+    .cart-item img{
+      width:56px;
+      height:56px;
+      object-fit:contain;
+      background:#fff;
+      border-radius:12px;
+      padding:4px;
+      flex-shrink:0;
+    }
+
+    .cart-info{
+      flex:1;
+      min-width:0;
+    }
+
+    .cart-name{
+      font-weight:800;
+      font-size:15px;
+    }
+
+    .cart-sub{
+      color:var(--muted);
+      font-size:14px;
+      margin-top:4px;
+    }
+
+    .cart-controls{
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+
+    .cart-total{
+      margin-top:14px;
+      font-size:24px;
+      font-weight:900;
+    }
+
+    .note{
+      margin-top:12px;
+      background:rgba(57,217,138,.12);
+      color:#c9ffe0;
+      border-radius:16px;
+      padding:14px;
+      font-size:14px;
+    }
+
+    .modal{
+      position:fixed;
+      left:50%;
+      top:50%;
+      transform:translate(-50%,-50%) scale(.96);
+      width:min(430px, calc(100% - 24px));
+      z-index:201;
+      background:#0d130f;
+      border:1px solid var(--line);
+      border-radius:22px;
+      padding:22px;
+      box-shadow:var(--shadow);
+      display:none;
+      opacity:0;
+      transition:.2s ease;
+    }
+
+    .modal.show{
+      display:block;
+      opacity:1;
+      transform:translate(-50%,-50%) scale(1);
+    }
+
+    .summary{
+      border-radius:14px;
+      background:rgba(255,255,255,.05);
+      padding:12px;
+      font-size:14px;
+      line-height:1.5;
+      margin-bottom:14px;
+    }
+
+    .field{
+      width:100%;
+      padding:14px 14px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background:#0c0c0c;
+      color:#fff;
+      outline:none;
+      margin-bottom:10px;
+    }
+
+    .error{
+      color:#ff8e8e;
+      font-size:14px;
+      margin-bottom:10px;
+    }
+
+    .success-modal{
+      position:fixed;
+      inset:0;
+      z-index:300;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      background:rgba(0,0,0,.76);
+      padding:16px;
+    }
+
+    .success-modal.show{display:flex}
+
+    .success-box{
+      width:min(390px,100%);
+      background:#0d130f;
+      border:1px solid var(--line);
+      border-radius:22px;
+      box-shadow:var(--shadow);
+      padding:24px;
+      text-align:center;
+    }
+
+    .success-box h3{
+      margin:0 0 12px;
+      font-size:28px;
+    }
+
+    .success-box p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.55;
+    }
+
+    .toast{
+      position:fixed;
+      left:50%;
+      bottom:24px;
+      transform:translateX(-50%) translateY(16px);
+      z-index:400;
+      background:rgba(0,0,0,.92);
+      border:1px solid var(--line);
+      color:#fff;
+      padding:14px 18px;
+      border-radius:999px;
+      box-shadow:var(--shadow);
+      opacity:0;
+      pointer-events:none;
+      transition:.22s ease;
+      font-size:14px;
+    }
+
+    .toast.show{
+      opacity:1;
+      transform:translateX(-50%) translateY(0);
+    }
+
+    .admin-btn{
+      position:fixed;
+      right:16px;
+      bottom:16px;
+      z-index:50;
+      width:52px;
+      height:52px;
+      border:none;
+      border-radius:999px;
+      background:rgba(255,255,255,.08);
+      color:#fff;
+      cursor:pointer;
+      display:none;
+    }
+
+    .admin-panel{
+      position:fixed;
+      inset:24px;
+      z-index:250;
+      background:#0d130f;
+      border:1px solid var(--line);
+      border-radius:24px;
+      box-shadow:var(--shadow);
+      display:none;
+      overflow:auto;
+      padding:20px;
+    }
+
+    .admin-panel.show{display:block}
+
+    .admin-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      margin-bottom:18px;
+    }
+
+    .admin-top h3{
+      margin:0;
+      font-size:28px;
+    }
+
+    .admin-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:18px;
+    }
+
+    .admin-card{
+      background:rgba(255,255,255,.04);
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:16px;
+    }
+
+    .admin-card h4{
+      margin:0 0 12px;
+      font-size:18px;
+    }
+
+    .admin-product{
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:14px;
+      margin-bottom:12px;
+      background:rgba(255,255,255,.03);
+    }
+
+    .admin-product:last-child{margin-bottom:0}
+
+    .admin-product-title{
+      font-weight:800;
+      margin-bottom:10px;
+    }
+
+    .admin-actions{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+      margin-top:10px;
+    }
+
+    .admin-small{
+      width:100%;
+      padding:12px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:#0a0a0a;
+      color:#fff;
+      outline:none;
+      margin-bottom:8px;
+    }
+
+    .admin-list{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+
+    .admin-list-item{
+      background:rgba(255,255,255,.03);
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:12px;
+      font-size:14px;
+      line-height:1.45;
+    }
+
+    @media (max-width: 1024px){
+      .grid{grid-template-columns:repeat(2,1fr)}
+      .benefits{grid-template-columns:repeat(2,1fr)}
+      .admin-grid{grid-template-columns:1fr}
+    }
+
+    @media (max-width: 640px){
+      .brand img{width:44px;height:44px}
+      .brand-title{font-size:24px}
+      .section-title{font-size:34px}
+      .hero h2{font-size:30px}
+      .story h3{font-size:32px}
+      .grid,
+      .benefits,
+      footer{grid-template-columns:1fr}
+      .header-inner{padding:10px 0}
+      .cart-btn{padding:10px 14px}
+      .admin-panel{inset:10px}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container header-inner">
+      <div class="brand" id="adminAccess">
+        <img src="logo.png" alt="Logo La Cebada">
+        <div>
+          <div class="brand-title">La Cebada</div>
+          <div class="brand-sub">Yerba mate seleccionada</div>
+        </div>
+      </div>
+
+      <button class="cart-btn" id="openCartBtn">
+        <span>🛒</span>
+        <span>Carrito</span>
+        <span class="badge" id="cartBadge">0</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <h2>Tu mate, como te gusta.</h2>
+      <p>Elegí tu yerba favorita, combiná marcas, sumá al carrito y finalizá tu pedido por WhatsApp o pedí que nos comuniquemos con vos.</p>
+    </section>
+
+    <section id="catalogo">
+      <h2 class="section-title">Nuestro catálogo</h2>
+      <p class="section-sub">Cuatro yerbas elegidas a mano. Sumá las que quieras.</p>
+
+      <div class="grid" id="productsGrid"></div>
+    </section>
+
+    <section class="benefits">
+      <div class="benefit">
+        <h4>Atención por WhatsApp</h4>
+        <p>Respondemos rápido y confirmamos cada pedido personalmente.</p>
+      </div>
+      <div class="benefit">
+        <h4>Yerbas seleccionadas</h4>
+        <p>Trabajamos solo con marcas que probamos y aprobamos.</p>
+      </div>
+      <div class="benefit">
+        <h4>Precio claro</h4>
+        <p>Ves el total final antes de confirmar. Sin sorpresas.</p>
+      </div>
+      <div class="benefit">
+        <h4>Pedido a tu medida</h4>
+        <p>Combiná marcas y kilos como prefieras.</p>
+      </div>
+    </section>
+
+    <section class="story">
+      <div class="story-top">Detrás de La Cebada</div>
+      <h3>Un emprendimiento de dos amigos materos</h3>
+      <p>Seleccionamos cada yerba personalmente. Si querés conocernos o consultarnos algo, escribinos por Instagram.</p>
+      <div class="story-links">
+        <a href="https://instagram.com/gaspichaves" target="_blank">@gaspichaves</a>
+        <a href="https://instagram.com/matu_aparisi" target="_blank">@matu_aparisi</a>
+      </div>
+    </section>
+
+    <footer>
+      <div>
+        <h4>La Cebada</h4>
+        <p>Yerbas premium para el matero exigente. Compra simple, atención humana.</p>
+      </div>
+      <div>
+        <h4>Compra segura</h4>
+        <p>Confirmamos cada pedido por WhatsApp antes de despachar. Sin vueltas.</p>
+      </div>
+      <div>
+        <h4>Seguinos</h4>
+        <p>
+          Instagram:
+          <a href="https://instagram.com/gaspichaves" target="_blank">@gaspichaves</a>
+          ·
+          <a href="https://instagram.com/matu_aparisi" target="_blank">@matu_aparisi</a>
+        </p>
+      </div>
+    </footer>
+  </main>
+
+  <div class="overlay" id="cartOverlay"></div>
+  <div class="drawer" id="cartDrawer">
+    <div class="drawer-inner">
+      <h3>Tu carrito</h3>
+      <div id="cartItems"></div>
+      <div class="cart-total" id="cartTotal">Total: $0</div>
+      <div class="note">✔ Podés seguir agregando productos antes de finalizar.</div>
+      <button class="secondary-btn" id="clearCartBtn">Vaciar carrito</button>
+      <button class="primary-btn" id="checkoutBtn">Finalizar compra</button>
+    </div>
+  </div>
+
+  <div class="overlay" id="checkoutOverlay"></div>
+  <div class="modal" id="checkoutModal">
+    <div class="summary" id="checkoutSummary"></div>
+
+    <div id="stepOptions">
+      <h3>¿Cómo querés finalizar tu pedido?</h3>
+      <button class="primary-btn" id="goWhatsappBtn">💬 Confirmar por WhatsApp</button>
+      <button class="secondary-btn" id="goContactBtn">📞 Que nos comuniquemos con vos</button>
+      <button class="danger-btn" id="cancelCheckoutBtn">Cancelar</button>
+    </div>
+
+    <div id="stepWhatsapp" style="display:none">
+      <h3>Confirmar por WhatsApp</h3>
+      <input class="field" id="waName" type="text" placeholder="Tu nombre y apellido">
+      <div class="error" id="waError"></div>
+      <button class="primary-btn" id="sendWhatsappBtn">Enviar pedido</button>
+      <button class="secondary-btn" id="backFromWhatsappBtn">Volver</button>
+    </div>
+
+    <div id="stepContact" style="display:none">
+      <h3>Te contactamos nosotros</h3>
+      <input class="field" id="contactName" type="text" placeholder="Tu nombre y apellido">
+      <input class="field" id="contactPhone" type="tel" placeholder="Tu número de teléfono">
+      <div class="error" id="contactError"></div>
+      <button class="primary-btn" id="sendContactBtn">Enviar solicitud</button>
+      <button class="secondary-btn" id="backFromContactBtn">Volver</button>
+    </div>
+  </div>
+
+  <div class="success-modal" id="successModal">
+    <div class="success-box">
+      <h3>✅ ¡Pedido recibido!</h3>
+      <p>En breve <strong>La Cebada</strong> se comunicará con vos por WhatsApp para confirmar tu pedido.</p>
+      <button class="primary-btn" id="closeSuccessBtn">Entendido</button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <div class="overlay" id="adminOverlay"></div>
+  <div class="admin-panel" id="adminPanel">
+    <div class="admin-top">
+      <h3>Panel de administrador</h3>
+      <button class="secondary-btn" id="closeAdminBtn" style="width:auto;margin:0">Cerrar</button>
+    </div>
+
+    <div class="admin-grid">
+      <div class="admin-card">
+        <h4>Productos</h4>
+        <div id="adminProducts"></div>
+      </div>
+
+      <div class="admin-card">
+        <h4>Acciones rápidas</h4>
+        <button class="secondary-btn" id="adminVaciarCarritoBtn">Vaciar carrito</button>
+        <button class="secondary-btn" id="adminRestaurarBtn">Restaurar catálogo original</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const TELEFONO_VENDEDOR = "5493364370451";
+    const WEBHOOK_URL = "https://hook.us2.make.com/ofufesknpyc3spbueo9q68v4bmasdhgu";
+    const ADMIN_PASSWORD = "cebada1";
+
+    const productosOriginales = [
+      {
+        id: "baldo",
+        nombre: "Yerba Baldo",
+        peso: "1/2 kg",
+        descripcion: "Mezcla intensa de hojas y palos seleccionados. Perfecta para los que buscan un mate fuerte y bien rendidor.",
+        precio: 6500,
+        imagen: "baldo.jpg",
+        etiqueta: "Más vendida",
+        notas: ["Intensa", "Rendidora", "Tradicional"],
+        stock: true
+      },
+      {
+        id: "canarias",
+        nombre: "Yerba Canarias",
+        peso: "1 kg",
+        descripcion: "La clásica uruguaya: molienda fina, sabor profundo y carácter inconfundible para los materos exigentes.",
+        precio: 10500,
+        imagen: "canarias.jpg",
+        etiqueta: "Origen Uruguay",
+        notas: ["Fuerte", "Premium", "Molienda fina"],
+        stock: true
+      },
+      {
+        id: "rei-premium",
+        nombre: "Yerba Rei Verde Premium",
+        peso: "1 kg",
+        descripcion: "Edición premium con secado natural y estacionamiento prolongado. Sabor noble, suave en boca y muy aromático.",
+        precio: 10000,
+        imagen: "rei-premium.jpg",
+        etiqueta: "Premium",
+        notas: ["Aromática", "Suave", "Estacionada"],
+        stock: true
+      },
+      {
+        id: "rei-clasica",
+        nombre: "Yerba Rei Verde Clásica",
+        peso: "1/2 kg",
+        descripcion: "La versión tradicional Rei Verde: equilibrio justo entre sabor y rendimiento para el mate de todos los días.",
+        precio: 6000,
+        imagen: "rei-clasica.jpg",
+        etiqueta: "Clásica",
+        notas: ["Equilibrada", "Diaria", "Clásica"],
+        stock: true
+      }
+    ];
+
+    let config = JSON.parse(localStorage.getItem("cebada_config") || "{}");
+    let carrito = JSON.parse(localStorage.getItem("cebada_carrito") || "[]");
+    let cantidades = JSON.parse(localStorage.getItem("cebada_cantidades") || "{}");
+
+    function getProductos() {
+      return productosOriginales.map(p => {
+        const c = config[p.id] || {};
+        return {
+          ...p,
+          precio: Number.isFinite(c.precio) ? c.precio : p.precio,
+          etiqueta: typeof c.etiqueta === "string" ? c.etiqueta : p.etiqueta,
+          stock: typeof c.stock === "boolean" ? c.stock : p.stock
+        };
+      });
+    }
+
+    function saveConfig() {
+      localStorage.setItem("cebada_config", JSON.stringify(config));
+    }
+
+    function saveCart() {
+      localStorage.setItem("cebada_carrito", JSON.stringify(carrito));
+    }
+
+    function saveCantidades() {
+      localStorage.setItem("cebada_cantidades", JSON.stringify(cantidades));
+    }
+
+    function ars(n) {
+      return "$" + Number(n).toLocaleString("es-AR");
+    }
+
+    function totalCantidad() {
+      return carrito.reduce((a, b) => a + b.cantidad, 0);
+    }
+
+    function totalPrecio() {
+      return carrito.reduce((a, b) => a + b.cantidad * b.precio, 0);
+    }
+
+    function detalleTexto() {
+      return carrito.map(p => `• ${p.nombre} ${p.peso} x${p.cantidad} — ${ars(p.precio * p.cantidad)}`).join("\\n");
+    }
+
+    function validarTel(t) {
+      const limpio = String(t).replace(/\\D/g, "");
+      return limpio.length >= 10 && limpio.length <= 13 && !/^0+$/.test(limpio);
+    }
+
+    function showToast(texto) {
+      const toast = document.getElementById("toast");
+      toast.textContent = texto;
+      toast.classList.add("show");
+      clearTimeout(window.__toastTimer);
+      window.__toastTimer = setTimeout(() => toast.classList.remove("show"), 1800);
+    }
+
+    function renderProducts() {
+      const productos = getProductos();
+      const grid = document.getElementById("productsGrid");
+
+      grid.innerHTML = productos.map(p => {
+        const cant = cantidades[p.id] || 1;
+        return `
+          <article class="card">
+            <div class="media">
+              ${p.etiqueta ? `<span class="tag">${p.etiqueta}</span>` : ""}
+              <img src="${p.imagen}" alt="${p.nombre} ${p.peso}">
+            </div>
+            <div class="content">
+              <h3>${p.nombre} <span class="weight">· ${p.peso}</span></h3>
+              <p class="desc">${p.descripcion}</p>
+              <div class="chips">
+                ${p.notas.map(n => `<span class="chip">${n}</span>`).join("")}
+              </div>
+              <div class="price-row">
+                <div class="price">${ars(p.precio)}</div>
+                <div class="${p.stock ? "stock-ok" : "stock-no"}">${p.stock ? "Stock disponible" : "Sin stock"}</div>
+              </div>
+              <div class="qty">
+                <button onclick="changeQty('${p.id}', -1)">−</button>
+                <span id="qty-${p.id}">${cant}</span>
+                <button onclick="changeQty('${p.id}', 1)">+</button>
+              </div>
+              <button class="primary-btn" onclick="addCart('${p.id}')">Agregar al carrito</button>
+            </div>
+          </article>
+        `;
+      }).join("");
+    }
+
+    function changeQty(id, delta) {
+      const actual = cantidades[id] || 1;
+      cantidades[id] = Math.max(1, actual + delta);
+      saveCantidades();
+      const span = document.getElementById("qty-" + id);
+      if (span) span.textContent = cantidades[id];
+    }
+
+    function addCart(id) {
+      const producto = getProductos().find(p => p.id === id);
+      if (!producto) return;
+      if (!producto.stock) {
+        alert("Este producto está sin stock");
+        return;
+      }
+
+      const cant = cantidades[id] || 1;
+      const existe = carrito.find(i => i.id === id);
+
+      if (existe) {
+        existe.cantidad += cant;
+        existe.precio = producto.precio;
+      } else {
+        carrito.push({
+          id: producto.id,
+          nombre: producto.nombre,
+          peso: producto.peso,
+          precio: producto.precio,
+          imagen: producto.imagen,
+          cantidad: cant
+        });
+      }
+
+      cantidades[id] = 1;
+      saveCantidades();
+      saveCart();
+      renderProducts();
+      renderCart();
+      showToast(producto.nombre + " " + producto.peso + " x" + cant + " agregado al carrito");
+    }
+
+    function modCart(id, delta) {
+      carrito = carrito
+        .map(i => i.id === id ? { ...i, cantidad: i.cantidad + delta } : i)
+        .filter(i => i.cantidad > 0);
+      saveCart();
+      renderCart();
+    }
+
+    function renderCart() {
+      document.getElementById("cartBadge").textContent = totalCantidad();
+      const items = document.getElementById("cartItems");
+      if (carrito.length === 0) {
+        items.innerHTML = "<p style='color:var(--muted)'>Tu carrito está vacío.</p>";
+      } else {
+        items.innerHTML = carrito.map(p => `
+          <div class="cart-item">
+            <img src="${p.imagen}" alt="${p.nombre}">
+            <div class="cart-info">
+              <div class="cart-name">${p.nombre} · ${p.peso}</div>
+              <div class="cart-sub">Subtotal: ${ars(p.precio * p.cantidad)}</div>
+            </div>
+            <div class="cart-controls">
+              <button class="mini-btn" onclick="modCart('${p.id}', -1)">−</button>
+              <span style="width:20px;text-align:center;font-weight:800">${p.cantidad}</span>
+              <button class="mini-btn" onclick="modCart('${p.id}', 1)">+</button>
+            </div>
+          </div>
+        `).join("");
+      }
+      document.getElementById("cartTotal").textContent = "Total: " + ars(totalPrecio());
+      updateCheckoutSummary();
+    }
+
+    function openCart() {
+      document.getElementById("cartOverlay").classList.add("show");
+      document.getElementById("cartDrawer").classList.add("show");
+    }
+
+    function closeCart() {
+      document.getElementById("cartOverlay").classList.remove("show");
+      document.getElementById("cartDrawer").classList.remove("show");
+    }
+
+    function showStep(step) {
+      document.getElementById("stepOptions").style.display = "none";
+      document.getElementById("stepWhatsapp").style.display = "none";
+      document.getElementById("stepContact").style.display = "none";
+
+      if (step === "options") document.getElementById("stepOptions").style.display = "block";
+      if (step === "whatsapp") document.getElementById("stepWhatsapp").style.display = "block";
+      if (step === "contact") document.getElementById("stepContact").style.display = "block";
+    }
+
+    function updateCheckoutSummary() {
+      document.getElementById("checkoutSummary").innerHTML = `
+        <div><strong>Productos:</strong> ${totalCantidad()}</div>
+        <div><strong>Total:</strong> ${ars(totalPrecio())}</div>
+      `;
+    }
+
+    function openCheckout() {
+      if (carrito.length === 0) {
+        alert("El carrito está vacío");
+        return;
+      }
+      updateCheckoutSummary();
+      showStep("options");
+      document.getElementById("checkoutOverlay").classList.add("show");
+      document.getElementById("checkoutModal").classList.add("show");
+    }
+
+    function closeCheckout() {
+      document.getElementById("checkoutOverlay").classList.remove("show");
+      document.getElementById("checkoutModal").classList.remove("show");
+      document.getElementById("waError").textContent = "";
+      document.getElementById("contactError").textContent = "";
+    }
+
+    function confirmarWhatsapp() {
+      const nombre = document.getElementById("waName").value.trim();
+      if (!nombre) {
+        document.getElementById("waError").textContent = "Por favor ingresá tu nombre y apellido.";
+        return;
+      }
+      document.getElementById("waError").textContent = "";
+
+      const fecha = new Date().toLocaleString("es-AR");
+      const msg =
+        `¡Hola La Cebada! 👋 Quiero confirmar este pedido:\\n\\n` +
+        detalleTexto() +
+        `\\n\\n🧉 Total de productos: ${totalCantidad()}` +
+        `\\n💰 Total a abonar: ${ars(totalPrecio())}` +
+        `\\n👤 Cliente: ${nombre}` +
+        `\\n🕒 ${fecha}\\n\\n¡Gracias!`;
+
+      window.open(`https://wa.me/${TELEFONO_VENDEDOR}?text=${encodeURIComponent(msg)}`, "_blank");
+
+      carrito = [];
+      saveCart();
+      renderCart();
+      closeCheckout();
+      closeCart();
+      document.getElementById("waName").value = "";
+    }
+
+    async function confirmarContacto() {
+      const nombre = document.getElementById("contactName").value.trim();
+      const telefono = document.getElementById("contactPhone").value.trim();
+
+      if (!nombre || !telefono) {
+        document.getElementById("contactError").textContent = "Completá tu nombre y teléfono.";
+        return;
+      }
+      if (!validarTel(telefono)) {
+        document.getElementById("contactError").textContent = "El número de teléfono no parece válido.";
+        return;
+      }
+
+      document.getElementById("contactError").textContent = "";
+
+      try {
+        await fetch(WEBHOOK_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            tipo_confirmacion: "nos_comunicamos_con_vos",
+            cliente: nombre,
+            telefono,
+            detalle: detalleTexto(),
+            cantidad_total: totalCantidad(),
+            total: totalPrecio(),
+            fecha: new Date().toLocaleString("es-AR")
+          })
+        });
+      } catch (e) {
+        console.error(e);
+      }
+
+      carrito = [];
+      saveCart();
+      renderCart();
+      closeCheckout();
+      closeCart();
+      document.getElementById("contactName").value = "";
+      document.getElementById("contactPhone").value = "";
+      document.getElementById("successModal").classList.add("show");
+    }
+
+    function openAdmin() {
+      const pass = prompt("Contraseña de administrador");
+      if (pass !== ADMIN_PASSWORD) return;
+      renderAdmin();
+      document.getElementById("adminOverlay").classList.add("show");
+      document.getElementById("adminPanel").classList.add("show");
+    }
+
+    function closeAdmin() {
+      document.getElementById("adminOverlay").classList.remove("show");
+      document.getElementById("adminPanel").classList.remove("show");
+    }
+
+    function renderAdmin() {
+      const productos = getProductos();
+      const wrap = document.getElementById("adminProducts");
+
+      wrap.innerHTML = productos.map(p => `
+        <div class="admin-product">
+          <div class="admin-product-title">${p.nombre} · ${p.peso}</div>
+          <input class="admin-small" type="number" id="price-${p.id}" value="${p.precio}" placeholder="Precio">
+          <input class="admin-small" type="text" id="tag-${p.id}" value="${p.etiqueta || ""}" placeholder="Etiqueta">
+          <div class="admin-actions">
+            <button class="secondary-btn" style="margin:0" onclick="saveProduct('${p.id}')">Guardar</button>
+            <button class="${p.stock ? 'danger-btn' : 'primary-btn'}" style="margin:0" onclick="toggleStock('${p.id}')">
+              ${p.stock ? 'Poner sin stock' : 'Activar stock'}
+            </button>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function saveProduct(id) {
+      const price = parseInt(document.getElementById("price-" + id).value, 10);
+      const tag = document.getElementById("tag-" + id).value.trim();
+
+      if (!config[id]) config[id] = {};
+      config[id].precio = isNaN(price) ? 0 : price;
+      config[id].etiqueta = tag;
+      saveConfig();
+      renderProducts();
+      renderAdmin();
+      renderCart();
+      showToast("Producto actualizado");
+    }
+
+    function toggleStock(id) {
+      const producto = getProductos().find(p => p.id === id);
+      if (!producto) return;
+      if (!config[id]) config[id] = {};
+      config[id].stock = !producto.stock;
+      saveConfig();
+      renderProducts();
+      renderAdmin();
+      showToast(config[id].stock ? "Stock activado" : "Producto sin stock");
+    }
+
+    function restoreCatalog() {
+      config = {};
+      saveConfig();
+      renderProducts();
+      renderAdmin();
+      renderCart();
+      showToast("Catálogo restaurado");
+    }
+
+    document.getElementById("openCartBtn").addEventListener("click", openCart);
+    document.getElementById("cartOverlay").addEventListener("click", closeCart);
+    document.getElementById("clearCartBtn").addEventListener("click", () => {
+      carrito = [];
+      saveCart();
+      renderCart();
+      showToast("Carrito vaciado");
+    });
+    document.getElementById("checkoutBtn").addEventListener("click", openCheckout);
+
+    document.getElementById("checkoutOverlay").addEventListener("click", closeCheckout);
+    document.getElementById("goWhatsappBtn").addEventListener("click", () => showStep("whatsapp"));
+    document.getElementById("goContactBtn").addEventListener("click", () => showStep("contact"));
+    document.getElementById("cancelCheckoutBtn").addEventListener("click", closeCheckout);
+    document.getElementById("backFromWhatsappBtn").addEventListener("click", () => showStep("options"));
+    document.getElementById("backFromContactBtn").addEventListener("click", () => showStep("options"));
+    document.getElementById("sendWhatsappBtn").addEventListener("click", confirmarWhatsapp);
+    document.getElementById("sendContactBtn").addEventListener("click", confirmarContacto);
+    document.getElementById("closeSuccessBtn").addEventListener("click", () => {
+      document.getElementById("successModal").classList.remove("show");
+    });
+
+    document.getElementById("adminAccess").addEventListener("click", openAdmin);
+    document.getElementById("adminOverlay").addEventListener("click", closeAdmin);
+    document.getElementById("closeAdminBtn").addEventListener("click", closeAdmin);
+    document.getElementById("adminVaciarCarritoBtn").addEventListener("click", () => {
+      carrito = [];
+      saveCart();
+      renderCart();
+      showToast("Carrito vaciado");
+    });
+    document.getElementById("adminRestaurarBtn").addEventListener("click", restoreCatalog);
+
+    renderProducts();
+    renderCart();
+  </script>
+</body>
+</html>
