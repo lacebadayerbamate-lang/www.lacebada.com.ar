@@ -8,16 +8,11 @@
     :root{
       --bg:#070707;
       --panel:#111111;
-      --panel-2:#171717;
       --line:rgba(255,255,255,.10);
       --text:#ffffff;
       --muted:rgba(255,255,255,.65);
-      --soft:rgba(255,255,255,.04);
       --green:#39d98a;
-      --green-2:#2fc97d;
-      --danger:#c0392b;
       --shadow:0 12px 40px rgba(0,0,0,.35);
-      --radius:22px;
     }
 
     *{box-sizing:border-box}
@@ -96,6 +91,7 @@
     }
 
     .cart-btn:hover{background:rgba(255,255,255,.10)}
+
     .badge{
       min-width:24px;
       height:24px;
@@ -607,21 +603,6 @@
       transform:translateX(-50%) translateY(0);
     }
 
-    .admin-btn{
-      position:fixed;
-      right:16px;
-      bottom:16px;
-      z-index:50;
-      width:52px;
-      height:52px;
-      border:none;
-      border-radius:999px;
-      background:rgba(255,255,255,.08);
-      color:#fff;
-      cursor:pointer;
-      display:none;
-    }
-
     .admin-panel{
       position:fixed;
       inset:24px;
@@ -652,7 +633,7 @@
 
     .admin-grid{
       display:grid;
-      grid-template-columns:repeat(2,1fr);
+      grid-template-columns:1fr 1fr;
       gap:18px;
     }
 
@@ -672,65 +653,27 @@
       border:1px solid var(--line);
       border-radius:16px;
       padding:14px;
-      margin-bottom:12px;
       background:rgba(255,255,255,.03);
     }
-
-    .admin-product:last-child{margin-bottom:0}
 
     .admin-product-title{
       font-weight:800;
       margin-bottom:10px;
     }
 
-    .admin-actions{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:10px;
-      margin-top:10px;
-    }
-
-    .admin-small{
-      width:100%;
-      padding:12px;
-      border-radius:12px;
-      border:1px solid var(--line);
-      background:#0a0a0a;
-      color:#fff;
-      outline:none;
-      margin-bottom:8px;
-    }
-
-    .admin-list{
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-    }
-
-    .admin-list-item{
-      background:rgba(255,255,255,.03);
-      border:1px solid var(--line);
-      border-radius:14px;
-      padding:12px;
-      font-size:14px;
-      line-height:1.45;
-    }
-
-    @media (max-width: 1024px){
+    @media (max-width:1024px){
       .grid{grid-template-columns:repeat(2,1fr)}
       .benefits{grid-template-columns:repeat(2,1fr)}
       .admin-grid{grid-template-columns:1fr}
     }
 
-    @media (max-width: 640px){
+    @media (max-width:640px){
       .brand img{width:44px;height:44px}
       .brand-title{font-size:24px}
       .section-title{font-size:34px}
       .hero h2{font-size:30px}
       .story h3{font-size:32px}
-      .grid,
-      .benefits,
-      footer{grid-template-columns:1fr}
+      .grid,.benefits,footer{grid-template-columns:1fr}
       .header-inner{padding:10px 0}
       .cart-btn{padding:10px 14px}
       .admin-panel{inset:10px}
@@ -765,7 +708,6 @@
     <section id="catalogo">
       <h2 class="section-title">Nuestro catálogo</h2>
       <p class="section-sub">Cuatro yerbas elegidas a mano. Sumá las que quieras.</p>
-
       <div class="grid" id="productsGrid"></div>
     </section>
 
@@ -879,14 +821,13 @@
 
     <div class="admin-grid">
       <div class="admin-card">
-        <h4>Productos</h4>
+        <h4>Stock, precio y etiquetas</h4>
         <div id="adminProducts"></div>
       </div>
 
       <div class="admin-card">
         <h4>Acciones rápidas</h4>
         <button class="secondary-btn" id="adminVaciarCarritoBtn">Vaciar carrito</button>
-        <button class="secondary-btn" id="adminRestaurarBtn">Restaurar catálogo original</button>
       </div>
     </div>
   </div>
@@ -894,6 +835,7 @@
   <script>
     const TELEFONO_VENDEDOR = "5493364370451";
     const WEBHOOK_URL = "https://hook.us2.make.com/ofufesknpyc3spbueo9q68v4bmasdhgu";
+    const STOCK_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQNWo2kZ0lxbKOUz00N29AqBN6clA2yf9BPmCX4ccaEf4-AyPYfiz0YNUqJzCIpQ5ZqFzx9xWgoFs0I/pub?gid=460073425&single=true&output=csv";
     const ADMIN_PASSWORD = "cebada1";
 
     const productosOriginales = [
@@ -943,25 +885,9 @@
       }
     ];
 
-    let config = JSON.parse(localStorage.getItem("cebada_config") || "{}");
+    let stockRemoto = {};
     let carrito = JSON.parse(localStorage.getItem("cebada_carrito") || "[]");
     let cantidades = JSON.parse(localStorage.getItem("cebada_cantidades") || "{}");
-
-    function getProductos() {
-      return productosOriginales.map(p => {
-        const c = config[p.id] || {};
-        return {
-          ...p,
-          precio: Number.isFinite(c.precio) ? c.precio : p.precio,
-          etiqueta: typeof c.etiqueta === "string" ? c.etiqueta : p.etiqueta,
-          stock: typeof c.stock === "boolean" ? c.stock : p.stock
-        };
-      });
-    }
-
-    function saveConfig() {
-      localStorage.setItem("cebada_config", JSON.stringify(config));
-    }
 
     function saveCart() {
       localStorage.setItem("cebada_carrito", JSON.stringify(carrito));
@@ -1000,6 +926,52 @@
       window.__toastTimer = setTimeout(() => toast.classList.remove("show"), 1800);
     }
 
+    function parseCSV(text) {
+      const lines = text.trim().split(/\\r?\\n/);
+      const rows = lines.map(line => line.split(",").map(cell => cell.trim()));
+      const headers = rows[0].map(h => h.toLowerCase());
+      return rows.slice(1).map(row => {
+        const obj = {};
+        headers.forEach((h, i) => obj[h] = row[i] || "");
+        return obj;
+      });
+    }
+
+    async function cargarStockDesdeSheets() {
+      try {
+        const res = await fetch(STOCK_CSV_URL);
+        const text = await res.text();
+        const filas = parseCSV(text);
+
+        stockRemoto = {};
+
+        filas.forEach(f => {
+          if (!f.producto) return;
+
+          stockRemoto[f.producto] = {
+            precio: Number(f.precio) || 0,
+            stock: String(f.stock).toLowerCase() === "si",
+            etiqueta: f.etiqueta || ""
+          };
+        });
+      } catch (error) {
+        console.error("Error cargando stock desde Google Sheets:", error);
+        stockRemoto = {};
+      }
+    }
+
+    function getProductos() {
+      return productosOriginales.map(p => {
+        const remoto = stockRemoto[p.id] || {};
+        return {
+          ...p,
+          precio: Number.isFinite(remoto.precio) && remoto.precio > 0 ? remoto.precio : p.precio,
+          etiqueta: typeof remoto.etiqueta === "string" && remoto.etiqueta !== "" ? remoto.etiqueta : p.etiqueta,
+          stock: typeof remoto.stock === "boolean" ? remoto.stock : p.stock
+        };
+      });
+    }
+
     function renderProducts() {
       const productos = getProductos();
       const grid = document.getElementById("productsGrid");
@@ -1027,7 +999,9 @@
                 <span id="qty-${p.id}">${cant}</span>
                 <button onclick="changeQty('${p.id}', 1)">+</button>
               </div>
-              <button class="primary-btn" onclick="addCart('${p.id}')">Agregar al carrito</button>
+              <button class="primary-btn" onclick="addCart('${p.id}')" ${p.stock ? "" : "disabled"} style="${p.stock ? "" : "opacity:.5;cursor:not-allowed"}">
+                ${p.stock ? "Agregar al carrito" : "Sin stock"}
+              </button>
             </div>
           </article>
         `;
@@ -1086,6 +1060,7 @@
     function renderCart() {
       document.getElementById("cartBadge").textContent = totalCantidad();
       const items = document.getElementById("cartItems");
+
       if (carrito.length === 0) {
         items.innerHTML = "<p style='color:var(--muted)'>Tu carrito está vacío.</p>";
       } else {
@@ -1104,6 +1079,7 @@
           </div>
         `).join("");
       }
+
       document.getElementById("cartTotal").textContent = "Total: " + ars(totalPrecio());
       updateCheckoutSummary();
     }
@@ -1159,6 +1135,7 @@
         document.getElementById("waError").textContent = "Por favor ingresá tu nombre y apellido.";
         return;
       }
+
       document.getElementById("waError").textContent = "";
 
       const fecha = new Date().toLocaleString("es-AR");
@@ -1188,6 +1165,7 @@
         document.getElementById("contactError").textContent = "Completá tu nombre y teléfono.";
         return;
       }
+
       if (!validarTel(telefono)) {
         document.getElementById("contactError").textContent = "El número de teléfono no parece válido.";
         return;
@@ -1237,56 +1215,26 @@
     }
 
     function renderAdmin() {
-      const productos = getProductos();
       const wrap = document.getElementById("adminProducts");
 
-      wrap.innerHTML = productos.map(p => `
+      wrap.innerHTML = `
         <div class="admin-product">
-          <div class="admin-product-title">${p.nombre} · ${p.peso}</div>
-          <input class="admin-small" type="number" id="price-${p.id}" value="${p.precio}" placeholder="Precio">
-          <input class="admin-small" type="text" id="tag-${p.id}" value="${p.etiqueta || ""}" placeholder="Etiqueta">
-          <div class="admin-actions">
-            <button class="secondary-btn" style="margin:0" onclick="saveProduct('${p.id}')">Guardar</button>
-            <button class="${p.stock ? 'danger-btn' : 'primary-btn'}" style="margin:0" onclick="toggleStock('${p.id}')">
-              ${p.stock ? 'Poner sin stock' : 'Activar stock'}
-            </button>
-          </div>
+          <div class="admin-product-title">Control de stock, precio y etiquetas</div>
+          <p style="color:var(--muted); line-height:1.5; margin:0 0 12px;">
+            Ahora estos cambios se controlan desde Google Sheets.
+          </p>
+          <p style="color:var(--muted); line-height:1.5; margin:0 0 12px;">
+            Modificá en la planilla:
+            <br>• producto
+            <br>• precio
+            <br>• stock (si / no)
+            <br>• etiqueta
+          </p>
+          <p style="color:var(--muted); line-height:1.5; margin:0;">
+            Después recargá la web y todos los usuarios verán el cambio.
+          </p>
         </div>
-      `).join("");
-    }
-
-    function saveProduct(id) {
-      const price = parseInt(document.getElementById("price-" + id).value, 10);
-      const tag = document.getElementById("tag-" + id).value.trim();
-
-      if (!config[id]) config[id] = {};
-      config[id].precio = isNaN(price) ? 0 : price;
-      config[id].etiqueta = tag;
-      saveConfig();
-      renderProducts();
-      renderAdmin();
-      renderCart();
-      showToast("Producto actualizado");
-    }
-
-    function toggleStock(id) {
-      const producto = getProductos().find(p => p.id === id);
-      if (!producto) return;
-      if (!config[id]) config[id] = {};
-      config[id].stock = !producto.stock;
-      saveConfig();
-      renderProducts();
-      renderAdmin();
-      showToast(config[id].stock ? "Stock activado" : "Producto sin stock");
-    }
-
-    function restoreCatalog() {
-      config = {};
-      saveConfig();
-      renderProducts();
-      renderAdmin();
-      renderCart();
-      showToast("Catálogo restaurado");
+      `;
     }
 
     document.getElementById("openCartBtn").addEventListener("click", openCart);
@@ -1320,10 +1268,14 @@
       renderCart();
       showToast("Carrito vaciado");
     });
-    document.getElementById("adminRestaurarBtn").addEventListener("click", restoreCatalog);
 
-    renderProducts();
-    renderCart();
+    async function init() {
+      await cargarStockDesdeSheets();
+      renderProducts();
+      renderCart();
+    }
+
+    init();
   </script>
 </body>
 </html>
