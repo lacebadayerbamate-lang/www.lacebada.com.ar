@@ -4,21 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>La Cebada | Yerba mate seleccionada</title>
-  <meta name="description" content="Comprá yerba mate seleccionada en La Cebada. Baldo, Canarias y Rei Verde con atención personalizada por WhatsApp." />
+  <meta name="description" content="Comprá yerba mate seleccionada en La Cebada. Baldo, Canarias y Rei Verde con atención personalizada por WhatsApp.">
   <style>
     :root{
       --bg:#070707;
       --bg-2:#0d0d0d;
       --panel:#121212;
-      --panel-2:#181818;
       --line:rgba(255,255,255,.10);
       --line-2:rgba(255,255,255,.06);
       --text:#ffffff;
       --muted:rgba(255,255,255,.68);
-      --muted-2:rgba(255,255,255,.48);
       --white-soft:rgba(255,255,255,.04);
-      --accent:#f4f0e6;
-      --accent-dark:#d8d0c2;
       --danger:#b92d2d;
       --danger-dark:#6f1f1f;
       --success:#79e7a5;
@@ -26,7 +22,6 @@
       --radius-xl:28px;
       --radius-lg:22px;
       --radius-md:16px;
-      --radius-sm:12px;
       --max:1200px;
     }
 
@@ -43,14 +38,12 @@
 
     img{display:block;max-width:100%}
     button,input{font:inherit}
+    .hidden{display:none !important}
 
     .container{
       width:min(var(--max), calc(100% - 32px));
       margin:0 auto;
     }
-
-    .muted{color:var(--muted)}
-    .hidden{display:none !important}
 
     header{
       position:sticky;
@@ -99,12 +92,6 @@
       margin-top:5px;
     }
 
-    .top-actions{
-      display:flex;
-      align-items:center;
-      gap:10px;
-    }
-
     .cart-btn{
       border:1px solid var(--line);
       background:rgba(255,255,255,.05);
@@ -150,8 +137,7 @@
     .hero-side{
       border:1px solid var(--line);
       border-radius:var(--radius-xl);
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
       box-shadow:var(--shadow);
     }
 
@@ -184,7 +170,7 @@
       border:1px solid var(--line);
       border-radius:999px;
       background:rgba(255,255,255,.04);
-      color:var(--accent);
+      color:#f4f0e6;
       font-size:12px;
       font-weight:700;
       letter-spacing:.08em;
@@ -880,13 +866,11 @@
         </div>
       </div>
 
-      <div class="top-actions">
-        <button class="cart-btn" id="openCartBtn">
-          <span>🛒</span>
-          <span>Carrito</span>
-          <span class="badge" id="cartBadge">0</span>
-        </button>
-      </div>
+      <button class="cart-btn" id="openCartBtn">
+        <span>🛒</span>
+        <span>Carrito</span>
+        <span class="badge" id="cartBadge">0</span>
+      </button>
     </div>
   </header>
 
@@ -1134,11 +1118,11 @@
     }
 
     function detalleTexto() {
-      return carrito.map(p => `• ${p.nombre} ${p.peso} x${p.cantidad} — ${ars(p.precio * p.cantidad)}`).join("\\n");
+      return carrito.map(p => `• ${p.nombre} ${p.peso} x${p.cantidad} — ${ars(p.precio * p.cantidad)}`).join("\n");
     }
 
     function validarTel(t) {
-      const limpio = String(t).replace(/\\D/g, "");
+      const limpio = String(t).replace(/\D/g, "");
       return limpio.length >= 10 && limpio.length <= 13 && !/^0+$/.test(limpio);
     }
 
@@ -1151,19 +1135,24 @@
     }
 
     function parseCSV(text) {
-      const lines = text.trim().split(/\\r?\\n/);
-      const rows = lines.map(line => line.split(",").map(cell => cell.trim()));
-      const headers = rows[0].map(h => h.toLowerCase());
-      return rows.slice(1).map(row => {
-        const obj = {};
-        headers.forEach((h, i) => obj[h] = row[i] || "");
-        return obj;
+      const lines = text.trim().split(/\r?\n/);
+      if (lines.length < 2) return [];
+
+      const headers = lines[0].split(",").map(h => h.trim().toLowerCase());
+
+      return lines.slice(1).map(line => {
+        const values = line.split(",").map(v => v.trim());
+        const row = {};
+        headers.forEach((header, index) => {
+          row[header] = values[index] || "";
+        });
+        return row;
       });
     }
 
     async function cargarStockDesdeSheets() {
       try {
-        const res = await fetch(STOCK_CSV_URL);
+        const res = await fetch(STOCK_CSV_URL, { cache: "no-store" });
         const text = await res.text();
         const filas = parseCSV(text);
 
@@ -1172,12 +1161,15 @@
         filas.forEach(f => {
           if (!f.producto) return;
 
-          stockRemoto[f.producto] = {
-            precio: Number(f.precio) || 0,
-            stock: String(f.stock).toLowerCase() === "si",
-            etiqueta: f.etiqueta || ""
+          stockRemoto[f.producto.trim()] = {
+            precio: Number(f.precio),
+            stock: f.stock.trim().toLowerCase() === "si",
+            etiqueta: (f.etiqueta || "").trim()
           };
         });
+
+        console.log("CSV cargado:", filas);
+        console.log("stockRemoto:", stockRemoto);
       } catch (error) {
         console.error("Error cargando stock desde Google Sheets:", error);
         stockRemoto = {};
@@ -1186,12 +1178,14 @@
 
     function getProductos() {
       return productosOriginales.map(p => {
-        const remoto = stockRemoto[p.id] || {};
+        const remoto = stockRemoto[p.id];
+        if (!remoto) return p;
+
         return {
           ...p,
-          precio: Number.isFinite(remoto.precio) && remoto.precio > 0 ? remoto.precio : p.precio,
-          etiqueta: typeof remoto.etiqueta === "string" && remoto.etiqueta !== "" ? remoto.etiqueta : p.etiqueta,
-          stock: typeof remoto.stock === "boolean" ? remoto.stock : p.stock
+          precio: !isNaN(remoto.precio) ? remoto.precio : p.precio,
+          etiqueta: remoto.etiqueta !== "" ? remoto.etiqueta : p.etiqueta,
+          stock: remoto.stock
         };
       });
     }
@@ -1300,7 +1294,7 @@
       const items = document.getElementById("cartItems");
 
       if (carrito.length === 0) {
-        items.innerHTML = "<p class='muted'>Tu carrito está vacío.</p>";
+        items.innerHTML = "<p style='color:var(--muted)'>Tu carrito está vacío.</p>";
       } else {
         items.innerHTML = carrito.map(p => `
           <div class="cart-item">
@@ -1380,12 +1374,12 @@
 
       const fecha = new Date().toLocaleString("es-AR");
       const msg =
-        `¡Hola La Cebada! 👋 Quiero confirmar este pedido:\\n\\n` +
+        `¡Hola La Cebada! 👋 Quiero confirmar este pedido:\n\n` +
         detalleTexto() +
-        `\\n\\n🧉 Total de productos: ${totalCantidad()}` +
-        `\\n💰 Total a abonar: ${ars(totalPrecio())}` +
-        `\\n👤 Cliente: ${nombre}` +
-        `\\n🕒 ${fecha}\\n\\n¡Gracias!`;
+        `\n\n🧉 Total de productos: ${totalCantidad()}` +
+        `\n💰 Total a abonar: ${ars(totalPrecio())}` +
+        `\n👤 Cliente: ${nombre}` +
+        `\n🕒 ${fecha}\n\n¡Gracias!`;
 
       window.open(`https://wa.me/${TELEFONO_VENDEDOR}?text=${encodeURIComponent(msg)}`, "_blank");
 
