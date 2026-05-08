@@ -1230,40 +1230,52 @@
       window.__toastTimer = setTimeout(() => toast.classList.remove("show"), 1800);
     }
 
-    function parseCSV(text){
-      const lines = text.trim().split(/\\r?\\n/);
+    function parseCSV(text) {
+      const cleanText = text.replace(/^\\uFEFF/, "").trim();
+      const lines = cleanText.split(/\\r?\\n/);
+
       if (lines.length < 2) return [];
-      const headers = lines[0].split(",").map(h => h.trim().toLowerCase());
+
+      const headers = lines[0]
+        .split(",")
+        .map(h => h.replace(/^\\uFEFF/, "").trim().toLowerCase());
 
       return lines.slice(1).map(line => {
         const values = line.split(",").map(v => v.trim());
         const row = {};
+
         headers.forEach((header, index) => {
           row[header] = values[index] || "";
         });
+
         return row;
       });
     }
 
-    async function cargarStockDesdeSheets(){
-      try{
-        const res = await fetch(STOCK_CSV_URL, { cache:"no-store" });
+    async function cargarStockDesdeSheets() {
+      try {
+        const url = STOCK_CSV_URL + "&t=" + Date.now();
+        const res = await fetch(url, { cache: "no-store" });
         const text = await res.text();
         const filas = parseCSV(text);
+
         stockRemoto = {};
 
         filas.forEach(f => {
-          if (!f.producto) return;
-          stockRemoto[f.producto.trim()] = {
+          const producto = (f.producto || "").trim().toLowerCase();
+          if (!producto) return;
+
+          stockRemoto[producto] = {
             precio: Number(f.precio),
-            stock: f.stock.trim().toLowerCase() === "si",
+            stock: (f.stock || "").trim().toLowerCase() === "si",
             etiqueta: (f.etiqueta || "").trim()
           };
         });
 
-        console.log("CSV cargado:", filas);
-        console.log("stockRemoto:", stockRemoto);
-      } catch(error){
+        console.log("CSV texto:", text);
+        console.log("Filas parseadas:", filas);
+        console.log("stockRemoto final:", stockRemoto);
+      } catch (error) {
         console.error("Error cargando stock desde Google Sheets:", error);
         stockRemoto = {};
       }
