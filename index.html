@@ -5,904 +5,140 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>La Cebada | Yerba mate seleccionada</title>
   <meta name="description" content="Comprá yerba mate seleccionada en La Cebada. Baldo, Canarias y Rei Verde con atención personalizada por WhatsApp.">
-
   <style>
     :root{
-      --bg:#070707;
-      --panel:#121212;
-      --line:rgba(255,255,255,.10);
-      --line2:rgba(255,255,255,.06);
-      --text:#fff;
-      --muted:rgba(255,255,255,.68);
-      --danger:#c63737;
-      --danger-dark:#6f1f1f;
-      --success:#86efac;
-      --shadow:0 18px 50px rgba(0,0,0,.35);
-      --wa:#25D366;
-      --max:1200px; 
+      --bg:#070707; --panel:#121212; --line:rgba(255,255,255,.10); --line2:rgba(255,255,255,.06);
+      --text:#fff; --muted:rgba(255,255,255,.68); --danger:#c63737; --danger-dark:#6f1f1f;
+      --success:#86efac; --shadow:0 18px 50px rgba(0,0,0,.35); --wa:#25D366; --max:1200px;
     }
-
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
     body{
-      margin:0;
-      font-family:Inter,Segoe UI,Arial,sans-serif;
-      color:var(--text);
-      background:
-        radial-gradient(circle at top,rgba(255,255,255,.04),transparent 35%),
-        linear-gradient(180deg,#000 0%,#0a0a0a 32%,#101010 100%);
+      margin:0; font-family:Inter,Segoe UI,Arial,sans-serif; color:var(--text);
+      background:radial-gradient(circle at top,rgba(255,255,255,.04),transparent 35%),linear-gradient(180deg,#000 0%,#0a0a0a 32%,#101010 100%);
     }
-
     img{display:block;max-width:100%}
     button,input{font:inherit}
     .hidden{display:none !important}
-
-    .container{
-      width:min(var(--max),calc(100% - 32px));
-      margin:0 auto;
-    }
-
-    .topbar{
-      background:linear-gradient(90deg,#111,#1b1b1b,#111);
-      border-bottom:1px solid var(--line);
-      color:#f4f0e6;
-      font-size:13px;
-      font-weight:700;
-    }
-
-    .topbar-inner{
-      min-height:40px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-    }
-
-    header{
-      position:sticky;
-      top:0;
-      z-index:50;
-      backdrop-filter:blur(14px);
-      background:rgba(0,0,0,.78);
-      border-bottom:1px solid var(--line);
-    }
-
-    .header-inner{
-      min-height:82px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:16px;
-    }
-
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:14px;
-      cursor:pointer;
-    }
-
-    .brand-logo{
-      width:56px;
-      height:56px;
-      border-radius:50%;
-      object-fit:contain;
-      background:#000;
-    }
-
-    .brand-title{
-      font-size:28px;
-      font-weight:900;
-    }
-
-    .brand-sub{
-      font-size:13px;
-      color:var(--muted);
-      margin-top:5px;
-    }
-
-    .cart-btn{
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.05);
-      color:#fff;
-      border-radius:999px;
-      padding:12px 18px;
-      display:flex;
-      align-items:center;
-      gap:10px;
-      cursor:pointer;
-      transition:.22s ease;
-    }
-
-    .cart-btn:hover{
-      transform:translateY(-1px);
-      background:rgba(255,255,255,.09);
-    }
-
-    .badge{
-      min-width:26px;
-      height:26px;
-      padding:0 8px;
-      border-radius:999px;
-      background:#fff;
-      color:#000;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      font-size:12px;
-      font-weight:900;
-    }
-
+    a{color:inherit}
+    .container{width:min(var(--max),calc(100% - 32px));margin:0 auto}
+    .topbar{background:linear-gradient(90deg,#111,#1b1b1b,#111);border-bottom:1px solid var(--line);color:#f4f0e6;font-size:13px;font-weight:700}
+    .topbar-inner{min-height:40px;display:flex;align-items:center;justify-content:center;text-align:center}
+    header{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);background:rgba(0,0,0,.78);border-bottom:1px solid var(--line)}
+    .header-inner{min-height:82px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;align-items:center;gap:14px;cursor:pointer;text-decoration:none}
+    .brand-logo{width:56px;height:56px;border-radius:50%;object-fit:contain;background:#000}
+    .brand-title{font-size:28px;font-weight:900}
+    .brand-sub{font-size:13px;color:var(--muted);margin-top:5px}
+    .cart-btn{border:1px solid var(--line);background:rgba(255,255,255,.05);color:#fff;border-radius:999px;padding:12px 18px;display:flex;align-items:center;gap:10px;cursor:pointer;transition:.22s ease}
+    .cart-btn:hover{transform:translateY(-1px);background:rgba(255,255,255,.09)}
+    .badge{min-width:26px;height:26px;padding:0 8px;border-radius:999px;background:#fff;color:#000;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:900}
     main{padding:28px 0 72px}
-
-    .hero{
-      display:grid;
-      grid-template-columns:1.15fr .85fr;
-      gap:22px;
-      margin-bottom:28px;
-    }
-
-    .hero-main,
-    .hero-side,
-    .trust-item,
-    .card,
-    .testimonial,
-    .faq,
-    .story,
-    footer,
-    .admin-card{
-      border:1px solid var(--line);
-      background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
-      box-shadow:var(--shadow);
-    }
-
-    .hero-main,
-    .hero-side,
-    .faq,
-    .story,
-    footer{
-      border-radius:28px;
-    }
-
-    .trust-item,
-    .testimonial,
-    .admin-card{
-      border-radius:22px;
-    }
-
-    .card{
-      border-radius:26px;
-      overflow:hidden;
-      background:linear-gradient(180deg,#111,#101010);
-      transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease;
-    }
-
-    .card:hover{
-      transform:translateY(-5px);
-      box-shadow:0 24px 60px rgba(0,0,0,.42);
-      border-color:rgba(255,255,255,.18);
-    }
-
-    .hero-main{
-      padding:34px;
-      min-height:340px;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      position:relative;
-      overflow:hidden;
-    }
-
-    .hero-main::before,
-    .hero-main::after{
-      content:"";
-      position:absolute;
-      border-radius:50%;
-      pointer-events:none;
-    }
-
-    .hero-main::before{
-      right:-120px;
-      top:-80px;
-      width:320px;
-      height:320px;
-      background:radial-gradient(circle,rgba(255,255,255,.08),transparent 70%);
-    }
-
-    .hero-main::after{
-      left:-80px;
-      bottom:-120px;
-      width:260px;
-      height:260px;
-      background:radial-gradient(circle,rgba(255,255,255,.06),transparent 70%);
-    }
-
-    .eyebrow{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      width:max-content;
-      padding:8px 12px;
-      border:1px solid var(--line);
-      border-radius:999px;
-      background:rgba(255,255,255,.04);
-      color:#f4f0e6;
-      font-size:12px;
-      font-weight:700;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-      margin-bottom:16px;
-    }
-
-    .hero-title{
-      margin:0;
-      font-size:56px;
-      line-height:.98;
-      letter-spacing:-.04em;
-    }
-
-    .hero-text{
-      margin:18px 0 0;
-      color:var(--muted);
-      font-size:18px;
-      line-height:1.6;
-    }
-
-    .hero-cta,
-    .story-links,
-    .chips,
-    .qty,
-    .cart-controls{
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
-    }
-
-    .hero-side{
-      padding:24px;
-      display:grid;
-      gap:14px;
-      align-content:center;
-    }
-
-    .mini-feature{
-      border:1px solid var(--line2);
-      background:rgba(255,255,255,.03);
-      border-radius:20px;
-      padding:18px;
-      transition:.22s ease;
-    }
-
-    .mini-feature:hover,
-    .trust-item:hover{
-      transform:translateY(-2px);
-      background:rgba(255,255,255,.05);
-    }
-
-    .mini-feature h4,
-    .trust-item h4,
-    .admin-card h4,
-    footer h4{
-      margin:0 0 8px;
-    }
-
-    .mini-feature p,
-    .trust-item p,
-    footer p,
-    .story p,
-    .testimonial p,
-    .faq-a{
-      margin:0;
-      color:var(--muted);
-      line-height:1.6;
-    }
-
-    .section-head{
-      display:flex;
-      align-items:end;
-      justify-content:space-between;
-      gap:18px;
-      margin:28px 0 20px;
-    }
-
-    .section-title{
-      margin:0;
-      font-size:42px;
-      font-weight:900;
-    }
-
-    .section-sub{
-      margin:6px 0 0;
-      color:var(--muted);
-      font-size:18px;
-    }
-
-    .trust-row,
-    .grid,
-    .testimonials,
-    .admin-grid,
-    footer{
-      display:grid;
-      gap:14px;
-    }
-
-    .trust-row{
-      grid-template-columns:repeat(4,1fr);
-      margin-bottom:28px;
-    }
-
-    .grid{
-      grid-template-columns:repeat(4,1fr);
-      gap:20px;
-    }
-
-    .testimonials{
-      grid-template-columns:repeat(3,1fr);
-      margin-top:34px;
-    }
-
-    .admin-grid,
-    footer{
-      grid-template-columns:1fr 1fr 1fr;
-    }
-
-    .media{
-      position:relative;
-      aspect-ratio:1/1;
-      background:#000;
-      overflow:hidden;
-    }
-
-    .media img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      transition:.28s ease;
-    }
-
-    .card:hover .media img{
-      transform:scale(1.03);
-    }
-
-    .tag{
-      position:absolute;
-      top:12px;
-      left:12px;
-      z-index:2;
-      padding:8px 12px;
-      border-radius:999px;
-      background:#fff;
-      color:#000;
-      font-weight:900;
-      font-size:12px;
-      box-shadow:var(--shadow);
-    }
-
-    .tag-stock{
-      top:auto;
-      bottom:12px;
-      background:var(--danger);
-      color:#fff;
-    }
-
-    .content{
-      padding:18px;
-      display:flex;
-      flex-direction:column;
-      flex:1;
-    }
-
-    .product-title{
-      margin:0;
-      font-size:23px;
-      line-height:1.12;
-    }
-
-    .weight{
-      color:var(--muted);
-      font-size:15px;
-      font-weight:700;
-    }
-
-    .desc{
-      margin:12px 0 0;
-      color:var(--muted);
-      line-height:1.5;
-      font-size:15px;
-      min-height:72px;
-    }
-
-    .chip{
-      font-size:12px;
-      padding:6px 10px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.04);
-      color:rgba(255,255,255,.78);
-    }
-
-    .price-row{
-      margin-top:18px;
-      display:flex;
-      justify-content:space-between;
-      align-items:flex-end;
-      gap:10px;
-    }
-
-    .price{
-      font-size:34px;
-      font-weight:900;
-    }
-
-    .stock-ok{
-      font-size:13px;
-      color:var(--success);
-      font-weight:700;
-    }
-
-    .stock-no{
-      font-size:13px;
-      color:#ff9d9d;
-      font-weight:700;
-    }
-
-    .qty{
-      margin-top:16px;
-      align-items:center;
-      justify-content:center;
-    }
-
-    .qty button,
-    .mini-btn{
-      width:38px;
-      height:38px;
-      border:none;
-      border-radius:999px;
-      background:rgba(255,255,255,.10);
-      color:#fff;
-      cursor:pointer;
-      font-size:20px;
-    }
-
-    .qty span{
-      min-width:24px;
-      text-align:center;
-      font-weight:900;
-      font-size:20px;
-    }
-
-    .btn,
-    .btn-outline,
-    .btn-danger,
-    .primary-btn,
-    .secondary-btn,
-    .danger-btn{
-      border:none;
-      border-radius:16px;
-      padding:14px 16px;
-      font-weight:800;
-      cursor:pointer;
-      transition:.22s ease;
-    }
-
-    .btn,
-    .primary-btn{
-      background:#fff;
-      color:#000;
-    }
-
-    .btn:hover,
-    .primary-btn:hover{
-      background:#ececec;
-      transform:translateY(-1px);
-    }
-
-    .btn-outline,
-    .secondary-btn{
-      background:rgba(255,255,255,.08);
-      color:#fff;
-      border:1px solid var(--line);
-    }
-
-    .btn-outline:hover,
-    .secondary-btn:hover{
-      background:rgba(255,255,255,.12);
-    }
-
-    .btn-danger,
-    .danger-btn{
-      background:var(--danger-dark);
-      color:#fff;
-    }
-
-    .btn-danger:hover,
-    .danger-btn:hover{
-      background:#7f2525;
-    }
-
-    .primary-btn,
-    .secondary-btn,
-    .danger-btn{
-      width:100%;
-      margin-top:16px;
-    }
-
-    .testimonial-stars{
-      font-size:18px;
-      margin-bottom:10px;
-    }
-
-    .testimonial strong{
-      display:block;
-      margin-top:14px;
-      font-size:14px;
-    }
-
-    .faq{
-      margin-top:34px;
-      padding:24px;
-    }
-
-    .faq-list{
-      display:grid;
-      gap:12px;
-      margin-top:16px;
-    }
-
-    .faq-item{
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.03);
-      border-radius:18px;
-      overflow:hidden;
-    }
-
-    .faq-q{
-      width:100%;
-      text-align:left;
-      background:transparent;
-      color:#fff;
-      padding:16px 18px;
-      border:none;
-      font-weight:800;
-      cursor:pointer;
-    }
-
-    .faq-a{
-      padding:0 18px 16px;
-      display:none;
-    }
-
-    .faq-item.open .faq-a{
-      display:block;
-    }
-
-    .story{
-      margin-top:32px;
-      padding:28px;
-      text-align:center;
-    }
-
-    .story-top{
-      letter-spacing:.22em;
-      text-transform:uppercase;
-      color:rgba(255,255,255,.45);
-      font-size:12px;
-    }
-
-    .story h3{
-      margin:10px 0;
-      font-size:40px;
-    }
-
-    footer{
-      margin-top:26px;
-      padding:24px;
-    }
-
-    .overlay{
-      position:fixed;
-      inset:0;
-      background:rgba(0,0,0,.72);
-      z-index:100;
-      display:none;
-    }
-
-    .overlay.show{
-      display:block;
-    }
-
-    .drawer{
-      position:fixed;
-      left:0;
-      right:0;
-      bottom:0;
-      z-index:101;
-      background:#0d130f;
-      border-top:1px solid var(--line);
-      border-top-left-radius:28px;
-      border-top-right-radius:28px;
-      max-height:84vh;
-      overflow:auto;
-      padding:22px;
-      transform:translateY(110%);
-      transition:.25s ease;
-      box-shadow:0 -16px 40px rgba(0,0,0,.45);
-    }
-
-    .drawer.show{
-      transform:translateY(0);
-    }
-
-    .drawer-inner{
-      width:min(760px,100%);
-      margin:0 auto;
-    }
-
-    .drawer h3,
-    .modal h3{
-      margin:0 0 14px;
-      font-size:28px;
-    }
-
-    .cart-item{
-      display:flex;
-      gap:12px;
-      align-items:center;
-      padding:12px;
-      border-radius:16px;
-      background:rgba(255,255,255,.05);
-      margin-bottom:10px;
-    }
-
-    .cart-item img{
-      width:56px;
-      height:56px;
-      object-fit:contain;
-      background:#fff;
-      border-radius:12px;
-      padding:4px;
-      flex-shrink:0;
-    }
-
-    .cart-info{
-      flex:1;
-    }
-
-    .cart-name{
-      font-weight:800;
-      font-size:15px;
-    }
-
-    .cart-sub{
-      color:var(--muted);
-      font-size:14px;
-      margin-top:4px;
-    }
-
-    .cart-total{
-      margin-top:14px;
-      font-size:24px;
-      font-weight:900;
-    }
-
-    .note{
-      margin-top:12px;
-      background:rgba(121,231,165,.12);
-      color:#c9ffe0;
-      border-radius:16px;
-      padding:14px;
-      font-size:14px;
-      line-height:1.45;
-    }
-
-    .modal{
-      position:fixed;
-      left:50%;
-      top:50%;
-      transform:translate(-50%,-50%) scale(.96);
-      width:min(440px,calc(100% - 24px));
-      z-index:201;
-      background:#0d130f;
-      border:1px solid var(--line);
-      border-radius:22px;
-      padding:22px;
-      box-shadow:var(--shadow);
-      display:none;
-      opacity:0;
-      transition:.2s ease;
-    }
-
-    .modal.show{
-      display:block;
-      opacity:1;
-      transform:translate(-50%,-50%) scale(1);
-    }
-
-    .summary{
-      border-radius:14px;
-      background:rgba(255,255,255,.05);
-      padding:12px;
-      font-size:14px;
-      line-height:1.55;
-      margin-bottom:14px;
-    }
-
-    .field{
-      width:100%;
-      padding:14px;
-      border-radius:14px;
-      border:1px solid var(--line);
-      background:#0c0c0c;
-      color:#fff;
-      outline:none;
-      margin-bottom:10px;
-    }
-
-    .field:focus{
-      border-color:rgba(255,255,255,.22);
-    }
-
-    .error{
-      color:#ff9d9d;
-      font-size:14px;
-      margin-bottom:10px;
-    }
-
-    .success-modal{
-      position:fixed;
-      inset:0;
-      z-index:300;
-      display:none;
-      align-items:center;
-      justify-content:center;
-      background:rgba(0,0,0,.76);
-      padding:16px;
-    }
-
-    .success-modal.show{
-      display:flex;
-    }
-
-    .success-box{
-      width:min(390px,100%);
-      background:#0d130f;
-      border:1px solid var(--line);
-      border-radius:22px;
-      box-shadow:var(--shadow);
-      padding:24px;
-      text-align:center;
-    }
-
-    .success-box h3{
-      margin:0 0 12px;
-      font-size:28px;
-    }
-
-    .success-box p{
-      margin:0;
-      color:var(--muted);
-      line-height:1.55;
-    }
-
-    .toast{
-      position:fixed;
-      left:50%;
-      bottom:24px;
-      transform:translateX(-50%) translateY(16px);
-      z-index:400;
-      background:rgba(0,0,0,.92);
-      border:1px solid var(--line);
-      color:#fff;
-      padding:14px 18px;
-      border-radius:999px;
-      box-shadow:var(--shadow);
-      opacity:0;
-      pointer-events:none;
-      transition:.22s ease;
-      font-size:14px;
-    }
-
-    .toast.show{
-      opacity:1;
-      transform:translateX(-50%) translateY(0);
-    }
-
-    .admin-panel{
-      position:fixed;
-      inset:24px;
-      z-index:250;
-      background:#0d130f;
-      border:1px solid var(--line);
-      border-radius:24px;
-      box-shadow:var(--shadow);
-      display:none;
-      overflow:auto;
-      padding:20px;
-    }
-
-    .admin-panel.show{
-      display:block;
-    }
-
-    .admin-top{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:10px;
-      margin-bottom:18px;
-    }
-
-    .admin-top h3{
-      margin:0;
-      font-size:28px;
-    }
-
-    .admin-grid{
-      grid-template-columns:1fr 1fr;
-    }
-
-    .admin-product{
-      border:1px solid var(--line);
-      border-radius:16px;
-      padding:14px;
-      background:rgba(255,255,255,.03);
-    }
-
-    .admin-product-title{
-      font-weight:800;
-      margin-bottom:10px;
-    }
-
-    .wa-float{
-      position:fixed;
-      right:18px;
-      bottom:18px;
-      z-index:60;
-      width:58px;
-      height:58px;
-      border-radius:50%;
-      background:var(--wa);
-      color:#fff;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:28px;
-      box-shadow:0 14px 30px rgba(37,211,102,.35);
-      transition:.22s ease;
-      text-decoration:none;
-    }
-
-    .wa-float:hover{
-      transform:translateY(-2px) scale(1.03);
-    }
-
-    @media (max-width:1100px){
-      .hero{grid-template-columns:1fr}
-      .grid{grid-template-columns:repeat(2,1fr)}
-      .trust-row,.testimonials{grid-template-columns:repeat(2,1fr)}
-      .admin-grid,footer{grid-template-columns:1fr}
-    }
-
-    @media (max-width:680px){
-      .container{width:min(var(--max),calc(100% - 20px))}
-      .brand-logo{width:46px;height:46px}
-      .brand-title{font-size:24px}
-      .hero-main{padding:24px}
-      .hero-title{font-size:38px}
-      .section-title{font-size:34px}
-      .section-sub{font-size:16px}
-      .story h3{font-size:31px}
-      .grid,.trust-row,.testimonials,footer{grid-template-columns:1fr}
-      .admin-panel{inset:10px}
-      .header-inner{min-height:72px}
-      .wa-float{width:54px;height:54px;font-size:26px}
-    }
+    .hero{display:grid;grid-template-columns:1.15fr .85fr;gap:22px;margin-bottom:28px}
+    .hero-main,.hero-side,.trust-item,.card,.testimonial,.faq,.story,footer,.admin-card{border:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));box-shadow:var(--shadow)}
+    .hero-main,.hero-side,.faq,.story,footer{border-radius:28px}
+    .trust-item,.testimonial,.admin-card{border-radius:22px}
+    .card{border-radius:26px;overflow:hidden;background:linear-gradient(180deg,#111,#101010);transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease}
+    .card:hover{transform:translateY(-5px);box-shadow:0 24px 60px rgba(0,0,0,.42);border-color:rgba(255,255,255,.18)}
+    .hero-main{padding:34px;min-height:340px;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden}
+    .hero-main::before,.hero-main::after{content:"";position:absolute;border-radius:50%;pointer-events:none}
+    .hero-main::before{right:-120px;top:-80px;width:320px;height:320px;background:radial-gradient(circle,rgba(255,255,255,.08),transparent 70%)}
+    .hero-main::after{left:-80px;bottom:-120px;width:260px;height:260px;background:radial-gradient(circle,rgba(255,255,255,.06),transparent 70%)}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;width:max-content;padding:8px 12px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.04);color:#f4f0e6;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:16px}
+    .hero-title{margin:0;font-size:56px;line-height:.98;letter-spacing:-.04em}
+    .hero-text{margin:18px 0 0;color:var(--muted);font-size:18px;line-height:1.6}
+    .hero-cta,.story-links,.chips,.qty,.cart-controls{display:flex;gap:12px;flex-wrap:wrap}
+    .hero-side{padding:24px;display:grid;gap:14px;align-content:center}
+    .mini-feature{border:1px solid var(--line2);background:rgba(255,255,255,.03);border-radius:20px;padding:18px;transition:.22s ease}
+    .mini-feature:hover,.trust-item:hover{transform:translateY(-2px);background:rgba(255,255,255,.05)}
+    .mini-feature h4,.trust-item h4,.admin-card h4,footer h4{margin:0 0 8px}
+    .mini-feature p,.trust-item p,footer p,.story p,.testimonial p,.faq-a{margin:0;color:var(--muted);line-height:1.6}
+    .section-head{display:flex;align-items:end;justify-content:space-between;gap:18px;margin:28px 0 20px}
+    .section-title{margin:0;font-size:42px;font-weight:900}
+    .section-sub{margin:6px 0 0;color:var(--muted);font-size:18px}
+    .trust-row,.grid,.testimonials,.admin-grid,footer{display:grid;gap:14px}
+    .trust-row{grid-template-columns:repeat(4,1fr);margin-bottom:28px}
+    .grid{grid-template-columns:repeat(4,1fr);gap:20px}
+    .testimonials{grid-template-columns:repeat(3,1fr);margin-top:34px}
+    .admin-grid,footer{grid-template-columns:1fr 1fr 1fr}
+    .media{position:relative;aspect-ratio:1/1;background:#000;overflow:hidden}
+    .media img{width:100%;height:100%;object-fit:cover;transition:.28s ease}
+    .card:hover .media img{transform:scale(1.03)}
+    .tag{position:absolute;top:12px;left:12px;z-index:2;padding:8px 12px;border-radius:999px;background:#fff;color:#000;font-weight:900;font-size:12px;box-shadow:var(--shadow)}
+    .tag-stock{top:auto;bottom:12px;background:var(--danger);color:#fff}
+    .content{padding:18px;display:flex;flex-direction:column;flex:1}
+    .product-title{margin:0;font-size:23px;line-height:1.12}
+    .weight{color:var(--muted);font-size:15px;font-weight:700}
+    .desc{margin:12px 0 0;color:var(--muted);line-height:1.5;font-size:15px;min-height:72px}
+    .chip{font-size:12px;padding:6px 10px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:rgba(255,255,255,.78)}
+    .price-row{margin-top:18px;display:flex;justify-content:space-between;align-items:flex-end;gap:10px}
+    .price{font-size:34px;font-weight:900}
+    .stock-ok{font-size:13px;color:var(--success);font-weight:700}
+    .stock-no{font-size:13px;color:#ff9d9d;font-weight:700}
+    .qty{margin-top:16px;align-items:center;justify-content:center}
+    .qty button,.mini-btn{width:38px;height:38px;border:none;border-radius:999px;background:rgba(255,255,255,.10);color:#fff;cursor:pointer;font-size:20px}
+    .qty span{min-width:24px;text-align:center;font-weight:900;font-size:20px}
+    .btn,.btn-outline,.btn-danger,.primary-btn,.secondary-btn,.danger-btn{border:none;border-radius:16px;padding:14px 16px;font-weight:800;cursor:pointer;transition:.22s ease}
+    .btn,.primary-btn{background:#fff;color:#000}
+    .btn:hover,.primary-btn:hover{background:#ececec;transform:translateY(-1px)}
+    .btn-outline,.secondary-btn{background:rgba(255,255,255,.08);color:#fff;border:1px solid var(--line)}
+    .btn-outline:hover,.secondary-btn:hover{background:rgba(255,255,255,.12)}
+    .btn-danger,.danger-btn{background:var(--danger-dark);color:#fff}
+    .btn-danger:hover,.danger-btn:hover{background:#7f2525}
+    .primary-btn,.secondary-btn,.danger-btn{width:100%;margin-top:16px}
+    .testimonial-stars{font-size:18px;margin-bottom:10px}
+    .testimonial strong{display:block;margin-top:14px;font-size:14px}
+    .faq{margin-top:34px;padding:24px}
+    .faq-list{display:grid;gap:12px;margin-top:16px}
+    .faq-item{border:1px solid var(--line);background:rgba(255,255,255,.03);border-radius:18px;overflow:hidden}
+    .faq-q{width:100%;text-align:left;background:transparent;color:#fff;padding:16px 18px;border:none;font-weight:800;cursor:pointer}
+    .faq-a{padding:0 18px 16px;display:none}
+    .faq-item.open .faq-a{display:block}
+    .story{margin-top:32px;padding:28px;text-align:center}
+    .story-top{letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.45);font-size:12px}
+    .story h3{margin:10px 0;font-size:40px}
+    footer{margin-top:26px;padding:24px}
+    .overlay{position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:100;display:none}
+    .overlay.show{display:block}
+    .drawer{position:fixed;left:0;right:0;bottom:0;z-index:101;background:#0d130f;border-top:1px solid var(--line);border-top-left-radius:28px;border-top-right-radius:28px;max-height:84vh;overflow:auto;padding:22px;transform:translateY(110%);transition:.25s ease;box-shadow:0 -16px 40px rgba(0,0,0,.45)}
+    .drawer.show{transform:translateY(0)}
+    .drawer-inner{width:min(760px,100%);margin:0 auto}
+    .drawer h3,.modal h3{margin:0 0 14px;font-size:28px}
+    .cart-item{display:flex;gap:12px;align-items:center;padding:12px;border-radius:16px;background:rgba(255,255,255,.05);margin-bottom:10px}
+    .cart-item img{width:56px;height:56px;object-fit:contain;background:#fff;border-radius:12px;padding:4px;flex-shrink:0}
+    .cart-info{flex:1}
+    .cart-name{font-weight:800;font-size:15px}
+    .cart-sub{color:var(--muted);font-size:14px;margin-top:4px}
+    .cart-total{margin-top:14px;font-size:24px;font-weight:900}
+    .note{margin-top:12px;background:rgba(121,231,165,.12);color:#c9ffe0;border-radius:16px;padding:14px;font-size:14px;line-height:1.45}
+    .modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%) scale(.96);width:min(440px,calc(100% - 24px));z-index:201;background:#0d130f;border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow);display:none;opacity:0;transition:.2s ease}
+    .modal.show{display:block;opacity:1;transform:translate(-50%,-50%) scale(1)}
+    .summary{border-radius:14px;background:rgba(255,255,255,.05);padding:12px;font-size:14px;line-height:1.55;margin-bottom:14px}
+    .field{width:100%;padding:14px;border-radius:14px;border:1px solid var(--line);background:#0c0c0c;color:#fff;outline:none;margin-bottom:10px}
+    .field:focus{border-color:rgba(255,255,255,.22)}
+    .error{color:#ff9d9d;font-size:14px;margin-bottom:10px}
+    .success-modal{position:fixed;inset:0;z-index:300;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.76);padding:16px}
+    .success-modal.show{display:flex}
+    .success-box{width:min(390px,100%);background:#0d130f;border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);padding:24px;text-align:center}
+    .success-box h3{margin:0 0 12px;font-size:28px}
+    .success-box p{margin:0;color:var(--muted);line-height:1.55}
+    .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(16px);z-index:400;background:rgba(0,0,0,.92);border:1px solid var(--line);color:#fff;padding:14px 18px;border-radius:999px;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:.22s ease;font-size:14px}
+    .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+    .admin-panel{position:fixed;inset:24px;z-index:250;background:#0d130f;border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);display:none;overflow:auto;padding:20px}
+    .admin-panel.show{display:block}
+    .admin-top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:18px}
+    .admin-top h3{margin:0;font-size:28px}
+    .admin-grid{grid-template-columns:1fr 1fr}
+    .admin-product{border:1px solid var(--line);border-radius:16px;padding:14px;background:rgba(255,255,255,.03)}
+    .admin-product-title{font-weight:800;margin-bottom:10px}
+    .wa-float{position:fixed;right:18px;bottom:18px;z-index:60;width:58px;height:58px;border-radius:50%;background:var(--wa);color:#fff;display:flex;align-items:center;justify-content:center;font-size:28px;box-shadow:0 14px 30px rgba(37,211,102,.35);transition:.22s ease;text-decoration:none}
+    .wa-float:hover{transform:translateY(-2px) scale(1.03)}
+    @media (max-width:1100px){.hero{grid-template-columns:1fr}.grid{grid-template-columns:repeat(2,1fr)}.trust-row,.testimonials{grid-template-columns:repeat(2,1fr)}.admin-grid,footer{grid-template-columns:1fr}}
+    @media (max-width:680px){.container{width:min(var(--max),calc(100% - 20px))}.brand-logo{width:46px;height:46px}.brand-title{font-size:24px}.hero-main{padding:24px}.hero-title{font-size:38px}.section-title{font-size:34px}.section-sub{font-size:16px}.story h3{font-size:31px}.grid,.trust-row,.testimonials,footer{grid-template-columns:1fr}.admin-panel{inset:10px}.header-inner{min-height:72px}.wa-float{width:54px;height:54px;font-size:26px}}
   </style>
 </head>
 <body>
-  <div class="topbar">
-    <div class="container topbar-inner">🧉 Stock actualizado · Atención personalizada · Pedidos por WhatsApp</div>
-  </div>
+  <div class="topbar"><div class="container topbar-inner">🧉 Stock actualizado · Atención personalizada · Pedidos por WhatsApp</div></div>
 
   <header>
     <div class="container header-inner">
@@ -913,11 +149,8 @@
           <div class="brand-sub">Yerba mate seleccionada</div>
         </div>
       </div>
-
       <button class="cart-btn" id="openCartBtn">
-        <span>🛒</span>
-        <span>Carrito</span>
-        <span class="badge" id="cartBadge">0</span>
+        <span>🛒</span><span>Carrito</span><span class="badge" id="cartBadge">0</span>
       </button>
     </div>
   </header>
@@ -927,10 +160,7 @@
       <div class="hero-main">
         <div class="eyebrow">Selección artesanal · atención humana</div>
         <h1 class="hero-title">Tu mate, como te gusta.</h1>
-        <p class="hero-text">
-          Elegí tu yerba favorita, combiná marcas, sumá al carrito y finalizá tu pedido de forma simple.
-          Confirmamos cada compra por WhatsApp para darte una atención clara, rápida y personalizada.
-        </p>
+        <p class="hero-text">Elegí tu yerba favorita, combiná marcas, sumá al carrito y finalizá tu pedido de forma simple. Confirmamos cada compra por WhatsApp para darte una atención clara, rápida y personalizada.</p>
         <div class="hero-cta">
           <button class="btn" onclick="document.getElementById('catalogo').scrollIntoView()">Ver catálogo</button>
           <button class="btn-outline" onclick="window.open('https://wa.me/5493364370451','_blank')">Pedir por WhatsApp</button>
@@ -938,18 +168,9 @@
       </div>
 
       <div class="hero-side">
-        <div class="mini-feature">
-          <h4>Atención por WhatsApp</h4>
-          <p>Confirmamos cada pedido personalmente antes de coordinar la entrega.</p>
-        </div>
-        <div class="mini-feature">
-          <h4>Stock actualizado</h4>
-          <p>La disponibilidad se lee desde una planilla en tiempo real para mostrar solo lo que realmente está disponible.</p>
-        </div>
-        <div class="mini-feature">
-          <h4>Precio claro</h4>
-          <p>Ves el total antes de finalizar, sin pasos confusos ni sorpresas.</p>
-        </div>
+        <div class="mini-feature"><h4>Atención por WhatsApp</h4><p>Confirmamos cada pedido personalmente antes de coordinar la entrega.</p></div>
+        <div class="mini-feature"><h4>Stock actualizado</h4><p>La disponibilidad se lee desde una planilla en tiempo real para mostrar solo lo que realmente está disponible.</p></div>
+        <div class="mini-feature"><h4>Precio claro</h4><p>Ves el total antes de finalizar, sin pasos confusos ni sorpresas.</p></div>
       </div>
     </section>
 
@@ -962,43 +183,19 @@
       </div>
 
       <div class="trust-row">
-        <div class="trust-item">
-          <h4>Yerbas seleccionadas</h4>
-          <p>Trabajamos solo con marcas que probamos y aprobamos.</p>
-        </div>
-        <div class="trust-item">
-          <h4>Compra simple</h4>
-          <p>Elegís, agregás al carrito y finalizás en pocos pasos.</p>
-        </div>
-        <div class="trust-item">
-          <h4>Pedido a tu medida</h4>
-          <p>Combiná marcas, cantidades y armá tu compra como prefieras.</p>
-        </div>
-        <div class="trust-item">
-          <h4>Atención real</h4>
-          <p>No sos un número. Cada pedido lo miramos y confirmamos nosotros.</p>
-        </div>
+        <div class="trust-item"><h4>Yerbas seleccionadas</h4><p>Trabajamos solo con marcas que probamos y aprobamos.</p></div>
+        <div class="trust-item"><h4>Compra simple</h4><p>Elegís, agregás al carrito y finalizás en pocos pasos.</p></div>
+        <div class="trust-item"><h4>Pedido a tu medida</h4><p>Combiná marcas, cantidades y armá tu compra como prefieras.</p></div>
+        <div class="trust-item"><h4>Atención real</h4><p>No sos un número. Cada pedido lo miramos y confirmamos nosotros.</p></div>
       </div>
 
       <div class="grid" id="productsGrid"></div>
     </section>
 
     <section class="testimonials">
-      <div class="testimonial">
-        <div class="testimonial-stars">★★★★★</div>
-        <p>Excelente atención y muy buena presentación. Todo se coordinó rápido y sin complicaciones.</p>
-        <strong>— Cliente verificado</strong>
-      </div>
-      <div class="testimonial">
-        <div class="testimonial-stars">★★★★★</div>
-        <p>La Baldo y la Canarias llegaron impecables. Muy buena experiencia de compra.</p>
-        <strong>— Matero frecuente</strong>
-      </div>
-      <div class="testimonial">
-        <div class="testimonial-stars">★★★★★</div>
-        <p>Me gustó que el stock esté claro y que la compra se confirme por WhatsApp. Muy prolijo.</p>
-        <strong>— Nuevo cliente</strong>
-      </div>
+      <div class="testimonial"><div class="testimonial-stars">★★★★★</div><p>Excelente atención y muy buena presentación. Todo se coordinó rápido y sin complicaciones.</p><strong>— Cliente verificado</strong></div>
+      <div class="testimonial"><div class="testimonial-stars">★★★★★</div><p>La Baldo y la Canarias llegaron impecables. Muy buena experiencia de compra.</p><strong>— Matero frecuente</strong></div>
+      <div class="testimonial"><div class="testimonial-stars">★★★★★</div><p>Me gustó que el stock esté claro y que la compra se confirme por WhatsApp. Muy prolijo.</p><strong>— Nuevo cliente</strong></div>
     </section>
 
     <section class="faq">
@@ -1010,32 +207,17 @@
       </div>
 
       <div class="faq-list">
-        <div class="faq-item">
-          <button class="faq-q" type="button">¿Cómo compro?</button>
-          <div class="faq-a">Elegís los productos, los sumás al carrito y finalizás por WhatsApp o dejando tu contacto para que te escribamos.</div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" type="button">¿Cómo sé si hay stock?</button>
-          <div class="faq-a">La disponibilidad se actualiza desde una planilla. Si un producto figura “Sin stock”, no se puede agregar al carrito.</div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" type="button">¿Puedo combinar varias marcas?</button>
-          <div class="faq-a">Sí, podés armar tu pedido con las marcas y cantidades que prefieras.</div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" type="button">¿Cómo se coordina la entrega?</button>
-          <div class="faq-a">Después de finalizar, confirmamos el pedido por WhatsApp y coordinamos con vos de forma directa.</div>
-        </div>
+        <div class="faq-item"><button class="faq-q" type="button">¿Cómo compro?</button><div class="faq-a">Elegís los productos, los sumás al carrito y finalizás por WhatsApp o dejando tu contacto para que te escribamos.</div></div>
+        <div class="faq-item"><button class="faq-q" type="button">¿Cómo sé si hay stock?</button><div class="faq-a">La disponibilidad se actualiza desde una planilla. Si un producto figura “Sin stock”, no se puede agregar al carrito.</div></div>
+        <div class="faq-item"><button class="faq-q" type="button">¿Puedo combinar varias marcas?</button><div class="faq-a">Sí, podés armar tu pedido con las marcas y cantidades que prefieras.</div></div>
+        <div class="faq-item"><button class="faq-q" type="button">¿Cómo se coordina la entrega?</button><div class="faq-a">Después de finalizar, confirmamos el pedido por WhatsApp y coordinamos con vos de forma directa.</div></div>
       </div>
     </section>
 
     <section class="story">
       <div class="story-top">Detrás de La Cebada</div>
       <h3>Un emprendimiento de dos amigos materos</h3>
-      <p>
-        Seleccionamos cada yerba personalmente y buscamos que comprar sea tan simple como cebar un buen mate.
-        Si querés consultarnos algo, también podés escribirnos por Instagram.
-      </p>
+      <p>Seleccionamos cada yerba personalmente y buscamos que comprar sea tan simple como cebar un buen mate. Si querés consultarnos algo, también podés escribirnos por Instagram.</p>
       <div class="story-links">
         <a href="https://instagram.com/gaspichaves" target="_blank">@gaspichaves</a>
         <a href="https://instagram.com/matu_aparisi" target="_blank">@matu_aparisi</a>
@@ -1043,23 +225,9 @@
     </section>
 
     <footer>
-      <div>
-        <h4>La Cebada</h4>
-        <p>Yerbas premium para el matero exigente. Compra simple y atención personalizada.</p>
-      </div>
-      <div>
-        <h4>Compra segura</h4>
-        <p>Confirmamos cada pedido por WhatsApp antes de despachar. Sin vueltas.</p>
-      </div>
-      <div>
-        <h4>Seguinos</h4>
-        <p>
-          Instagram:
-          <a href="https://instagram.com/gaspichaves" target="_blank">@gaspichaves</a>
-          ·
-          <a href="https://instagram.com/matu_aparisi" target="_blank">@matu_aparisi</a>
-        </p>
-      </div>
+      <div><h4>La Cebada</h4><p>Yerbas premium para el matero exigente. Compra simple y atención personalizada.</p></div>
+      <div><h4>Compra segura</h4><p>Confirmamos cada pedido por WhatsApp antes de despachar. Sin vueltas.</p></div>
+      <div><h4>Seguinos</h4><p>Instagram: <a href="https://instagram.com/gaspichaves" target="_blank">@gaspichaves</a> · <a href="https://instagram.com/matu_aparisi" target="_blank">@matu_aparisi</a></p></div>
     </footer>
   </main>
 
@@ -1080,14 +248,12 @@
   <div class="overlay" id="checkoutOverlay"></div>
   <div class="modal" id="checkoutModal">
     <div class="summary" id="checkoutSummary"></div>
-
     <div id="stepOptions">
       <h3>¿Cómo querés finalizar tu pedido?</h3>
       <button class="primary-btn" id="goWhatsappBtn">💬 Confirmar por WhatsApp</button>
       <button class="secondary-btn" id="goContactBtn">📞 Que nos comuniquemos con vos</button>
       <button class="danger-btn" id="cancelCheckoutBtn">Cancelar</button>
     </div>
-
     <div id="stepWhatsapp" class="hidden">
       <h3>Confirmar por WhatsApp</h3>
       <input class="field" id="waName" type="text" placeholder="Tu nombre y apellido">
@@ -1095,7 +261,6 @@
       <button class="primary-btn" id="sendWhatsappBtn">Enviar pedido</button>
       <button class="secondary-btn" id="backFromWhatsappBtn">Volver</button>
     </div>
-
     <div id="stepContact" class="hidden">
       <h3>Te contactamos nosotros</h3>
       <input class="field" id="contactName" type="text" placeholder="Tu nombre y apellido">
@@ -1122,17 +287,9 @@
       <h3>Panel de administrador</h3>
       <button class="secondary-btn" id="closeAdminBtn" style="width:auto;margin:0">Cerrar</button>
     </div>
-
     <div class="admin-grid">
-      <div class="admin-card">
-        <h4>Stock, precio y etiquetas</h4>
-        <div id="adminProducts"></div>
-      </div>
-
-      <div class="admin-card">
-        <h4>Acciones rápidas</h4>
-        <button class="secondary-btn" id="adminVaciarCarritoBtn">Vaciar carrito</button>
-      </div>
+      <div class="admin-card"><h4>Stock, precio y etiquetas</h4><div id="adminProducts"></div></div>
+      <div class="admin-card"><h4>Acciones rápidas</h4><button class="secondary-btn" id="adminVaciarCarritoBtn">Vaciar carrito</button></div>
     </div>
   </div>
 
@@ -1143,84 +300,23 @@
     const ADMIN_PASSWORD = "cebada1";
 
     const productosOriginales = [
-      {
-        id:"baldo",
-        nombre:"Yerba Baldo",
-        peso:"1/2 kg",
-        descripcion:"Mezcla intensa de hojas y palos seleccionados. Perfecta para los que buscan un mate fuerte y bien rendidor.",
-        precio:6500,
-        imagen:"baldo.jpg",
-        etiqueta:"Más vendida",
-        notas:["Intensa","Rendidora","Tradicional"],
-        stock:true
-      },
-      {
-        id:"canarias",
-        nombre:"Yerba Canarias",
-        peso:"1 kg",
-        descripcion:"La clásica uruguaya: molienda fina, sabor profundo y carácter inconfundible para los materos exigentes.",
-        precio:10500,
-        imagen:"canarias.jpg",
-        etiqueta:"Origen Uruguay",
-        notas:["Fuerte","Premium","Molienda fina"],
-        stock:true
-      },
-      {
-        id:"rei-premium",
-        nombre:"Yerba Rei Verde Premium",
-        peso:"1 kg",
-        descripcion:"Edición premium con secado natural y estacionamiento prolongado. Sabor noble, suave en boca y muy aromático.",
-        precio:10000,
-        imagen:"rei-premium.jpg",
-        etiqueta:"Premium",
-        notas:["Aromática","Suave","Estacionada"],
-        stock:true
-      },
-      {
-        id:"rei-clasica",
-        nombre:"Yerba Rei Verde Clásica",
-        peso:"1/2 kg",
-        descripcion:"La versión tradicional Rei Verde: equilibrio justo entre sabor y rendimiento para el mate de todos los días.",
-        precio:6000,
-        imagen:"rei-clasica.jpg",
-        etiqueta:"Clásica",
-        notas:["Equilibrada","Diaria","Clásica"],
-        stock:true
-      }
+      {id:"baldo",nombre:"Yerba Baldo",peso:"1/2 kg",descripcion:"Mezcla intensa de hojas y palos seleccionados. Perfecta para los que buscan un mate fuerte y bien rendidor.",precio:6500,imagen:"baldo.jpg",etiqueta:"Más vendida",notas:["Intensa","Rendidora","Tradicional"],stock:true},
+      {id:"canarias",nombre:"Yerba Canarias",peso:"1 kg",descripcion:"La clásica uruguaya: molienda fina, sabor profundo y carácter inconfundible para los materos exigentes.",precio:10500,imagen:"canarias.jpg",etiqueta:"Origen Uruguay",notas:["Fuerte","Premium","Molienda fina"],stock:true},
+      {id:"rei-premium",nombre:"Yerba Rei Verde Premium",peso:"1 kg",descripcion:"Edición premium con secado natural y estacionamiento prolongado. Sabor noble, suave en boca y muy aromático.",precio:10000,imagen:"rei-premium.jpg",etiqueta:"Premium",notas:["Aromática","Suave","Estacionada"],stock:true},
+      {id:"rei-clasica",nombre:"Yerba Rei Verde Clásica",peso:"1/2 kg",descripcion:"La versión tradicional Rei Verde: equilibrio justo entre sabor y rendimiento para el mate de todos los días.",precio:6000,imagen:"rei-clasica.jpg",etiqueta:"Clásica",notas:["Equilibrada","Diaria","Clásica"],stock:true}
     ];
 
     let stockRemoto = {};
     let carrito = JSON.parse(localStorage.getItem("cebada_carrito") || "[]");
     let cantidades = JSON.parse(localStorage.getItem("cebada_cantidades") || "{}");
 
-    function saveCart(){
-      localStorage.setItem("cebada_carrito", JSON.stringify(carrito));
-    }
-
-    function saveCantidades(){
-      localStorage.setItem("cebada_cantidades", JSON.stringify(cantidades));
-    }
-
-    function ars(n){
-      return "$" + Number(n).toLocaleString("es-AR");
-    }
-
-    function totalCantidad(){
-      return carrito.reduce((a,b)=>a+b.cantidad,0);
-    }
-
-    function totalPrecio(){
-      return carrito.reduce((a,b)=>a+b.cantidad*b.precio,0);
-    }
-
-    function detalleTexto(){
-      return carrito.map(p => `• ${p.nombre} ${p.peso} x${p.cantidad} — ${ars(p.precio * p.cantidad)}`).join("\\n");
-    }
-
-    function validarTel(t){
-      const limpio = String(t).replace(/\\D/g,"");
-      return limpio.length >= 10 && limpio.length <= 13 && !/^0+$/.test(limpio);
-    }
+    function saveCart(){ localStorage.setItem("cebada_carrito", JSON.stringify(carrito)); }
+    function saveCantidades(){ localStorage.setItem("cebada_cantidades", JSON.stringify(cantidades)); }
+    function ars(n){ return "$" + Number(n).toLocaleString("es-AR"); }
+    function totalCantidad(){ return carrito.reduce((a,b)=>a+b.cantidad,0); }
+    function totalPrecio(){ return carrito.reduce((a,b)=>a+b.cantidad*b.precio,0); }
+    function detalleTexto(){ return carrito.map(p => `• ${p.nombre} ${p.peso} x${p.cantidad} — ${ars(p.precio * p.cantidad)}`).join("\n"); }
+    function validarTel(t){ const limpio = String(t).replace(/\D/g,""); return limpio.length >= 10 && limpio.length <= 13 && !/^0+$/.test(limpio); }
 
     function showToast(texto){
       const toast = document.getElementById("toast");
@@ -1231,23 +327,14 @@
     }
 
     function parseCSV(text) {
-      const cleanText = text.replace(/^\\uFEFF/, "").trim();
-      const lines = cleanText.split(/\\r?\\n/);
-
+      const cleanText = text.replace(/^\uFEFF/, "").trim();
+      const lines = cleanText.split(/\r?\n/);
       if (lines.length < 2) return [];
-
-      const headers = lines[0]
-        .split(",")
-        .map(h => h.replace(/^\\uFEFF/, "").trim().toLowerCase());
-
+      const headers = lines[0].split(",").map(h => h.replace(/^\uFEFF/, "").trim().toLowerCase());
       return lines.slice(1).map(line => {
         const values = line.split(",").map(v => v.trim());
         const row = {};
-
-        headers.forEach((header, index) => {
-          row[header] = values[index] || "";
-        });
-
+        headers.forEach((header, index) => { row[header] = values[index] || ""; });
         return row;
       });
     }
@@ -1260,11 +347,9 @@
         const filas = parseCSV(text);
 
         stockRemoto = {};
-
         filas.forEach(f => {
           const producto = (f.producto || "").trim().toLowerCase();
           if (!producto) return;
-
           stockRemoto[producto] = {
             precio: Number(f.precio),
             stock: (f.stock || "").trim().toLowerCase() === "si",
@@ -1285,7 +370,6 @@
       return productosOriginales.map(p => {
         const remoto = stockRemoto[p.id];
         if (!remoto) return p;
-
         return {
           ...p,
           precio: !isNaN(remoto.precio) ? remoto.precio : p.precio,
@@ -1298,10 +382,8 @@
     function renderProducts(){
       const productos = getProductos();
       const grid = document.getElementById("productsGrid");
-
       grid.innerHTML = productos.map(p => {
         const cant = cantidades[p.id] || 1;
-
         return `
           <article class="card">
             <div class="media">
@@ -1309,39 +391,22 @@
               ${!p.stock ? `<span class="tag tag-stock">Sin stock</span>` : ""}
               <img src="${p.imagen}" alt="${p.nombre} ${p.peso}" style="${!p.stock ? "filter:grayscale(38%) opacity(.66);" : ""}">
             </div>
-
             <div class="content">
               <h3 class="product-title">${p.nombre} <span class="weight">· ${p.peso}</span></h3>
               <p class="desc">${p.descripcion}</p>
-
-              <div class="chips">
-                ${p.notas.map(n => `<span class="chip">${n}</span>`).join("")}
-              </div>
-
+              <div class="chips">${p.notas.map(n => `<span class="chip">${n}</span>`).join("")}</div>
               <div class="price-row">
                 <div class="price">${ars(p.precio)}</div>
-                <div class="${p.stock ? "stock-ok" : "stock-no"}">
-                  ${p.stock ? "✅ Stock disponible" : "⛔ Sin stock"}
-                </div>
+                <div class="${p.stock ? "stock-ok" : "stock-no"}">${p.stock ? "✅ Stock disponible" : "⛔ Sin stock"}</div>
               </div>
-
               <div class="qty">
                 <button onclick="changeQty('${p.id}', -1)">−</button>
                 <span id="qty-${p.id}">${cant}</span>
                 <button onclick="changeQty('${p.id}', 1)">+</button>
               </div>
-
-              <button
-                class="primary-btn"
-                onclick="addCart('${p.id}')"
-                ${p.stock ? "" : "disabled"}
-                style="${p.stock ? "" : "background:#5a1f1f;color:#fff;opacity:1;cursor:not-allowed"}"
-              >
-                ${p.stock ? "Agregar al carrito" : "Sin stock"}
-              </button>
+              <button class="primary-btn" onclick="addCart('${p.id}')" ${p.stock ? "" : "disabled"} style="${p.stock ? "" : "background:#5a1f1f;color:#fff;opacity:1;cursor:not-allowed"}">${p.stock ? "Agregar al carrito" : "Sin stock"}</button>
             </div>
-          </article>
-        `;
+          </article>`;
       }).join("");
     }
 
@@ -1356,26 +421,14 @@
     function addCart(id){
       const producto = getProductos().find(p => p.id === id);
       if (!producto) return;
-      if (!producto.stock){
-        alert("Este producto está sin stock");
-        return;
-      }
+      if (!producto.stock){ alert("Este producto está sin stock"); return; }
 
       const cant = cantidades[id] || 1;
       const existe = carrito.find(i => i.id === id);
 
-      if (existe){
-        existe.cantidad += cant;
-        existe.precio = producto.precio;
-      } else {
-        carrito.push({
-          id: producto.id,
-          nombre: producto.nombre,
-          peso: producto.peso,
-          precio: producto.precio,
-          imagen: producto.imagen,
-          cantidad: cant
-        });
+      if (existe){ existe.cantidad += cant; existe.precio = producto.precio; }
+      else {
+        carrito.push({ id: producto.id, nombre: producto.nombre, peso: producto.peso, precio: producto.precio, imagen: producto.imagen, cantidad: cant });
       }
 
       cantidades[id] = 1;
@@ -1387,10 +440,7 @@
     }
 
     function modCart(id, delta){
-      carrito = carrito
-        .map(i => i.id === id ? { ...i, cantidad: i.cantidad + delta } : i)
-        .filter(i => i.cantidad > 0);
-
+      carrito = carrito.map(i => i.id === id ? { ...i, cantidad: i.cantidad + delta } : i).filter(i => i.cantidad > 0);
       saveCart();
       renderCart();
     }
@@ -1422,37 +472,24 @@
       updateCheckoutSummary();
     }
 
-    function openCart(){
-      document.getElementById("cartOverlay").classList.add("show");
-      document.getElementById("cartDrawer").classList.add("show");
-    }
-
-    function closeCart(){
-      document.getElementById("cartOverlay").classList.remove("show");
-      document.getElementById("cartDrawer").classList.remove("show");
-    }
+    function openCart(){ document.getElementById("cartOverlay").classList.add("show"); document.getElementById("cartDrawer").classList.add("show"); }
+    function closeCart(){ document.getElementById("cartOverlay").classList.remove("show"); document.getElementById("cartDrawer").classList.remove("show"); }
 
     function showStep(step){
       document.getElementById("stepOptions").classList.add("hidden");
       document.getElementById("stepWhatsapp").classList.add("hidden");
       document.getElementById("stepContact").classList.add("hidden");
-
       if (step === "options") document.getElementById("stepOptions").classList.remove("hidden");
       if (step === "whatsapp") document.getElementById("stepWhatsapp").classList.remove("hidden");
       if (step === "contact") document.getElementById("stepContact").classList.remove("hidden");
     }
 
     function updateCheckoutSummary(){
-      document.getElementById("checkoutSummary").innerHTML =
-        `<div><strong>Productos:</strong> ${totalCantidad()}</div><div><strong>Total:</strong> ${ars(totalPrecio())}</div>`;
+      document.getElementById("checkoutSummary").innerHTML = `<div><strong>Productos:</strong> ${totalCantidad()}</div><div><strong>Total:</strong> ${ars(totalPrecio())}</div>`;
     }
 
     function openCheckout(){
-      if (carrito.length === 0){
-        alert("El carrito está vacío");
-        return;
-      }
-
+      if (carrito.length === 0){ alert("El carrito está vacío"); return; }
       updateCheckoutSummary();
       showStep("options");
       document.getElementById("checkoutOverlay").classList.add("show");
@@ -1468,21 +505,26 @@
 
     function confirmarWhatsapp(){
       const nombre = document.getElementById("waName").value.trim();
-      if (!nombre){
-        document.getElementById("waError").textContent = "Por favor ingresá tu nombre y apellido.";
-        return;
-      }
-
+      if (!nombre){ document.getElementById("waError").textContent = "Por favor ingresá tu nombre y apellido."; return; }
       document.getElementById("waError").textContent = "";
 
       const fecha = new Date().toLocaleString("es-AR");
       const msg =
-        `¡Hola La Cebada! 👋 Quiero confirmar este pedido:\\n\\n` +
+        `¡Hola La Cebada! 👋 Quiero confirmar este pedido:
+
+` +
         detalleTexto() +
-        `\\n\\n🧉 Total de productos: ${totalCantidad()}` +
-        `\\n💰 Total a abonar: ${ars(totalPrecio())}` +
-        `\\n👤 Cliente: ${nombre}` +
-        `\\n🕒 ${fecha}\\n\\n¡Gracias!`;
+        `
+
+🧉 Total de productos: ${totalCantidad()}` +
+        `
+💰 Total a abonar: ${ars(totalPrecio())}` +
+        `
+👤 Cliente: ${nombre}` +
+        `
+🕒 ${fecha}
+
+¡Gracias!`;
 
       window.open(`https://wa.me/${TELEFONO_VENDEDOR}?text=${encodeURIComponent(msg)}`, "_blank");
 
@@ -1498,19 +540,11 @@
       const nombre = document.getElementById("contactName").value.trim();
       const telefono = document.getElementById("contactPhone").value.trim();
 
-      if (!nombre || !telefono){
-        document.getElementById("contactError").textContent = "Completá tu nombre y teléfono.";
-        return;
-      }
-
-      if (!validarTel(telefono)){
-        document.getElementById("contactError").textContent = "El número de teléfono no parece válido.";
-        return;
-      }
-
+      if (!nombre || !telefono){ document.getElementById("contactError").textContent = "Completá tu nombre y teléfono."; return; }
+      if (!validarTel(telefono)){ document.getElementById("contactError").textContent = "El número de teléfono no parece válido."; return; }
       document.getElementById("contactError").textContent = "";
 
-      try{
+      try {
         await fetch(WEBHOOK_URL, {
           method:"POST",
           headers:{ "Content-Type":"application/json" },
@@ -1524,7 +558,7 @@
             fecha:new Date().toLocaleString("es-AR")
           })
         });
-      }catch(e){
+      } catch(e) {
         console.error(e);
       }
 
@@ -1556,27 +590,14 @@
         <div class="admin-product">
           <div class="admin-product-title">Control de stock, precio y etiquetas</div>
           <p style="color:var(--muted); line-height:1.6; margin:0 0 12px;">Ahora estos cambios se controlan desde Google Sheets.</p>
-          <p style="color:var(--muted); line-height:1.6; margin:0 0 12px;">
-            Modificá en la planilla:<br>
-            • producto<br>
-            • precio<br>
-            • stock (si / no)<br>
-            • etiqueta
-          </p>
+          <p style="color:var(--muted); line-height:1.6; margin:0 0 12px;">Modificá en la planilla:<br>• producto<br>• precio<br>• stock (si / no)<br>• etiqueta</p>
           <p style="color:var(--muted); line-height:1.6; margin:0;">Después recargá la web y todos los usuarios verán el cambio.</p>
         </div>`;
     }
 
     document.getElementById("openCartBtn").addEventListener("click", openCart);
     document.getElementById("cartOverlay").addEventListener("click", closeCart);
-
-    document.getElementById("clearCartBtn").addEventListener("click", () => {
-      carrito = [];
-      saveCart();
-      renderCart();
-      showToast("Carrito vaciado");
-    });
-
+    document.getElementById("clearCartBtn").addEventListener("click", () => { carrito = []; saveCart(); renderCart(); showToast("Carrito vaciado"); });
     document.getElementById("checkoutBtn").addEventListener("click", openCheckout);
     document.getElementById("checkoutOverlay").addEventListener("click", closeCheckout);
     document.getElementById("goWhatsappBtn").addEventListener("click", () => showStep("whatsapp"));
@@ -1586,19 +607,11 @@
     document.getElementById("backFromContactBtn").addEventListener("click", () => showStep("options"));
     document.getElementById("sendWhatsappBtn").addEventListener("click", confirmarWhatsapp);
     document.getElementById("sendContactBtn").addEventListener("click", confirmarContacto);
-    document.getElementById("closeSuccessBtn").addEventListener("click", () => {
-      document.getElementById("successModal").classList.remove("show");
-    });
-
+    document.getElementById("closeSuccessBtn").addEventListener("click", () => { document.getElementById("successModal").classList.remove("show"); });
     document.getElementById("adminAccess").addEventListener("click", openAdmin);
     document.getElementById("adminOverlay").addEventListener("click", closeAdmin);
     document.getElementById("closeAdminBtn").addEventListener("click", closeAdmin);
-    document.getElementById("adminVaciarCarritoBtn").addEventListener("click", () => {
-      carrito = [];
-      saveCart();
-      renderCart();
-      showToast("Carrito vaciado");
-    });
+    document.getElementById("adminVaciarCarritoBtn").addEventListener("click", () => { carrito = []; saveCart(); renderCart(); showToast("Carrito vaciado"); });
 
     document.querySelectorAll(".faq-q").forEach(btn => {
       btn.addEventListener("click", () => btn.parentElement.classList.toggle("open"));
