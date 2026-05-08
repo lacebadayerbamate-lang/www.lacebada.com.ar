@@ -8,41 +8,53 @@
   <style>
     :root{
       --bg:#070707;
-      --bg-2:#0d0d0d;
       --panel:#121212;
       --line:rgba(255,255,255,.10);
-      --line-2:rgba(255,255,255,.06);
-      --text:#ffffff;
+      --line2:rgba(255,255,255,.06);
+      --text:#fff;
       --muted:rgba(255,255,255,.68);
-      --white-soft:rgba(255,255,255,.04);
-      --danger:#b92d2d;
+      --danger:#c63737;
       --danger-dark:#6f1f1f;
-      --success:#79e7a5;
+      --success:#86efac;
       --shadow:0 18px 50px rgba(0,0,0,.35);
-      --radius-xl:28px;
-      --radius-lg:22px;
-      --radius-md:16px;
+      --wa:#25D366;
       --max:1200px;
     }
 
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
-    html,body{margin:0;padding:0}
     body{
-      font-family: Inter, Segoe UI, Arial, sans-serif;
+      margin:0;
+      font-family:Inter,Segoe UI,Arial,sans-serif;
       color:var(--text);
       background:
-        radial-gradient(circle at top, rgba(255,255,255,.04), transparent 35%),
-        linear-gradient(180deg,#000 0%, #0a0a0a 32%, #101010 100%);
+        radial-gradient(circle at top,rgba(255,255,255,.04),transparent 35%),
+        linear-gradient(180deg,#000 0%,#0a0a0a 32%,#101010 100%);
     }
 
     img{display:block;max-width:100%}
     button,input{font:inherit}
-    .hidden{display:none !important}
+    .hidden{display:none!important}
 
     .container{
-      width:min(var(--max), calc(100% - 32px));
+      width:min(var(--max),calc(100% - 32px));
       margin:0 auto;
+    }
+
+    .topbar{
+      background:linear-gradient(90deg,#111,#1b1b1b,#111);
+      border-bottom:1px solid var(--line);
+      color:#f4f0e6;
+      font-size:13px;
+      font-weight:700;
+    }
+
+    .topbar-inner{
+      min-height:40px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
     }
 
     header{
@@ -67,7 +79,6 @@
       align-items:center;
       gap:14px;
       cursor:pointer;
-      user-select:none;
     }
 
     .brand-logo{
@@ -76,14 +87,11 @@
       border-radius:50%;
       object-fit:contain;
       background:#000;
-      box-shadow:0 6px 20px rgba(0,0,0,.25);
     }
 
     .brand-title{
       font-size:28px;
       font-weight:900;
-      line-height:1;
-      letter-spacing:-0.02em;
     }
 
     .brand-sub{
@@ -102,7 +110,7 @@
       align-items:center;
       gap:10px;
       cursor:pointer;
-      transition:.2s ease;
+      transition:.22s ease;
     }
 
     .cart-btn:hover{
@@ -111,8 +119,8 @@
     }
 
     .badge{
-      min-width:24px;
-      height:24px;
+      min-width:26px;
+      height:26px;
       padding:0 8px;
       border-radius:999px;
       background:#fff;
@@ -121,7 +129,7 @@
       align-items:center;
       justify-content:center;
       font-size:12px;
-      font-weight:800;
+      font-weight:900;
     }
 
     main{padding:28px 0 72px}
@@ -134,16 +142,42 @@
     }
 
     .hero-main,
-    .hero-side{
+    .hero-side,
+    .trust-item,
+    .card,
+    .testimonial,
+    .faq,
+    .story,
+    footer,
+    .admin-card{
       border:1px solid var(--line);
-      border-radius:var(--radius-xl);
-      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
       box-shadow:var(--shadow);
+    }
+
+    .hero-main,
+    .hero-side,
+    .faq,
+    .story,
+    footer{
+      border-radius:28px;
+    }
+
+    .trust-item,
+    .testimonial,
+    .admin-card{
+      border-radius:22px;
+    }
+
+    .card{
+      border-radius:26px;
+      overflow:hidden;
+      background:linear-gradient(180deg,#111,#101010);
     }
 
     .hero-main{
       padding:34px;
-      min-height:320px;
+      min-height:340px;
       display:flex;
       flex-direction:column;
       justify-content:center;
@@ -151,14 +185,28 @@
       overflow:hidden;
     }
 
-    .hero-main::after{
+    .hero-main:before,
+    .hero-main:after{
       content:"";
       position:absolute;
-      inset:auto -80px -120px auto;
+      border-radius:50%;
+      pointer-events:none;
+    }
+
+    .hero-main:before{
+      right:-120px;
+      top:-80px;
+      width:320px;
+      height:320px;
+      background:radial-gradient(circle,rgba(255,255,255,.08),transparent 70%);
+    }
+
+    .hero-main:after{
+      left:-80px;
+      bottom:-120px;
       width:260px;
       height:260px;
-      background:radial-gradient(circle, rgba(255,255,255,.08), transparent 70%);
-      pointer-events:none;
+      background:radial-gradient(circle,rgba(255,255,255,.06),transparent 70%);
     }
 
     .eyebrow{
@@ -180,10 +228,9 @@
 
     .hero-title{
       margin:0;
-      font-size:54px;
+      font-size:56px;
       line-height:.98;
       letter-spacing:-.04em;
-      max-width:760px;
     }
 
     .hero-text{
@@ -191,48 +238,17 @@
       color:var(--muted);
       font-size:18px;
       line-height:1.6;
-      max-width:700px;
     }
 
-    .hero-cta{
+    .hero-cta,
+    .story-links,
+    .chips,
+    .qty,
+    .cart-controls{
       display:flex;
-      flex-wrap:wrap;
       gap:12px;
-      margin-top:24px;
+      flex-wrap:wrap;
     }
-
-    .btn,
-    .btn-outline,
-    .btn-danger{
-      border:none;
-      border-radius:16px;
-      padding:14px 18px;
-      font-weight:800;
-      cursor:pointer;
-      transition:.2s ease;
-    }
-
-    .btn{
-      background:#fff;
-      color:#000;
-    }
-
-    .btn:hover{background:#ececec;transform:translateY(-1px)}
-
-    .btn-outline{
-      background:rgba(255,255,255,.06);
-      color:#fff;
-      border:1px solid var(--line);
-    }
-
-    .btn-outline:hover{background:rgba(255,255,255,.10)}
-
-    .btn-danger{
-      background:var(--danger-dark);
-      color:#fff;
-    }
-
-    .btn-danger:hover{background:#7e2424}
 
     .hero-side{
       padding:24px;
@@ -242,22 +258,35 @@
     }
 
     .mini-feature{
-      border:1px solid var(--line-2);
+      border:1px solid var(--line2);
       background:rgba(255,255,255,.03);
       border-radius:20px;
       padding:18px;
+      transition:.22s ease;
     }
 
-    .mini-feature h4{
+    .mini-feature:hover,
+    .trust-item:hover{
+      transform:translateY(-2px);
+      background:rgba(255,255,255,.05);
+    }
+
+    .mini-feature h4,
+    .trust-item h4,
+    .admin-card h4,
+    footer h4{
       margin:0 0 8px;
-      font-size:17px;
     }
 
-    .mini-feature p{
+    .mini-feature p,
+    .trust-item p,
+    footer p,
+    .story p,
+    .testimonial p,
+    .faq-a{
       margin:0;
       color:var(--muted);
-      line-height:1.5;
-      font-size:14px;
+      line-height:1.6;
     }
 
     .section-head{
@@ -272,7 +301,6 @@
       margin:0;
       font-size:42px;
       font-weight:900;
-      letter-spacing:-.03em;
     }
 
     .section-sub{
@@ -281,47 +309,43 @@
       font-size:18px;
     }
 
-    .trust-row{
+    .trust-row,
+    .grid,
+    .testimonials,
+    .admin-grid,
+    footer{
       display:grid;
-      grid-template-columns:repeat(4,1fr);
       gap:14px;
+    }
+
+    .trust-row{
+      grid-template-columns:repeat(4,1fr);
       margin-bottom:28px;
     }
 
-    .trust-item{
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.03);
-      border-radius:22px;
-      padding:18px;
-    }
-
-    .trust-item h4{
-      margin:0 0 8px;
-      font-size:18px;
-    }
-
-    .trust-item p{
-      margin:0;
-      color:var(--muted);
-      line-height:1.5;
-      font-size:15px;
-    }
-
     .grid{
-      display:grid;
       grid-template-columns:repeat(4,1fr);
       gap:20px;
     }
 
+    .testimonials{
+      grid-template-columns:repeat(3,1fr);
+      margin-top:34px;
+    }
+
+    .admin-grid,
+    footer{
+      grid-template-columns:1fr 1fr 1fr;
+    }
+
     .card{
-      border:1px solid var(--line);
-      background:linear-gradient(180deg,#111,#101010);
-      border-radius:26px;
-      overflow:hidden;
-      box-shadow:var(--shadow);
-      display:flex;
-      flex-direction:column;
-      min-height:100%;
+      transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease;
+    }
+
+    .card:hover{
+      transform:translateY(-5px);
+      box-shadow:0 24px 60px rgba(0,0,0,.42);
+      border-color:rgba(255,255,255,.18);
     }
 
     .media{
@@ -335,11 +359,11 @@
       width:100%;
       height:100%;
       object-fit:cover;
-      transition:.25s ease;
+      transition:.28s ease;
     }
 
     .card:hover .media img{
-      transform:scale(1.02);
+      transform:scale(1.03);
     }
 
     .tag{
@@ -374,7 +398,6 @@
       margin:0;
       font-size:23px;
       line-height:1.12;
-      letter-spacing:-.02em;
     }
 
     .weight{
@@ -389,13 +412,6 @@
       line-height:1.5;
       font-size:15px;
       min-height:72px;
-    }
-
-    .chips{
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-      margin-top:14px;
     }
 
     .chip{
@@ -418,18 +434,24 @@
     .price{
       font-size:34px;
       font-weight:900;
-      letter-spacing:-.03em;
     }
 
-    .stock-ok{font-size:13px;color:var(--success);font-weight:700}
-    .stock-no{font-size:13px;color:#ff9d9d;font-weight:700}
+    .stock-ok{
+      font-size:13px;
+      color:var(--success);
+      font-weight:700;
+    }
+
+    .stock-no{
+      font-size:13px;
+      color:#ff9d9d;
+      font-weight:700;
+    }
 
     .qty{
       margin-top:16px;
-      display:flex;
       align-items:center;
       justify-content:center;
-      gap:14px;
     }
 
     .qty button,
@@ -442,12 +464,6 @@
       color:#fff;
       cursor:pointer;
       font-size:20px;
-      transition:.2s ease;
-    }
-
-    .qty button:hover,
-    .mini-btn:hover{
-      background:rgba(255,255,255,.18);
     }
 
     .qty span{
@@ -457,51 +473,115 @@
       font-size:20px;
     }
 
+    .btn,
+    .btn-outline,
+    .btn-danger,
     .primary-btn,
     .secondary-btn,
     .danger-btn{
-      width:100%;
       border:none;
-      cursor:pointer;
       border-radius:16px;
       padding:14px 16px;
-      margin-top:16px;
       font-weight:800;
-      transition:.2s ease;
+      cursor:pointer;
+      transition:.22s ease;
     }
 
+    .btn,
     .primary-btn{
       background:#fff;
       color:#000;
     }
 
+    .btn:hover,
     .primary-btn:hover{
       background:#ececec;
       transform:translateY(-1px);
     }
 
+    .btn-outline,
     .secondary-btn{
       background:rgba(255,255,255,.08);
       color:#fff;
       border:1px solid var(--line);
     }
 
-    .secondary-btn:hover{background:rgba(255,255,255,.12)}
+    .btn-outline:hover,
+    .secondary-btn:hover{
+      background:rgba(255,255,255,.12);
+    }
 
+    .btn-danger,
     .danger-btn{
       background:var(--danger-dark);
       color:#fff;
     }
 
-    .danger-btn:hover{background:#7f2525}
+    .btn-danger:hover,
+    .danger-btn:hover{
+      background:#7f2525;
+    }
+
+    .primary-btn,
+    .secondary-btn,
+    .danger-btn{
+      width:100%;
+      margin-top:16px;
+    }
+
+    .testimonial-stars{
+      font-size:18px;
+      margin-bottom:10px;
+    }
+
+    .testimonial strong{
+      display:block;
+      margin-top:14px;
+      font-size:14px;
+    }
+
+    .faq{
+      margin-top:34px;
+      padding:24px;
+    }
+
+    .faq-list{
+      display:grid;
+      gap:12px;
+      margin-top:16px;
+    }
+
+    .faq-item{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      border-radius:18px;
+      overflow:hidden;
+    }
+
+    .faq-q{
+      width:100%;
+      text-align:left;
+      background:transparent;
+      color:#fff;
+      padding:16px 18px;
+      border:none;
+      font-weight:800;
+      cursor:pointer;
+    }
+
+    .faq-a{
+      padding:0 18px 16px;
+      display:none;
+    }
+
+    .faq-item.open .faq-a{
+      display:block;
+    }
 
     .story{
       margin-top:32px;
-      border:1px solid var(--line);
-      border-radius:28px;
       padding:28px;
       text-align:center;
-      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
     }
 
     .story-top{
@@ -512,59 +592,14 @@
     }
 
     .story h3{
-      margin:10px 0 10px;
+      margin:10px 0;
       font-size:40px;
-      letter-spacing:-.03em;
-    }
-
-    .story p{
-      max-width:760px;
-      margin:0 auto;
-      color:var(--muted);
-      font-size:18px;
-      line-height:1.6;
-    }
-
-    .story-links{
-      margin-top:20px;
-      display:flex;
-      gap:12px;
-      justify-content:center;
-      flex-wrap:wrap;
-    }
-
-    .story-links a{
-      color:#fff;
-      text-decoration:none;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.05);
-      padding:12px 18px;
-      border-radius:999px;
     }
 
     footer{
       margin-top:26px;
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:14px;
-      border:1px solid var(--line);
-      border-radius:28px;
-      background:rgba(255,255,255,.03);
       padding:24px;
     }
-
-    footer h4{
-      margin:0 0 10px;
-      font-size:18px;
-    }
-
-    footer p{
-      margin:0;
-      color:var(--muted);
-      line-height:1.55;
-    }
-
-    footer a{color:#fff}
 
     .overlay{
       position:fixed;
@@ -574,7 +609,9 @@
       display:none;
     }
 
-    .overlay.show{display:block}
+    .overlay.show{
+      display:block;
+    }
 
     .drawer{
       position:fixed;
@@ -594,7 +631,9 @@
       box-shadow:0 -16px 40px rgba(0,0,0,.45);
     }
 
-    .drawer.show{transform:translateY(0)}
+    .drawer.show{
+      transform:translateY(0);
+    }
 
     .drawer-inner{
       width:min(760px,100%);
@@ -629,7 +668,6 @@
 
     .cart-info{
       flex:1;
-      min-width:0;
     }
 
     .cart-name{
@@ -641,12 +679,6 @@
       color:var(--muted);
       font-size:14px;
       margin-top:4px;
-    }
-
-    .cart-controls{
-      display:flex;
-      align-items:center;
-      gap:8px;
     }
 
     .cart-total{
@@ -670,7 +702,7 @@
       left:50%;
       top:50%;
       transform:translate(-50%,-50%) scale(.96);
-      width:min(440px, calc(100% - 24px));
+      width:min(440px,calc(100% - 24px));
       z-index:201;
       background:#0d130f;
       border:1px solid var(--line);
@@ -699,7 +731,7 @@
 
     .field{
       width:100%;
-      padding:14px 14px;
+      padding:14px;
       border-radius:14px;
       border:1px solid var(--line);
       background:#0c0c0c;
@@ -729,7 +761,9 @@
       padding:16px;
     }
 
-    .success-modal.show{display:flex}
+    .success-modal.show{
+      display:flex;
+    }
 
     .success-box{
       width:min(390px,100%);
@@ -788,7 +822,9 @@
       padding:20px;
     }
 
-    .admin-panel.show{display:block}
+    .admin-panel.show{
+      display:block;
+    }
 
     .admin-top{
       display:flex;
@@ -804,21 +840,7 @@
     }
 
     .admin-grid{
-      display:grid;
       grid-template-columns:1fr 1fr;
-      gap:18px;
-    }
-
-    .admin-card{
-      background:rgba(255,255,255,.04);
-      border:1px solid var(--line);
-      border-radius:18px;
-      padding:16px;
-    }
-
-    .admin-card h4{
-      margin:0 0 12px;
-      font-size:18px;
     }
 
     .admin-product{
@@ -833,15 +855,37 @@
       margin-bottom:10px;
     }
 
-    @media (max-width: 1100px){
-      .hero{grid-template-columns:1fr}
-      .grid{grid-template-columns:repeat(2,1fr)}
-      .trust-row{grid-template-columns:repeat(2,1fr)}
-      .admin-grid{grid-template-columns:1fr}
+    .wa-float{
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      z-index:60;
+      width:58px;
+      height:58px;
+      border-radius:50%;
+      background:var(--wa);
+      color:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:28px;
+      box-shadow:0 14px 30px rgba(37,211,102,.35);
+      transition:.22s ease;
     }
 
-    @media (max-width: 680px){
-      .container{width:min(var(--max), calc(100% - 20px))}
+    .wa-float:hover{
+      transform:translateY(-2px) scale(1.03);
+    }
+
+    @media (max-width:1100px){
+      .hero{grid-template-columns:1fr}
+      .grid{grid-template-columns:repeat(2,1fr)}
+      .trust-row,.testimonials{grid-template-columns:repeat(2,1fr)}
+      .admin-grid,footer{grid-template-columns:1fr}
+    }
+
+    @media (max-width:680px){
+      .container{width:min(var(--max),calc(100% - 20px))}
       .brand-logo{width:46px;height:46px}
       .brand-title{font-size:24px}
       .hero-main{padding:24px}
@@ -849,13 +893,18 @@
       .section-title{font-size:34px}
       .section-sub{font-size:16px}
       .story h3{font-size:31px}
-      .grid,.trust-row,footer{grid-template-columns:1fr}
+      .grid,.trust-row,.testimonials,footer{grid-template-columns:1fr}
       .admin-panel{inset:10px}
       .header-inner{min-height:72px}
+      .wa-float{width:54px;height:54px;font-size:26px}
     }
   </style>
 </head>
 <body>
+  <div class="topbar">
+    <div class="container topbar-inner">🧉 Stock actualizado · Atención personalizada · Pedidos por WhatsApp</div>
+  </div>
+
   <header>
     <div class="container header-inner">
       <div class="brand" id="adminAccess" title="Panel de administrador">
@@ -885,7 +934,7 @@
         </p>
         <div class="hero-cta">
           <button class="btn" onclick="document.getElementById('catalogo').scrollIntoView()">Ver catálogo</button>
-          <button class="btn-outline" onclick="window.open('https://instagram.com/gaspichaves','_blank')">Consultar por Instagram</button>
+          <button class="btn-outline" onclick="window.open('https://wa.me/5493364370451','_blank')">Pedir por WhatsApp</button>
         </div>
       </div>
 
@@ -935,6 +984,52 @@
       <div class="grid" id="productsGrid"></div>
     </section>
 
+    <section class="testimonials">
+      <div class="testimonial">
+        <div class="testimonial-stars">★★★★★</div>
+        <p>Excelente atención y muy buena presentación. Todo se coordinó rápido y sin complicaciones.</p>
+        <strong>— Cliente verificado</strong>
+      </div>
+      <div class="testimonial">
+        <div class="testimonial-stars">★★★★★</div>
+        <p>La Baldo y la Canarias llegaron impecables. Muy buena experiencia de compra.</p>
+        <strong>— Matero frecuente</strong>
+      </div>
+      <div class="testimonial">
+        <div class="testimonial-stars">★★★★★</div>
+        <p>Me gustó que el stock esté claro y que la compra se confirme por WhatsApp. Muy prolijo.</p>
+        <strong>— Nuevo cliente</strong>
+      </div>
+    </section>
+
+    <section class="faq">
+      <div class="section-head" style="margin:0 0 10px">
+        <div>
+          <h2 class="section-title" style="font-size:34px">Preguntas frecuentes</h2>
+          <p class="section-sub" style="font-size:16px">Lo más importante, explicado simple.</p>
+        </div>
+      </div>
+
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-q" type="button">¿Cómo compro?</button>
+          <div class="faq-a">Elegís los productos, los sumás al carrito y finalizás por WhatsApp o dejando tu contacto para que te escribamos.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" type="button">¿Cómo sé si hay stock?</button>
+          <div class="faq-a">La disponibilidad se actualiza desde una planilla. Si un producto figura “Sin stock”, no se puede agregar al carrito.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" type="button">¿Puedo combinar varias marcas?</button>
+          <div class="faq-a">Sí, podés armar tu pedido con las marcas y cantidades que prefieras.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" type="button">¿Cómo se coordina la entrega?</button>
+          <div class="faq-a">Después de finalizar, confirmamos el pedido por WhatsApp y coordinamos con vos de forma directa.</div>
+        </div>
+      </div>
+    </section>
+
     <section class="story">
       <div class="story-top">Detrás de La Cebada</div>
       <h3>Un emprendimiento de dos amigos materos</h3>
@@ -968,6 +1063,8 @@
       </div>
     </footer>
   </main>
+
+  <a class="wa-float" href="https://wa.me/5493364370451" target="_blank" aria-label="WhatsApp">✆</a>
 
   <div class="overlay" id="cartOverlay"></div>
   <div class="drawer" id="cartDrawer">
@@ -1047,86 +1144,25 @@
     const ADMIN_PASSWORD = "cebada1";
 
     const productosOriginales = [
-      {
-        id: "baldo",
-        nombre: "Yerba Baldo",
-        peso: "1/2 kg",
-        descripcion: "Mezcla intensa de hojas y palos seleccionados. Perfecta para los que buscan un mate fuerte y bien rendidor.",
-        precio: 6500,
-        imagen: "baldo.jpg",
-        etiqueta: "Más vendida",
-        notas: ["Intensa", "Rendidora", "Tradicional"],
-        stock: true
-      },
-      {
-        id: "canarias",
-        nombre: "Yerba Canarias",
-        peso: "1 kg",
-        descripcion: "La clásica uruguaya: molienda fina, sabor profundo y carácter inconfundible para los materos exigentes.",
-        precio: 10500,
-        imagen: "canarias.jpg",
-        etiqueta: "Origen Uruguay",
-        notas: ["Fuerte", "Premium", "Molienda fina"],
-        stock: true
-      },
-      {
-        id: "rei-premium",
-        nombre: "Yerba Rei Verde Premium",
-        peso: "1 kg",
-        descripcion: "Edición premium con secado natural y estacionamiento prolongado. Sabor noble, suave en boca y muy aromático.",
-        precio: 10000,
-        imagen: "rei-premium.jpg",
-        etiqueta: "Premium",
-        notas: ["Aromática", "Suave", "Estacionada"],
-        stock: true
-      },
-      {
-        id: "rei-clasica",
-        nombre: "Yerba Rei Verde Clásica",
-        peso: "1/2 kg",
-        descripcion: "La versión tradicional Rei Verde: equilibrio justo entre sabor y rendimiento para el mate de todos los días.",
-        precio: 6000,
-        imagen: "rei-clasica.jpg",
-        etiqueta: "Clásica",
-        notas: ["Equilibrada", "Diaria", "Clásica"],
-        stock: true
-      }
+      { id:"baldo", nombre:"Yerba Baldo", peso:"1/2 kg", descripcion:"Mezcla intensa de hojas y palos seleccionados. Perfecta para los que buscan un mate fuerte y bien rendidor.", precio:6500, imagen:"baldo.jpg", etiqueta:"Más vendida", notas:["Intensa","Rendidora","Tradicional"], stock:true },
+      { id:"canarias", nombre:"Yerba Canarias", peso:"1 kg", descripcion:"La clásica uruguaya: molienda fina, sabor profundo y carácter inconfundible para los materos exigentes.", precio:10500, imagen:"canarias.jpg", etiqueta:"Origen Uruguay", notas:["Fuerte","Premium","Molienda fina"], stock:true },
+      { id:"rei-premium", nombre:"Yerba Rei Verde Premium", peso:"1 kg", descripcion:"Edición premium con secado natural y estacionamiento prolongado. Sabor noble, suave en boca y muy aromático.", precio:10000, imagen:"rei-premium.jpg", etiqueta:"Premium", notas:["Aromática","Suave","Estacionada"], stock:true },
+      { id:"rei-clasica", nombre:"Yerba Rei Verde Clásica", peso:"1/2 kg", descripcion:"La versión tradicional Rei Verde: equilibrio justo entre sabor y rendimiento para el mate de todos los días.", precio:6000, imagen:"rei-clasica.jpg", etiqueta:"Clásica", notas:["Equilibrada","Diaria","Clásica"], stock:true }
     ];
 
     let stockRemoto = {};
     let carrito = JSON.parse(localStorage.getItem("cebada_carrito") || "[]");
     let cantidades = JSON.parse(localStorage.getItem("cebada_cantidades") || "{}");
 
-    function saveCart() {
-      localStorage.setItem("cebada_carrito", JSON.stringify(carrito));
-    }
+    function saveCart(){ localStorage.setItem("cebada_carrito", JSON.stringify(carrito)); }
+    function saveCantidades(){ localStorage.setItem("cebada_cantidades", JSON.stringify(cantidades)); }
+    function ars(n){ return "$" + Number(n).toLocaleString("es-AR"); }
+    function totalCantidad(){ return carrito.reduce((a,b)=>a+b.cantidad,0); }
+    function totalPrecio(){ return carrito.reduce((a,b)=>a+b.cantidad*b.precio,0); }
+    function detalleTexto(){ return carrito.map(p => `• ${p.nombre} ${p.peso} x${p.cantidad} — ${ars(p.precio * p.cantidad)}`).join("\\n"); }
+    function validarTel(t){ const limpio = String(t).replace(/\\D/g,""); return limpio.length >= 10 && limpio.length <= 13 && !/^0+$/.test(limpio); }
 
-    function saveCantidades() {
-      localStorage.setItem("cebada_cantidades", JSON.stringify(cantidades));
-    }
-
-    function ars(n) {
-      return "$" + Number(n).toLocaleString("es-AR");
-    }
-
-    function totalCantidad() {
-      return carrito.reduce((a, b) => a + b.cantidad, 0);
-    }
-
-    function totalPrecio() {
-      return carrito.reduce((a, b) => a + b.cantidad * b.precio, 0);
-    }
-
-    function detalleTexto() {
-      return carrito.map(p => `• ${p.nombre} ${p.peso} x${p.cantidad} — ${ars(p.precio * p.cantidad)}`).join("\n");
-    }
-
-    function validarTel(t) {
-      const limpio = String(t).replace(/\D/g, "");
-      return limpio.length >= 10 && limpio.length <= 13 && !/^0+$/.test(limpio);
-    }
-
-    function showToast(texto) {
+    function showToast(texto){
       const toast = document.getElementById("toast");
       toast.textContent = texto;
       toast.classList.add("show");
@@ -1134,33 +1170,27 @@
       window.__toastTimer = setTimeout(() => toast.classList.remove("show"), 1800);
     }
 
-    function parseCSV(text) {
-      const lines = text.trim().split(/\r?\n/);
+    function parseCSV(text){
+      const lines = text.trim().split(/\\r?\\n/);
       if (lines.length < 2) return [];
-
       const headers = lines[0].split(",").map(h => h.trim().toLowerCase());
-
       return lines.slice(1).map(line => {
         const values = line.split(",").map(v => v.trim());
         const row = {};
-        headers.forEach((header, index) => {
-          row[header] = values[index] || "";
-        });
+        headers.forEach((header, index) => row[header] = values[index] || "");
         return row;
       });
     }
 
-    async function cargarStockDesdeSheets() {
-      try {
-        const res = await fetch(STOCK_CSV_URL, { cache: "no-store" });
+    async function cargarStockDesdeSheets(){
+      try{
+        const res = await fetch(STOCK_CSV_URL, { cache:"no-store" });
         const text = await res.text();
         const filas = parseCSV(text);
-
         stockRemoto = {};
 
         filas.forEach(f => {
           if (!f.producto) return;
-
           stockRemoto[f.producto.trim()] = {
             precio: Number(f.precio),
             stock: f.stock.trim().toLowerCase() === "si",
@@ -1170,17 +1200,16 @@
 
         console.log("CSV cargado:", filas);
         console.log("stockRemoto:", stockRemoto);
-      } catch (error) {
+      }catch(error){
         console.error("Error cargando stock desde Google Sheets:", error);
         stockRemoto = {};
       }
     }
 
-    function getProductos() {
+    function getProductos(){
       return productosOriginales.map(p => {
         const remoto = stockRemoto[p.id];
         if (!remoto) return p;
-
         return {
           ...p,
           precio: !isNaN(remoto.precio) ? remoto.precio : p.precio,
@@ -1190,13 +1219,12 @@
       });
     }
 
-    function renderProducts() {
+    function renderProducts(){
       const productos = getProductos();
       const grid = document.getElementById("productsGrid");
 
       grid.innerHTML = productos.map(p => {
         const cant = cantidades[p.id] || 1;
-
         return `
           <article class="card">
             <div class="media">
@@ -1224,21 +1252,15 @@
                 <button onclick="changeQty('${p.id}', 1)">+</button>
               </div>
 
-              <button
-                class="primary-btn"
-                onclick="addCart('${p.id}')"
-                ${p.stock ? "" : "disabled"}
-                style="${p.stock ? "" : "background:#5a1f1f;color:#fff;opacity:1;cursor:not-allowed"}"
-              >
+              <button class="primary-btn" onclick="addCart('${p.id}')" ${p.stock ? "" : "disabled"} style="${p.stock ? "" : "background:#5a1f1f;color:#fff;opacity:1;cursor:not-allowed"}">
                 ${p.stock ? "Agregar al carrito" : "Sin stock"}
               </button>
             </div>
-          </article>
-        `;
+          </article>`;
       }).join("");
     }
 
-    function changeQty(id, delta) {
+    function changeQty(id, delta){
       const actual = cantidades[id] || 1;
       cantidades[id] = Math.max(1, actual + delta);
       saveCantidades();
@@ -1246,19 +1268,15 @@
       if (span) span.textContent = cantidades[id];
     }
 
-    function addCart(id) {
+    function addCart(id){
       const producto = getProductos().find(p => p.id === id);
       if (!producto) return;
-
-      if (!producto.stock) {
-        alert("Este producto está sin stock");
-        return;
-      }
+      if (!producto.stock){ alert("Este producto está sin stock"); return; }
 
       const cant = cantidades[id] || 1;
       const existe = carrito.find(i => i.id === id);
 
-      if (existe) {
+      if (existe){
         existe.cantidad += cant;
         existe.precio = producto.precio;
       } else {
@@ -1280,20 +1298,17 @@
       showToast(producto.nombre + " " + producto.peso + " x" + cant + " agregado al carrito");
     }
 
-    function modCart(id, delta) {
-      carrito = carrito
-        .map(i => i.id === id ? { ...i, cantidad: i.cantidad + delta } : i)
-        .filter(i => i.cantidad > 0);
-
+    function modCart(id, delta){
+      carrito = carrito.map(i => i.id === id ? { ...i, cantidad: i.cantidad + delta } : i).filter(i => i.cantidad > 0);
       saveCart();
       renderCart();
     }
 
-    function renderCart() {
+    function renderCart(){
       document.getElementById("cartBadge").textContent = totalCantidad();
       const items = document.getElementById("cartItems");
 
-      if (carrito.length === 0) {
+      if (carrito.length === 0){
         items.innerHTML = "<p style='color:var(--muted)'>Tu carrito está vacío.</p>";
       } else {
         items.innerHTML = carrito.map(p => `
@@ -1308,64 +1323,56 @@
               <span style="width:20px;text-align:center;font-weight:900">${p.cantidad}</span>
               <button class="mini-btn" onclick="modCart('${p.id}', 1)">+</button>
             </div>
-          </div>
-        `).join("");
+          </div>`;
+        ).join("");
       }
 
       document.getElementById("cartTotal").textContent = "Total: " + ars(totalPrecio());
       updateCheckoutSummary();
     }
 
-    function openCart() {
+    function openCart(){
       document.getElementById("cartOverlay").classList.add("show");
       document.getElementById("cartDrawer").classList.add("show");
     }
 
-    function closeCart() {
+    function closeCart(){
       document.getElementById("cartOverlay").classList.remove("show");
       document.getElementById("cartDrawer").classList.remove("show");
     }
 
-    function showStep(step) {
+    function showStep(step){
       document.getElementById("stepOptions").classList.add("hidden");
       document.getElementById("stepWhatsapp").classList.add("hidden");
       document.getElementById("stepContact").classList.add("hidden");
-
       if (step === "options") document.getElementById("stepOptions").classList.remove("hidden");
       if (step === "whatsapp") document.getElementById("stepWhatsapp").classList.remove("hidden");
       if (step === "contact") document.getElementById("stepContact").classList.remove("hidden");
     }
 
-    function updateCheckoutSummary() {
-      document.getElementById("checkoutSummary").innerHTML = `
-        <div><strong>Productos:</strong> ${totalCantidad()}</div>
-        <div><strong>Total:</strong> ${ars(totalPrecio())}</div>
-      `;
+    function updateCheckoutSummary(){
+      document.getElementById("checkoutSummary").innerHTML =
+        `<div><strong>Productos:</strong> ${totalCantidad()}</div><div><strong>Total:</strong> ${ars(totalPrecio())}</div>`;
     }
 
-    function openCheckout() {
-      if (carrito.length === 0) {
-        alert("El carrito está vacío");
-        return;
-      }
-
+    function openCheckout(){
+      if (carrito.length === 0){ alert("El carrito está vacío"); return; }
       updateCheckoutSummary();
       showStep("options");
       document.getElementById("checkoutOverlay").classList.add("show");
       document.getElementById("checkoutModal").classList.add("show");
     }
 
-    function closeCheckout() {
+    function closeCheckout(){
       document.getElementById("checkoutOverlay").classList.remove("show");
       document.getElementById("checkoutModal").classList.remove("show");
       document.getElementById("waError").textContent = "";
       document.getElementById("contactError").textContent = "";
     }
 
-    function confirmarWhatsapp() {
+    function confirmarWhatsapp(){
       const nombre = document.getElementById("waName").value.trim();
-
-      if (!nombre) {
+      if (!nombre){
         document.getElementById("waError").textContent = "Por favor ingresá tu nombre y apellido.";
         return;
       }
@@ -1374,12 +1381,12 @@
 
       const fecha = new Date().toLocaleString("es-AR");
       const msg =
-        `¡Hola La Cebada! 👋 Quiero confirmar este pedido:\n\n` +
+        `¡Hola La Cebada! 👋 Quiero confirmar este pedido:\\n\\n` +
         detalleTexto() +
-        `\n\n🧉 Total de productos: ${totalCantidad()}` +
-        `\n💰 Total a abonar: ${ars(totalPrecio())}` +
-        `\n👤 Cliente: ${nombre}` +
-        `\n🕒 ${fecha}\n\n¡Gracias!`;
+        `\\n\\n🧉 Total de productos: ${totalCantidad()}` +
+        `\\n💰 Total a abonar: ${ars(totalPrecio())}` +
+        `\\n👤 Cliente: ${nombre}` +
+        `\\n🕒 ${fecha}\\n\\n¡Gracias!`;
 
       window.open(`https://wa.me/${TELEFONO_VENDEDOR}?text=${encodeURIComponent(msg)}`, "_blank");
 
@@ -1391,37 +1398,37 @@
       document.getElementById("waName").value = "";
     }
 
-    async function confirmarContacto() {
+    async function confirmarContacto(){
       const nombre = document.getElementById("contactName").value.trim();
       const telefono = document.getElementById("contactPhone").value.trim();
 
-      if (!nombre || !telefono) {
+      if (!nombre || !telefono){
         document.getElementById("contactError").textContent = "Completá tu nombre y teléfono.";
         return;
       }
 
-      if (!validarTel(telefono)) {
+      if (!validarTel(telefono)){
         document.getElementById("contactError").textContent = "El número de teléfono no parece válido.";
         return;
       }
 
       document.getElementById("contactError").textContent = "";
 
-      try {
+      try{
         await fetch(WEBHOOK_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
+          method:"POST",
+          headers:{ "Content-Type":"application/json" },
           body: JSON.stringify({
-            tipo_confirmacion: "nos_comunicamos_con_vos",
-            cliente: nombre,
+            tipo_confirmacion:"nos_comunicamos_con_vos",
+            cliente:nombre,
             telefono,
-            detalle: detalleTexto(),
-            cantidad_total: totalCantidad(),
-            total: totalPrecio(),
-            fecha: new Date().toLocaleString("es-AR")
+            detalle:detalleTexto(),
+            cantidad_total:totalCantidad(),
+            total:totalPrecio(),
+            fecha:new Date().toLocaleString("es-AR")
           })
         });
-      } catch (e) {
+      }catch(e){
         console.error(e);
       }
 
@@ -1435,41 +1442,27 @@
       document.getElementById("successModal").classList.add("show");
     }
 
-    function openAdmin() {
+    function openAdmin(){
       const pass = prompt("Contraseña de administrador");
       if (pass !== ADMIN_PASSWORD) return;
-
       renderAdmin();
       document.getElementById("adminOverlay").classList.add("show");
       document.getElementById("adminPanel").classList.add("show");
     }
 
-    function closeAdmin() {
+    function closeAdmin(){
       document.getElementById("adminOverlay").classList.remove("show");
       document.getElementById("adminPanel").classList.remove("show");
     }
 
-    function renderAdmin() {
-      const wrap = document.getElementById("adminProducts");
-
-      wrap.innerHTML = `
+    function renderAdmin(){
+      document.getElementById("adminProducts").innerHTML = `
         <div class="admin-product">
           <div class="admin-product-title">Control de stock, precio y etiquetas</div>
-          <p style="color:var(--muted); line-height:1.6; margin:0 0 12px;">
-            Ahora estos cambios se controlan desde Google Sheets.
-          </p>
-          <p style="color:var(--muted); line-height:1.6; margin:0 0 12px;">
-            Modificá en la planilla:
-            <br>• producto
-            <br>• precio
-            <br>• stock (si / no)
-            <br>• etiqueta
-          </p>
-          <p style="color:var(--muted); line-height:1.6; margin:0;">
-            Después recargá la web y todos los usuarios verán el cambio.
-          </p>
-        </div>
-      `;
+          <p style="color:var(--muted); line-height:1.6; margin:0 0 12px;">Ahora estos cambios se controlan desde Google Sheets.</p>
+          <p style="color:var(--muted); line-height:1.6; margin:0 0 12px;">Modificá en la planilla:<br>• producto<br>• precio<br>• stock (si / no)<br>• etiqueta</p>
+          <p style="color:var(--muted); line-height:1.6; margin:0;">Después recargá la web y todos los usuarios verán el cambio.</p>
+        </div>`;
     }
 
     document.getElementById("openCartBtn").addEventListener("click", openCart);
@@ -1504,7 +1497,11 @@
       showToast("Carrito vaciado");
     });
 
-    async function init() {
+    document.querySelectorAll(".faq-q").forEach(btn => {
+      btn.addEventListener("click", () => btn.parentElement.classList.toggle("open"));
+    });
+
+    async function init(){
       await cargarStockDesdeSheets();
       renderProducts();
       renderCart();
