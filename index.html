@@ -3,243 +3,1203 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>La Cebada | Yerba mate seleccionada</title>
-  <meta name="description" content="Comprá yerba mate seleccionada en La Cebada. Baldo, Canarias y Rei Verde con atención personalizada por WhatsApp.">
+  <title>La Cebada | Yerbas y accesorios materos</title>
   <style>
     :root{
-      --bg:#070707; --panel:#121212; --line:rgba(255,255,255,.10); --line2:rgba(255,255,255,.06);
-      --text:#fff; --muted:rgba(255,255,255,.68); --danger:#c63737; --danger-dark:#6f1f1f;
-      --success:#86efac; --shadow:0 18px 50px rgba(0,0,0,.35); --wa:#25D366; --max:1200px;
+      --bg:#050604;
+      --bg-2:#09120c;
+      --panel:#0e130f;
+      --panel-2:#151c16;
+      --panel-3:#1b241d;
+      --line:rgba(235,226,199,.14);
+      --line-strong:rgba(235,226,199,.24);
+      --text:#fffaf0;
+      --muted:rgba(255,250,240,.66);
+      --muted-2:rgba(255,250,240,.48);
+      --cream:#f5ead0;
+      --gold:#d9b56d;
+      --gold-2:#f2cf83;
+      --green:#63d58f;
+      --green-deep:#123b25;
+      --danger:#d45a43;
+      --shadow:0 22px 70px rgba(0,0,0,.45);
+      --shadow-soft:0 14px 36px rgba(0,0,0,.28);
+      --radius:26px;
     }
+
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
+    html,body{margin:0;padding:0}
     body{
-      margin:0; font-family:Inter,Segoe UI,Arial,sans-serif; color:var(--text);
-      background:radial-gradient(circle at top,rgba(255,255,255,.04),transparent 35%),linear-gradient(180deg,#000 0%,#0a0a0a 32%,#101010 100%);
+      min-height:100vh;
+      font-family:Inter, Segoe UI, Arial, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(99,213,143,.12), transparent 34%),
+        radial-gradient(circle at 80% 8%, rgba(217,181,109,.12), transparent 26%),
+        linear-gradient(180deg,#030403 0%, var(--bg) 42%, #0a0d09 100%);
+      color:var(--text);
     }
-    img{display:block;max-width:100%}
-    button,input{font:inherit}
-    .hidden{display:none !important}
-    a{color:inherit}
-    .container{width:min(var(--max),calc(100% - 32px));margin:0 auto}
-    .topbar{background:linear-gradient(90deg,#111,#1b1b1b,#111);border-bottom:1px solid var(--line);color:#f4f0e6;font-size:13px;font-weight:700}
-    .topbar-inner{min-height:40px;display:flex;align-items:center;justify-content:center;text-align:center}
-    header{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);background:rgba(0,0,0,.78);border-bottom:1px solid var(--line)}
-    .header-inner{min-height:82px;display:flex;align-items:center;justify-content:space-between;gap:16px}
-    .brand{display:flex;align-items:center;gap:14px;cursor:pointer;text-decoration:none}
-    .brand-logo{width:56px;height:56px;border-radius:50%;object-fit:contain;background:#000}
-    .brand-title{font-size:28px;font-weight:900}
-    .brand-sub{font-size:13px;color:var(--muted);margin-top:5px}
-    .cart-btn{border:1px solid var(--line);background:rgba(255,255,255,.05);color:#fff;border-radius:999px;padding:12px 18px;display:flex;align-items:center;gap:10px;cursor:pointer;transition:.22s ease}
-    .cart-btn:hover{transform:translateY(-1px);background:rgba(255,255,255,.09)}
-    .badge{min-width:26px;height:26px;padding:0 8px;border-radius:999px;background:#fff;color:#000;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:900}
-    main{padding:28px 0 72px}
-    .hero{display:grid;grid-template-columns:1.15fr .85fr;gap:22px;margin-bottom:28px}
-    .hero-main,.hero-side,.trust-item,.card,.testimonial,.faq,.story,footer,.admin-card{border:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));box-shadow:var(--shadow)}
-    .hero-main,.hero-side,.faq,.story,footer{border-radius:28px}
-    .trust-item,.testimonial,.admin-card{border-radius:22px}
-    .card{border-radius:26px;overflow:hidden;background:linear-gradient(180deg,#111,#101010);transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease}
-    .card:hover{transform:translateY(-5px);box-shadow:0 24px 60px rgba(0,0,0,.42);border-color:rgba(255,255,255,.18)}
-    .hero-main{padding:34px;min-height:340px;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden}
-    .hero-main::before,.hero-main::after{content:"";position:absolute;border-radius:50%;pointer-events:none}
-    .hero-main::before{right:-120px;top:-80px;width:320px;height:320px;background:radial-gradient(circle,rgba(255,255,255,.08),transparent 70%)}
-    .hero-main::after{left:-80px;bottom:-120px;width:260px;height:260px;background:radial-gradient(circle,rgba(255,255,255,.06),transparent 70%)}
-    .eyebrow{display:inline-flex;align-items:center;gap:8px;width:max-content;padding:8px 12px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.04);color:#f4f0e6;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:16px}
-    .hero-title{margin:0;font-size:56px;line-height:.98;letter-spacing:-.04em}
-    .hero-text{margin:18px 0 0;color:var(--muted);font-size:18px;line-height:1.6}
-    .hero-cta,.story-links,.chips,.qty,.cart-controls{display:flex;gap:12px;flex-wrap:wrap}
-    .hero-side{padding:24px;display:grid;gap:14px;align-content:center}
-    .mini-feature{border:1px solid var(--line2);background:rgba(255,255,255,.03);border-radius:20px;padding:18px;transition:.22s ease}
-    .mini-feature:hover,.trust-item:hover{transform:translateY(-2px);background:rgba(255,255,255,.05)}
-    .mini-feature h4,.trust-item h4,.admin-card h4,footer h4{margin:0 0 8px}
-    .mini-feature p,.trust-item p,footer p,.story p,.testimonial p,.faq-a{margin:0;color:var(--muted);line-height:1.6}
-    .section-head{display:flex;align-items:end;justify-content:space-between;gap:18px;margin:28px 0 20px}
-    .section-title{margin:0;font-size:42px;font-weight:900}
-    .section-sub{margin:6px 0 0;color:var(--muted);font-size:18px}
-    .trust-row,.grid,.testimonials,.admin-grid,footer{display:grid;gap:14px}
-    .trust-row{grid-template-columns:repeat(4,1fr);margin-bottom:28px}
-    .grid{grid-template-columns:repeat(4,1fr);gap:20px}
-    .testimonials{grid-template-columns:repeat(3,1fr);margin-top:34px}
-    .admin-grid,footer{grid-template-columns:1fr 1fr 1fr}
-    .media{position:relative;aspect-ratio:1/1;background:#000;overflow:hidden}
-    .media img{width:100%;height:100%;object-fit:cover;transition:.28s ease}
-    .card:hover .media img{transform:scale(1.03)}
-    .tag{position:absolute;top:12px;left:12px;z-index:2;padding:8px 12px;border-radius:999px;background:#fff;color:#000;font-weight:900;font-size:12px;box-shadow:var(--shadow)}
-    .tag-stock{top:auto;bottom:12px;background:var(--danger);color:#fff}
-    .content{padding:18px;display:flex;flex-direction:column;flex:1}
-    .product-title{margin:0;font-size:23px;line-height:1.12}
-    .weight{color:var(--muted);font-size:15px;font-weight:700}
-    .desc{margin:12px 0 0;color:var(--muted);line-height:1.5;font-size:15px;min-height:72px}
-    .chip{font-size:12px;padding:6px 10px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:rgba(255,255,255,.78)}
-    .price-row{margin-top:18px;display:flex;justify-content:space-between;align-items:flex-end;gap:10px}
-    .price{font-size:34px;font-weight:900}
-    .stock-ok{font-size:13px;color:var(--success);font-weight:700}
-    .stock-no{font-size:13px;color:#ff9d9d;font-weight:700}
-    .qty{margin-top:16px;align-items:center;justify-content:center}
-    .qty button,.mini-btn{width:38px;height:38px;border:none;border-radius:999px;background:rgba(255,255,255,.10);color:#fff;cursor:pointer;font-size:20px}
-    .qty span{min-width:24px;text-align:center;font-weight:900;font-size:20px}
-    .btn,.btn-outline,.btn-danger,.primary-btn,.secondary-btn,.danger-btn{border:none;border-radius:16px;padding:14px 16px;font-weight:800;cursor:pointer;transition:.22s ease}
-    .btn,.primary-btn{background:#fff;color:#000}
-    .btn:hover,.primary-btn:hover{background:#ececec;transform:translateY(-1px)}
-    .btn-outline,.secondary-btn{background:rgba(255,255,255,.08);color:#fff;border:1px solid var(--line)}
-    .btn-outline:hover,.secondary-btn:hover{background:rgba(255,255,255,.12)}
-    .btn-danger,.danger-btn{background:var(--danger-dark);color:#fff}
-    .btn-danger:hover,.danger-btn:hover{background:#7f2525}
-    .primary-btn,.secondary-btn,.danger-btn{width:100%;margin-top:16px}
-    .testimonial-stars{font-size:18px;margin-bottom:10px}
-    .testimonial strong{display:block;margin-top:14px;font-size:14px}
-    .faq{margin-top:34px;padding:24px}
-    .faq-list{display:grid;gap:12px;margin-top:16px}
-    .faq-item{border:1px solid var(--line);background:rgba(255,255,255,.03);border-radius:18px;overflow:hidden}
-    .faq-q{width:100%;text-align:left;background:transparent;color:#fff;padding:16px 18px;border:none;font-weight:800;cursor:pointer}
-    .faq-a{padding:0 18px 16px;display:none}
-    .faq-item.open .faq-a{display:block}
-    .story{margin-top:32px;padding:28px;text-align:center}
-    .story-top{letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.45);font-size:12px}
-    .story h3{margin:10px 0;font-size:40px}
-    footer{margin-top:26px;padding:24px}
-    .overlay{position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:100;display:none}
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      opacity:.06;
+      background-image:
+        linear-gradient(rgba(255,255,255,.16) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.16) 1px, transparent 1px);
+      background-size:46px 46px;
+      mask-image:linear-gradient(180deg,#000,transparent 74%);
+    }
+
+    img{max-width:100%;display:block}
+    button,input,select{font:inherit}
+    button{border:none}
+
+    .container{
+      width:min(1200px, calc(100% - 32px));
+      margin:0 auto;
+    }
+
+    .sr-only{
+      position:absolute;
+      width:1px;
+      height:1px;
+      padding:0;
+      margin:-1px;
+      overflow:hidden;
+      clip:rect(0,0,0,0);
+      white-space:nowrap;
+      border:0;
+    }
+
+    header{
+      position:sticky;
+      top:0;
+      z-index:40;
+      border-bottom:1px solid var(--line);
+      background:rgba(5,6,4,.84);
+      backdrop-filter:blur(16px);
+    }
+
+    .header-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:14px 0;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:13px;
+      cursor:pointer;
+      user-select:none;
+      min-width:0;
+    }
+
+    .brand img{
+      width:58px;
+      height:58px;
+      object-fit:contain;
+      background:#000;
+      border:1px solid var(--line-strong);
+      border-radius:50%;
+      box-shadow:0 0 0 6px rgba(217,181,109,.06);
+      flex-shrink:0;
+    }
+
+    .brand-title{
+      font-size:30px;
+      font-weight:900;
+      letter-spacing:-.04em;
+      line-height:1;
+      margin:0;
+    }
+
+    .brand-sub{
+      font-size:13px;
+      color:var(--muted);
+      margin-top:5px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .header-actions{
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+
+    .pill-link,
+    .cart-btn{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.055);
+      color:#fff;
+      border-radius:999px;
+      padding:12px 18px;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      cursor:pointer;
+      transition:.22s ease;
+      text-decoration:none;
+      white-space:nowrap;
+    }
+
+    .pill-link:hover,
+    .cart-btn:hover{
+      transform:translateY(-1px);
+      background:rgba(255,255,255,.10);
+      border-color:var(--line-strong);
+    }
+
+    .cart-btn{
+      background:linear-gradient(135deg, var(--cream), var(--gold-2));
+      color:#151008;
+      font-weight:800;
+    }
+
+    .badge{
+      min-width:24px;
+      height:24px;
+      border-radius:999px;
+      background:#111;
+      color:#fff;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      font-size:12px;
+      font-weight:900;
+      padding:0 8px;
+    }
+
+    main{padding:28px 0 70px}
+
+    .hero{
+      position:relative;
+      overflow:hidden;
+      margin-bottom:34px;
+      padding:34px;
+      border:1px solid var(--line);
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.075), rgba(255,255,255,.025)),
+        linear-gradient(180deg, rgba(18,59,37,.25), rgba(0,0,0,.04));
+      border-radius:34px;
+      box-shadow:var(--shadow);
+    }
+
+    .hero::after{
+      content:"🧉";
+      position:absolute;
+      right:34px;
+      bottom:-30px;
+      font-size:170px;
+      opacity:.08;
+      transform:rotate(-10deg);
+    }
+
+    .hero-kicker{
+      width:max-content;
+      max-width:100%;
+      padding:8px 12px;
+      border-radius:999px;
+      color:#17120a;
+      background:linear-gradient(135deg, var(--gold-2), var(--cream));
+      font-size:12px;
+      font-weight:900;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      margin-bottom:18px;
+    }
+
+    .hero-grid{
+      position:relative;
+      z-index:1;
+      display:grid;
+      grid-template-columns:1.3fr .7fr;
+      gap:24px;
+      align-items:end;
+    }
+
+    .hero h1{
+      margin:0 0 12px;
+      font-size:clamp(38px, 6vw, 74px);
+      line-height:.94;
+      letter-spacing:-.07em;
+      max-width:780px;
+    }
+
+    .hero p{
+      margin:0;
+      color:var(--muted);
+      max-width:760px;
+      line-height:1.62;
+      font-size:18px;
+    }
+
+    .hero-actions{
+      margin-top:24px;
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .hero-card{
+      border:1px solid var(--line);
+      background:rgba(0,0,0,.22);
+      border-radius:24px;
+      padding:18px;
+      box-shadow:var(--shadow-soft);
+    }
+
+    .hero-card strong{
+      display:block;
+      font-size:42px;
+      line-height:1;
+      color:var(--gold-2);
+      letter-spacing:-.05em;
+    }
+
+    .hero-card span{
+      display:block;
+      margin-top:8px;
+      color:var(--muted);
+      line-height:1.35;
+    }
+
+    .section-head{
+      display:flex;
+      align-items:end;
+      justify-content:space-between;
+      gap:18px;
+      margin-bottom:18px;
+    }
+
+    .section-title{
+      margin:0 0 6px;
+      font-size:clamp(34px, 4vw, 50px);
+      font-weight:900;
+      letter-spacing:-.06em;
+    }
+
+    .section-sub{
+      margin:0;
+      color:var(--muted);
+      font-size:17px;
+      line-height:1.45;
+    }
+
+    .catalog-tools{
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:12px;
+      align-items:center;
+      margin:18px 0 22px;
+    }
+
+    .search-wrap{
+      position:relative;
+    }
+
+    .search-wrap span{
+      position:absolute;
+      left:16px;
+      top:50%;
+      transform:translateY(-50%);
+      color:var(--muted-2);
+      pointer-events:none;
+    }
+
+    .search{
+      width:100%;
+      padding:15px 16px 15px 46px;
+      border-radius:18px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.05);
+      color:#fff;
+      outline:none;
+      transition:.2s ease;
+    }
+
+    .search:focus{
+      border-color:rgba(242,207,131,.55);
+      box-shadow:0 0 0 4px rgba(242,207,131,.10);
+    }
+
+    .filters{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .filter-btn{
+      padding:12px 15px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.045);
+      color:var(--muted);
+      cursor:pointer;
+      transition:.2s ease;
+      font-weight:700;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active{
+      color:#17120a;
+      background:linear-gradient(135deg, var(--gold-2), var(--cream));
+      border-color:transparent;
+    }
+
+    .results-note{
+      margin:-6px 0 18px;
+      color:var(--muted-2);
+      font-size:14px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:20px;
+    }
+
+    .card{
+      position:relative;
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.02));
+      border-radius:28px;
+      overflow:hidden;
+      box-shadow:var(--shadow-soft);
+      display:flex;
+      flex-direction:column;
+      min-height:100%;
+      transition:.22s ease;
+    }
+
+    .card:hover{
+      transform:translateY(-4px);
+      border-color:rgba(242,207,131,.34);
+      box-shadow:0 22px 60px rgba(0,0,0,.38);
+    }
+
+    .media{
+      position:relative;
+      aspect-ratio:1/1;
+      background:
+        radial-gradient(circle at 50% 30%, rgba(242,207,131,.18), transparent 42%),
+        linear-gradient(135deg,#070907,#121912);
+      overflow:hidden;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .media img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      transition:.28s ease;
+    }
+
+    .card:hover .media img{transform:scale(1.035)}
+
+    .product-icon{
+      display:none;
+      font-size:82px;
+      opacity:.9;
+      filter:drop-shadow(0 12px 24px rgba(0,0,0,.35));
+    }
+
+    .media.no-image img{display:none}
+    .media.no-image .product-icon{display:block}
+
+    .tag{
+      position:absolute;
+      top:13px;
+      left:13px;
+      z-index:2;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(245,234,208,.94);
+      color:#17120a;
+      font-weight:900;
+      font-size:12px;
+      box-shadow:var(--shadow-soft);
+    }
+
+    .category-tag{
+      position:absolute;
+      top:13px;
+      right:13px;
+      z-index:2;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(0,0,0,.46);
+      border:1px solid var(--line);
+      color:rgba(255,255,255,.82);
+      font-size:12px;
+      font-weight:800;
+      backdrop-filter:blur(8px);
+    }
+
+    .content{
+      padding:18px;
+      display:flex;
+      flex-direction:column;
+      flex:1;
+    }
+
+    .content h3{
+      margin:0;
+      font-size:23px;
+      line-height:1.08;
+      letter-spacing:-.035em;
+    }
+
+    .weight{
+      display:block;
+      margin-top:7px;
+      color:var(--muted);
+      font-size:14px;
+      font-weight:700;
+      letter-spacing:0;
+    }
+
+    .desc{
+      margin:12px 0 0;
+      color:var(--muted);
+      line-height:1.48;
+      font-size:15px;
+      min-height:88px;
+    }
+
+    .chips{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:auto;
+      padding-top:14px;
+    }
+
+    .chip{
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.045);
+      color:rgba(255,255,255,.75);
+    }
+
+    .price-row{
+      margin-top:16px;
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-end;
+      gap:10px;
+    }
+
+    .price{
+      font-size:32px;
+      line-height:1;
+      font-weight:950;
+      letter-spacing:-.06em;
+      color:#fff;
+    }
+
+    .price.consultar{
+      font-size:24px;
+      letter-spacing:-.03em;
+      color:var(--gold-2);
+    }
+
+    .stock-ok,.stock-no{
+      font-size:12px;
+      font-weight:900;
+      white-space:nowrap;
+    }
+    .stock-ok{color:#9df7ba}
+    .stock-no{color:#ff9b8c}
+
+    .qty{
+      margin-top:16px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:14px;
+      padding:7px;
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:rgba(0,0,0,.18);
+    }
+
+    .qty button,
+    .mini-btn{
+      width:38px;
+      height:38px;
+      border-radius:999px;
+      background:rgba(255,255,255,.09);
+      color:#fff;
+      cursor:pointer;
+      font-size:20px;
+      transition:.2s ease;
+    }
+
+    .qty button:hover,
+    .mini-btn:hover{background:rgba(255,255,255,.18)}
+
+    .qty span{
+      min-width:24px;
+      text-align:center;
+      font-weight:900;
+      font-size:20px;
+    }
+
+    .primary-btn,
+    .secondary-btn,
+    .danger-btn{
+      width:100%;
+      cursor:pointer;
+      border-radius:17px;
+      padding:14px 16px;
+      margin-top:14px;
+      font-weight:850;
+      transition:.22s ease;
+    }
+
+    .primary-btn{
+      background:linear-gradient(135deg, var(--cream), var(--gold-2));
+      color:#17120a;
+      box-shadow:0 10px 24px rgba(217,181,109,.16);
+    }
+    .primary-btn:hover{transform:translateY(-1px);filter:brightness(1.02)}
+
+    .secondary-btn{
+      background:rgba(255,255,255,.085);
+      border:1px solid var(--line);
+      color:#fff;
+    }
+    .secondary-btn:hover{background:rgba(255,255,255,.14)}
+
+    .danger-btn{
+      background:rgba(212,90,67,.16);
+      border:1px solid rgba(212,90,67,.3);
+      color:#ffd9d2;
+    }
+    .danger-btn:hover{background:rgba(212,90,67,.24)}
+
+    .empty-state{
+      grid-column:1/-1;
+      border:1px dashed var(--line-strong);
+      background:rgba(255,255,255,.035);
+      border-radius:24px;
+      padding:32px;
+      text-align:center;
+      color:var(--muted);
+    }
+
+    .benefits{
+      margin-top:36px;
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:14px;
+    }
+
+    .benefit{
+      border:1px solid var(--line);
+      border-radius:22px;
+      background:rgba(255,255,255,.04);
+      padding:19px;
+    }
+
+    .benefit-icon{
+      width:38px;
+      height:38px;
+      border-radius:14px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:rgba(242,207,131,.12);
+      margin-bottom:12px;
+    }
+
+    .benefit h4{
+      margin:0 0 8px;
+      font-size:18px;
+    }
+    .benefit p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.45;
+      font-size:15px;
+    }
+
+    .story{
+      margin-top:30px;
+      border:1px solid var(--line);
+      border-radius:34px;
+      padding:34px;
+      text-align:center;
+      background:
+        radial-gradient(circle at top, rgba(99,213,143,.12), transparent 38%),
+        linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.02));
+      box-shadow:var(--shadow-soft);
+    }
+
+    .story-top{
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      color:var(--gold-2);
+      font-size:12px;
+      font-weight:900;
+    }
+
+    .story h3{
+      margin:10px 0 10px;
+      font-size:clamp(32px, 4vw, 48px);
+      letter-spacing:-.06em;
+    }
+
+    .story p{
+      max-width:790px;
+      margin:0 auto;
+      color:var(--muted);
+      font-size:18px;
+      line-height:1.55;
+    }
+
+    .story-links{
+      margin-top:22px;
+      display:flex;
+      gap:12px;
+      justify-content:center;
+      flex-wrap:wrap;
+    }
+
+    .story-links a{
+      color:#fff;
+      text-decoration:none;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.055);
+      padding:12px 18px;
+      border-radius:999px;
+      transition:.2s ease;
+    }
+
+    .story-links a:hover{background:rgba(255,255,255,.11);transform:translateY(-1px)}
+
+    footer{
+      margin-top:26px;
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:14px;
+      border:1px solid var(--line);
+      border-radius:30px;
+      background:rgba(255,255,255,.035);
+      padding:24px;
+    }
+
+    footer h4{
+      margin:0 0 10px;
+      font-size:18px;
+    }
+    footer p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.5;
+    }
+    footer a{color:#fff}
+
+    .overlay{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.72);
+      z-index:100;
+      display:none;
+      backdrop-filter:blur(3px);
+    }
+
     .overlay.show{display:block}
-    .drawer{position:fixed;left:0;right:0;bottom:0;z-index:101;background:#0d130f;border-top:1px solid var(--line);border-top-left-radius:28px;border-top-right-radius:28px;max-height:84vh;overflow:auto;padding:22px;transform:translateY(110%);transition:.25s ease;box-shadow:0 -16px 40px rgba(0,0,0,.45)}
+
+    .drawer{
+      position:fixed;
+      left:0;
+      right:0;
+      bottom:0;
+      z-index:101;
+      background:#0a100c;
+      border-top:1px solid var(--line);
+      border-top-left-radius:30px;
+      border-top-right-radius:30px;
+      max-height:84vh;
+      overflow:auto;
+      padding:22px;
+      transform:translateY(110%);
+      transition:.25s ease;
+      box-shadow:0 -18px 55px rgba(0,0,0,.52);
+    }
+
     .drawer.show{transform:translateY(0)}
-    .drawer-inner{width:min(760px,100%);margin:0 auto}
-    .drawer h3,.modal h3{margin:0 0 14px;font-size:28px}
-    .cart-item{display:flex;gap:12px;align-items:center;padding:12px;border-radius:16px;background:rgba(255,255,255,.05);margin-bottom:10px}
-    .cart-item img{width:56px;height:56px;object-fit:contain;background:#fff;border-radius:12px;padding:4px;flex-shrink:0}
-    .cart-info{flex:1}
-    .cart-name{font-weight:800;font-size:15px}
-    .cart-sub{color:var(--muted);font-size:14px;margin-top:4px}
-    .cart-total{margin-top:14px;font-size:24px;font-weight:900}
-    .note{margin-top:12px;background:rgba(121,231,165,.12);color:#c9ffe0;border-radius:16px;padding:14px;font-size:14px;line-height:1.45}
-    .modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%) scale(.96);width:min(440px,calc(100% - 24px));z-index:201;background:#0d130f;border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow);display:none;opacity:0;transition:.2s ease}
-    .modal.show{display:block;opacity:1;transform:translate(-50%,-50%) scale(1)}
-    .summary{border-radius:14px;background:rgba(255,255,255,.05);padding:12px;font-size:14px;line-height:1.55;margin-bottom:14px}
-    .field{width:100%;padding:14px;border-radius:14px;border:1px solid var(--line);background:#0c0c0c;color:#fff;outline:none;margin-bottom:10px}
-    .field:focus{border-color:rgba(255,255,255,.22)}
-    .error{color:#ff9d9d;font-size:14px;margin-bottom:10px}
-    .success-modal{position:fixed;inset:0;z-index:300;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.76);padding:16px}
+
+    .drawer-inner{
+      width:min(780px,100%);
+      margin:0 auto;
+    }
+
+    .drawer-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:12px;
+    }
+
+    .drawer h3,
+    .modal h3{
+      margin:0;
+      font-size:30px;
+      letter-spacing:-.045em;
+    }
+
+    .cart-item{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      padding:12px;
+      border-radius:18px;
+      background:rgba(255,255,255,.055);
+      border:1px solid var(--line);
+      margin-bottom:10px;
+    }
+
+    .cart-item img{
+      width:58px;
+      height:58px;
+      object-fit:cover;
+      background:#131913;
+      border-radius:14px;
+      flex-shrink:0;
+    }
+
+    .cart-info{
+      flex:1;
+      min-width:0;
+    }
+
+    .cart-name{
+      font-weight:900;
+      font-size:15px;
+    }
+
+    .cart-sub{
+      color:var(--muted);
+      font-size:14px;
+      margin-top:4px;
+    }
+
+    .cart-controls{
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+
+    .cart-total{
+      margin-top:14px;
+      font-size:26px;
+      font-weight:950;
+      letter-spacing:-.04em;
+    }
+
+    .cart-warning{
+      display:none;
+      margin-top:8px;
+      color:#ffe5aa;
+      font-size:13px;
+      line-height:1.45;
+    }
+
+    .cart-warning.show{display:block}
+
+    .note{
+      margin-top:12px;
+      background:rgba(99,213,143,.12);
+      color:#d7ffe6;
+      border:1px solid rgba(99,213,143,.18);
+      border-radius:17px;
+      padding:14px;
+      font-size:14px;
+      line-height:1.45;
+    }
+
+    .modal{
+      position:fixed;
+      left:50%;
+      top:50%;
+      transform:translate(-50%,-50%) scale(.96);
+      width:min(455px, calc(100% - 24px));
+      z-index:201;
+      background:#0a100c;
+      border:1px solid var(--line);
+      border-radius:24px;
+      padding:22px;
+      box-shadow:var(--shadow);
+      display:none;
+      opacity:0;
+      transition:.2s ease;
+    }
+
+    .modal.show{
+      display:block;
+      opacity:1;
+      transform:translate(-50%,-50%) scale(1);
+    }
+
+    .summary{
+      border-radius:16px;
+      background:rgba(255,255,255,.055);
+      border:1px solid var(--line);
+      padding:13px;
+      font-size:14px;
+      line-height:1.55;
+      margin-bottom:14px;
+    }
+
+    .field{
+      width:100%;
+      padding:14px 14px;
+      border-radius:15px;
+      border:1px solid var(--line);
+      background:#080a08;
+      color:#fff;
+      outline:none;
+      margin-top:12px;
+    }
+
+    .field:focus{border-color:rgba(242,207,131,.5)}
+
+    .error{
+      color:#ff9b8c;
+      font-size:14px;
+      margin-top:10px;
+    }
+
+    .success-modal{
+      position:fixed;
+      inset:0;
+      z-index:300;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      background:rgba(0,0,0,.76);
+      padding:16px;
+    }
+
     .success-modal.show{display:flex}
-    .success-box{width:min(390px,100%);background:#0d130f;border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);padding:24px;text-align:center}
-    .success-box h3{margin:0 0 12px;font-size:28px}
-    .success-box p{margin:0;color:var(--muted);line-height:1.55}
-    .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(16px);z-index:400;background:rgba(0,0,0,.92);border:1px solid var(--line);color:#fff;padding:14px 18px;border-radius:999px;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:.22s ease;font-size:14px}
-    .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-    .admin-panel{position:fixed;inset:24px;z-index:250;background:#0d130f;border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);display:none;overflow:auto;padding:20px}
+
+    .success-box{
+      width:min(410px,100%);
+      background:#0a100c;
+      border:1px solid var(--line);
+      border-radius:24px;
+      box-shadow:var(--shadow);
+      padding:25px;
+      text-align:center;
+    }
+
+    .success-box h3{
+      margin:0 0 12px;
+      font-size:30px;
+      letter-spacing:-.04em;
+    }
+
+    .success-box p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.55;
+    }
+
+    .toast{
+      position:fixed;
+      left:50%;
+      bottom:24px;
+      transform:translateX(-50%) translateY(16px);
+      z-index:400;
+      background:rgba(0,0,0,.94);
+      border:1px solid var(--line);
+      color:#fff;
+      padding:14px 18px;
+      border-radius:999px;
+      box-shadow:var(--shadow);
+      opacity:0;
+      pointer-events:none;
+      transition:.22s ease;
+      font-size:14px;
+      max-width:calc(100% - 24px);
+    }
+
+    .toast.show{
+      opacity:1;
+      transform:translateX(-50%) translateY(0);
+    }
+
+    .admin-panel{
+      position:fixed;
+      inset:24px;
+      z-index:250;
+      background:#0a100c;
+      border:1px solid var(--line);
+      border-radius:26px;
+      box-shadow:var(--shadow);
+      display:none;
+      overflow:auto;
+      padding:20px;
+    }
+
     .admin-panel.show{display:block}
-    .admin-top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:18px}
-    .admin-top h3{margin:0;font-size:28px}
-    .admin-grid{grid-template-columns:1fr 1fr}
-    .admin-product{border:1px solid var(--line);border-radius:16px;padding:14px;background:rgba(255,255,255,.03)}
-    .admin-product-title{font-weight:800;margin-bottom:10px}
-    .wa-float{position:fixed;right:18px;bottom:18px;z-index:60;width:58px;height:58px;border-radius:50%;background:var(--wa);color:#fff;display:flex;align-items:center;justify-content:center;font-size:28px;box-shadow:0 14px 30px rgba(37,211,102,.35);transition:.22s ease;text-decoration:none}
-    .wa-float:hover{transform:translateY(-2px) scale(1.03)}
-    @media (max-width:1100px){.hero{grid-template-columns:1fr}.grid{grid-template-columns:repeat(2,1fr)}.trust-row,.testimonials{grid-template-columns:repeat(2,1fr)}.admin-grid,footer{grid-template-columns:1fr}}
-    @media (max-width:680px){.container{width:min(var(--max),calc(100% - 20px))}.brand-logo{width:46px;height:46px}.brand-title{font-size:24px}.hero-main{padding:24px}.hero-title{font-size:38px}.section-title{font-size:34px}.section-sub{font-size:16px}.story h3{font-size:31px}.grid,.trust-row,.testimonials,footer{grid-template-columns:1fr}.admin-panel{inset:10px}.header-inner{min-height:72px}.wa-float{width:54px;height:54px;font-size:26px}}
+
+    .admin-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      margin-bottom:18px;
+    }
+
+    .admin-top h3{
+      margin:0;
+      font-size:30px;
+      letter-spacing:-.05em;
+    }
+
+    .admin-grid{
+      display:grid;
+      grid-template-columns:1.35fr .65fr;
+      gap:18px;
+    }
+
+    .admin-card{
+      background:rgba(255,255,255,.04);
+      border:1px solid var(--line);
+      border-radius:20px;
+      padding:16px;
+    }
+
+    .admin-card h4{
+      margin:0 0 12px;
+      font-size:18px;
+    }
+
+    .admin-product{
+      border:1px solid var(--line);
+      border-radius:17px;
+      padding:14px;
+      margin-bottom:12px;
+      background:rgba(255,255,255,.035);
+    }
+
+    .admin-product:last-child{margin-bottom:0}
+
+    .admin-product-title{
+      font-weight:900;
+      margin-bottom:10px;
+    }
+
+    .admin-actions{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+      margin-top:10px;
+    }
+
+    .admin-small{
+      width:100%;
+      padding:12px;
+      border-radius:13px;
+      border:1px solid var(--line);
+      background:#070907;
+      color:#fff;
+      outline:none;
+      margin-bottom:8px;
+    }
+
+    .mini-stat{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      padding:12px 0;
+      border-bottom:1px solid var(--line);
+      color:var(--muted);
+    }
+    .mini-stat strong{color:#fff}
+    .mini-stat:last-child{border-bottom:none}
+
+    @media (max-width: 1060px){
+      .grid{grid-template-columns:repeat(3,1fr)}
+      .benefits{grid-template-columns:repeat(2,1fr)}
+      .hero-grid{grid-template-columns:1fr}
+      .admin-grid{grid-template-columns:1fr}
+    }
+
+    @media (max-width: 760px){
+      .grid{grid-template-columns:repeat(2,1fr)}
+      .catalog-tools{grid-template-columns:1fr}
+      .filters{justify-content:flex-start}
+      .section-head{display:block}
+      .pill-link{display:none}
+      .hero{padding:25px;border-radius:28px}
+      .hero::after{font-size:120px;right:10px}
+      footer{grid-template-columns:1fr}
+    }
+
+    @media (max-width: 560px){
+      .container{width:min(100% - 22px, 1200px)}
+      .brand img{width:46px;height:46px}
+      .brand-title{font-size:24px}
+      .brand-sub{font-size:12px}
+      .header-actions{gap:6px}
+      .cart-btn{padding:10px 13px}
+      .cart-btn .cart-text{display:none}
+      .grid,.benefits{grid-template-columns:1fr}
+      .hero h1{font-size:42px}
+      .desc{min-height:auto}
+      .drawer{padding:18px 12px}
+      .cart-item{align-items:flex-start}
+      .cart-controls{flex-direction:column}
+      .admin-panel{inset:10px;padding:14px}
+      .admin-actions{grid-template-columns:1fr}
+    }
   </style>
 </head>
 <body>
-  <div class="topbar"><div class="container topbar-inner">🧉 Stock actualizado · Atención personalizada · Pedidos por WhatsApp</div></div>
-
   <header>
     <div class="container header-inner">
-      <div class="brand" id="adminAccess" title="Panel de administrador">
-        <img src="logo.png" alt="Logo La Cebada" class="brand-logo">
+      <div class="brand" id="adminAccess" title="Acceso administrador">
+        <img src="logo.png" alt="Logo La Cebada">
         <div>
           <div class="brand-title">La Cebada</div>
-          <div class="brand-sub">Yerba mate seleccionada</div>
+          <div class="brand-sub">Yerbas y accesorios materos</div>
         </div>
       </div>
-      <button class="cart-btn" id="openCartBtn">
-        <span>🛒</span><span>Carrito</span><span class="badge" id="cartBadge">0</span>
-      </button>
+
+      <div class="header-actions">
+        <a class="pill-link" href="#catalogo">Ver catálogo</a>
+        <button class="cart-btn" id="openCartBtn">
+          <span>🛒</span>
+          <span class="cart-text">Carrito</span>
+          <span class="badge" id="cartBadge">0</span>
+        </button>
+      </div>
     </div>
   </header>
 
   <main class="container">
     <section class="hero">
-      <div class="hero-main">
-        <div class="eyebrow">Selección artesanal · atención humana</div>
-        <h1 class="hero-title">Tu mate, como te gusta.</h1>
-        <p class="hero-text">Elegí tu yerba favorita, combiná marcas, sumá al carrito y finalizá tu pedido de forma simple. Confirmamos cada compra por WhatsApp para darte una atención clara, rápida y personalizada.</p>
-        <div class="hero-cta">
-          <button class="btn" onclick="document.getElementById('catalogo').scrollIntoView()">Ver catálogo</button>
-          <button class="btn-outline" onclick="window.open('https://wa.me/5493364370451','_blank')">Pedir por WhatsApp</button>
+      <div class="hero-kicker">La Cebada · tienda matera</div>
+      <div class="hero-grid">
+        <div>
+          <h1>Todo para unos buenos mates.</h1>
+          <p>Elegí yerbas seleccionadas, sumá accesorios materos y armá tu pedido en segundos. Te confirmamos disponibilidad y entrega por WhatsApp.</p>
+          <div class="hero-actions">
+            <a class="pill-link" href="#catalogo">Comprar ahora</a>
+            <a class="pill-link" href="https://instagram.com/gaspichaves" target="_blank" rel="noopener">Instagram</a>
+          </div>
         </div>
-      </div>
-
-      <div class="hero-side">
-        <div class="mini-feature"><h4>Atención por WhatsApp</h4><p>Confirmamos cada pedido personalmente antes de coordinar la entrega.</p></div>
-        <div class="mini-feature"><h4>Stock actualizado</h4><p>La disponibilidad se lee desde una planilla en tiempo real para mostrar solo lo que realmente está disponible.</p></div>
-        <div class="mini-feature"><h4>Precio claro</h4><p>Ves el total antes de finalizar, sin pasos confusos ni sorpresas.</p></div>
+        <div class="hero-card">
+          <strong id="heroProductCount">0</strong>
+          <span>productos disponibles entre yerbas, bombillas y accesorios.</span>
+        </div>
       </div>
     </section>
 
     <section id="catalogo">
       <div class="section-head">
         <div>
-          <h2 class="section-title">Nuestro catálogo</h2>
-          <p class="section-sub">Cuatro yerbas elegidas a mano. Sumá las que quieras.</p>
+          <h2 class="section-title">Catálogo</h2>
+          <p class="section-sub">Yerbas, bombillas y accesorios para completar tu equipo matero.</p>
         </div>
       </div>
 
-      <div class="trust-row">
-        <div class="trust-item"><h4>Yerbas seleccionadas</h4><p>Trabajamos solo con marcas que probamos y aprobamos.</p></div>
-        <div class="trust-item"><h4>Compra simple</h4><p>Elegís, agregás al carrito y finalizás en pocos pasos.</p></div>
-        <div class="trust-item"><h4>Pedido a tu medida</h4><p>Combiná marcas, cantidades y armá tu compra como prefieras.</p></div>
-        <div class="trust-item"><h4>Atención real</h4><p>No sos un número. Cada pedido lo miramos y confirmamos nosotros.</p></div>
+      <div class="catalog-tools">
+        <div class="search-wrap">
+          <span>🔎</span>
+          <label class="sr-only" for="searchInput">Buscar producto</label>
+          <input class="search" id="searchInput" type="search" placeholder="Buscar por marca, accesorio, bombilla...">
+        </div>
+        <div class="filters" id="categoryFilters"></div>
       </div>
 
+      <div class="results-note" id="resultsNote"></div>
       <div class="grid" id="productsGrid"></div>
     </section>
 
-    <section class="testimonials">
-      <div class="testimonial"><div class="testimonial-stars">★★★★★</div><p>Excelente atención y muy buena presentación. Todo se coordinó rápido y sin complicaciones.</p><strong>— Cliente verificado</strong></div>
-      <div class="testimonial"><div class="testimonial-stars">★★★★★</div><p>La Baldo y la Canarias llegaron impecables. Muy buena experiencia de compra.</p><strong>— Matero frecuente</strong></div>
-      <div class="testimonial"><div class="testimonial-stars">★★★★★</div><p>Me gustó que el stock esté claro y que la compra se confirme por WhatsApp. Muy prolijo.</p><strong>— Nuevo cliente</strong></div>
-    </section>
-
-    <section class="faq">
-      <div class="section-head" style="margin:0 0 10px">
-        <div>
-          <h2 class="section-title" style="font-size:34px">Preguntas frecuentes</h2>
-          <p class="section-sub" style="font-size:16px">Lo más importante, explicado simple.</p>
-        </div>
+    <section class="benefits">
+      <div class="benefit">
+        <div class="benefit-icon">💬</div>
+        <h4>Atención por WhatsApp</h4>
+        <p>Respondemos rápido, confirmamos stock y coordinamos cada pedido de forma personalizada.</p>
       </div>
-
-      <div class="faq-list">
-        <div class="faq-item"><button class="faq-q" type="button">¿Cómo compro?</button><div class="faq-a">Elegís los productos, los sumás al carrito y finalizás por WhatsApp o dejando tu contacto para que te escribamos.</div></div>
-        <div class="faq-item"><button class="faq-q" type="button">¿Cómo sé si hay stock?</button><div class="faq-a">La disponibilidad se actualiza desde una planilla. Si un producto figura “Sin stock”, no se puede agregar al carrito.</div></div>
-        <div class="faq-item"><button class="faq-q" type="button">¿Puedo combinar varias marcas?</button><div class="faq-a">Sí, podés armar tu pedido con las marcas y cantidades que prefieras.</div></div>
-        <div class="faq-item"><button class="faq-q" type="button">¿Cómo se coordina la entrega?</button><div class="faq-a">Después de finalizar, confirmamos el pedido por WhatsApp y coordinamos con vos de forma directa.</div></div>
+      <div class="benefit">
+        <div class="benefit-icon">🧉</div>
+        <h4>Selección matera</h4>
+        <p>Trabajamos productos pensados para quienes disfrutan el mate todos los días.</p>
+      </div>
+      <div class="benefit">
+        <div class="benefit-icon">✅</div>
+        <h4>Compra clara</h4>
+        <p>Antes de confirmar ves cantidades, subtotales y el detalle completo de tu pedido.</p>
+      </div>
+      <div class="benefit">
+        <div class="benefit-icon">📦</div>
+        <h4>Pedido a medida</h4>
+        <p>Combiná yerbas, bombillas y accesorios según lo que estés necesitando.</p>
       </div>
     </section>
 
     <section class="story">
       <div class="story-top">Detrás de La Cebada</div>
-      <h3>Un emprendimiento de dos amigos materos</h3>
-      <p>Seleccionamos cada yerba personalmente y buscamos que comprar sea tan simple como cebar un buen mate. Si querés consultarnos algo, también podés escribirnos por Instagram.</p>
+      <h3>Un emprendimiento de amigos materos</h3>
+      <p>Seleccionamos productos con una idea simple: que cada cliente pueda armar su mate ideal, con buena atención y sin vueltas.</p>
       <div class="story-links">
-        <a href="https://instagram.com/gaspichaves" target="_blank">@gaspichaves</a>
-        <a href="https://instagram.com/matu_aparisi" target="_blank">@matu_aparisi</a>
+        <a href="https://instagram.com/gaspichaves" target="_blank" rel="noopener">@gaspichaves</a>
+        <a href="https://instagram.com/matu_aparisi" target="_blank" rel="noopener">@matu_aparisi</a>
       </div>
     </section>
 
     <footer>
-      <div><h4>La Cebada</h4><p>Yerbas premium para el matero exigente. Compra simple y atención personalizada.</p></div>
-      <div><h4>Compra segura</h4><p>Confirmamos cada pedido por WhatsApp antes de despachar. Sin vueltas.</p></div>
-      <div><h4>Seguinos</h4><p>Instagram: <a href="https://instagram.com/gaspichaves" target="_blank">@gaspichaves</a> · <a href="https://instagram.com/matu_aparisi" target="_blank">@matu_aparisi</a></p></div>
+      <div>
+        <h4>La Cebada</h4>
+        <p>Yerbas y accesorios para el matero exigente. Compra simple y atención humana.</p>
+      </div>
+      <div>
+        <h4>Confirmación segura</h4>
+        <p>Cada pedido se revisa por WhatsApp antes de cerrar la compra y coordinar entrega.</p>
+      </div>
+      <div>
+        <h4>Seguinos</h4>
+        <p>
+          Instagram:
+          <a href="https://instagram.com/gaspichaves" target="_blank" rel="noopener">@gaspichaves</a>
+          ·
+          <a href="https://instagram.com/matu_aparisi" target="_blank" rel="noopener">@matu_aparisi</a>
+        </p>
+      </div>
     </footer>
   </main>
-
-  <a class="wa-float" href="https://wa.me/5493364370451" target="_blank" aria-label="WhatsApp">✆</a>
 
   <div class="overlay" id="cartOverlay"></div>
   <div class="drawer" id="cartDrawer">
     <div class="drawer-inner">
-      <h3>Tu carrito</h3>
+      <div class="drawer-top">
+        <h3>Tu carrito</h3>
+        <button class="secondary-btn" id="closeCartBtn" style="width:auto;margin:0">Cerrar</button>
+      </div>
       <div id="cartItems"></div>
       <div class="cart-total" id="cartTotal">Total: $0</div>
-      <div class="note">Podés seguir agregando productos antes de finalizar la compra.</div>
+      <div class="cart-warning" id="cartWarning">Algunos productos tienen precio a confirmar. Te pasamos el valor final por WhatsApp.</div>
+      <div class="note">✔ Podés seguir agregando productos antes de finalizar.</div>
       <button class="secondary-btn" id="clearCartBtn">Vaciar carrito</button>
       <button class="primary-btn" id="checkoutBtn">Finalizar compra</button>
     </div>
@@ -248,20 +1208,23 @@
   <div class="overlay" id="checkoutOverlay"></div>
   <div class="modal" id="checkoutModal">
     <div class="summary" id="checkoutSummary"></div>
+
     <div id="stepOptions">
-      <h3>¿Cómo querés finalizar tu pedido?</h3>
+      <h3>¿Cómo querés finalizar?</h3>
       <button class="primary-btn" id="goWhatsappBtn">💬 Confirmar por WhatsApp</button>
       <button class="secondary-btn" id="goContactBtn">📞 Que nos comuniquemos con vos</button>
       <button class="danger-btn" id="cancelCheckoutBtn">Cancelar</button>
     </div>
-    <div id="stepWhatsapp" class="hidden">
+
+    <div id="stepWhatsapp" style="display:none">
       <h3>Confirmar por WhatsApp</h3>
       <input class="field" id="waName" type="text" placeholder="Tu nombre y apellido">
       <div class="error" id="waError"></div>
       <button class="primary-btn" id="sendWhatsappBtn">Enviar pedido</button>
       <button class="secondary-btn" id="backFromWhatsappBtn">Volver</button>
     </div>
-    <div id="stepContact" class="hidden">
+
+    <div id="stepContact" style="display:none">
       <h3>Te contactamos nosotros</h3>
       <input class="field" id="contactName" type="text" placeholder="Tu nombre y apellido">
       <input class="field" id="contactPhone" type="tel" placeholder="Tu número de teléfono">
@@ -274,7 +1237,7 @@
   <div class="success-modal" id="successModal">
     <div class="success-box">
       <h3>✅ ¡Pedido recibido!</h3>
-      <p>En breve <strong>La Cebada</strong> se comunicará con vos por WhatsApp para confirmar tu pedido.</p>
+      <p>En breve <strong>La Cebada</strong> se comunicará con vos por WhatsApp para confirmar disponibilidad, precio final y entrega.</p>
       <button class="primary-btn" id="closeSuccessBtn">Entendido</button>
     </div>
   </div>
@@ -287,130 +1250,312 @@
       <h3>Panel de administrador</h3>
       <button class="secondary-btn" id="closeAdminBtn" style="width:auto;margin:0">Cerrar</button>
     </div>
+
     <div class="admin-grid">
-      <div class="admin-card"><h4>Stock, precio y etiquetas</h4><div id="adminProducts"></div></div>
-      <div class="admin-card"><h4>Acciones rápidas</h4><button class="secondary-btn" id="adminVaciarCarritoBtn">Vaciar carrito</button></div>
+      <div class="admin-card">
+        <h4>Productos</h4>
+        <div id="adminProducts"></div>
+      </div>
+
+      <div class="admin-card">
+        <h4>Resumen</h4>
+        <div class="mini-stat"><span>Total productos</span><strong id="adminTotalProducts">0</strong></div>
+        <div class="mini-stat"><span>Con stock</span><strong id="adminStockProducts">0</strong></div>
+        <div class="mini-stat"><span>Precio a confirmar</span><strong id="adminConsultProducts">0</strong></div>
+        <h4 style="margin-top:22px">Acciones rápidas</h4>
+        <button class="secondary-btn" id="adminVaciarCarritoBtn">Vaciar carrito</button>
+        <button class="secondary-btn" id="adminRestaurarBtn">Restaurar catálogo original</button>
+        <div class="note">Tip: para los productos nuevos, cargá el precio desde este panel cuando lo tengas definido. Si queda en 0, aparece como “Consultar”.</div>
+      </div>
     </div>
   </div>
 
   <script>
     const TELEFONO_VENDEDOR = "5493364370451";
     const WEBHOOK_URL = "https://hook.us2.make.com/ofufesknpyc3spbueo9q68v4bmasdhgu";
-    const STOCK_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQNWo2kZ0lxbKOUz00N29AqBN6clA2yf9BPmCX4ccaEf4-AyPYfiz0YNUqJzCIpQ5ZqFzx9xWgoFs0I/pub?gid=460073425&single=true&output=csv";
     const ADMIN_PASSWORD = "cebada1";
 
-    const productosOriginales = [
-      {id:"baldo",nombre:"Yerba Baldo",peso:"1/2 kg",descripcion:"Mezcla intensa de hojas y palos seleccionados. Perfecta para los que buscan un mate fuerte y bien rendidor.",precio:6500,imagen:"baldo.jpg",etiqueta:"Más vendida",notas:["Intensa","Rendidora","Tradicional"],stock:true},
-      {id:"canarias",nombre:"Yerba Canarias",peso:"1 kg",descripcion:"La clásica uruguaya: molienda fina, sabor profundo y carácter inconfundible para los materos exigentes.",precio:10500,imagen:"canarias.jpg",etiqueta:"Origen Uruguay",notas:["Fuerte","Premium","Molienda fina"],stock:true},
-      {id:"rei-premium",nombre:"Yerba Rei Verde Premium",peso:"1 kg",descripcion:"Edición premium con secado natural y estacionamiento prolongado. Sabor noble, suave en boca y muy aromático.",precio:10000,imagen:"rei-premium.jpg",etiqueta:"Premium",notas:["Aromática","Suave","Estacionada"],stock:true},
-      {id:"rei-clasica",nombre:"Yerba Rei Verde Clásica",peso:"1/2 kg",descripcion:"La versión tradicional Rei Verde: equilibrio justo entre sabor y rendimiento para el mate de todos los días.",precio:6000,imagen:"rei-clasica.jpg",etiqueta:"Clásica",notas:["Equilibrada","Diaria","Clásica"],stock:true}
+    const categorias = [
+      { id: "todos", nombre: "Todo" },
+      { id: "yerbas", nombre: "Yerbas" },
+      { id: "bombillas", nombre: "Bombillas" },
+      { id: "accesorios", nombre: "Accesorios" }
     ];
 
-    let stockRemoto = {};
+    const productosOriginales = [
+      {
+        id: "baldo",
+        nombre: "Yerba Baldo",
+        peso: "1/2 kg",
+        categoria: "yerbas",
+        descripcion: "Mezcla intensa de hojas y palos seleccionados. Perfecta para quienes buscan un mate fuerte y rendidor.",
+        precio: 6500,
+        imagen: "baldo.jpg",
+        icono: "🧉",
+        etiqueta: "Más vendida",
+        notas: ["Intensa", "Rendidora", "Tradicional"],
+        stock: true
+      },
+      {
+        id: "canarias",
+        nombre: "Yerba Canarias",
+        peso: "1 kg",
+        categoria: "yerbas",
+        descripcion: "La clásica uruguaya: molienda fina, sabor profundo y carácter inconfundible para materos exigentes.",
+        precio: 10500,
+        imagen: "canarias.jpg",
+        icono: "🧉",
+        etiqueta: "Origen Uruguay",
+        notas: ["Fuerte", "Premium", "Molienda fina"],
+        stock: true
+      },
+      {
+        id: "rei-premium",
+        nombre: "Yerba Rei Verde Premium",
+        peso: "1 kg",
+        categoria: "yerbas",
+        descripcion: "Edición premium con secado natural y estacionamiento prolongado. Sabor noble, suave y aromático.",
+        precio: 10000,
+        imagen: "rei-premium.jpg",
+        icono: "🧉",
+        etiqueta: "Premium",
+        notas: ["Aromática", "Suave", "Estacionada"],
+        stock: true
+      },
+      {
+        id: "rei-clasica",
+        nombre: "Yerba Rei Verde Clásica",
+        peso: "1/2 kg",
+        categoria: "yerbas",
+        descripcion: "La versión tradicional Rei Verde: equilibrio justo entre sabor y rendimiento para el mate de todos los días.",
+        precio: 6000,
+        imagen: "rei-clasica.jpg",
+        icono: "🧉",
+        etiqueta: "Clásica",
+        notas: ["Equilibrada", "Diaria", "Clásica"],
+        stock: true
+      },
+      {
+        id: "canasta-matera-eco-cuero",
+        nombre: "Canasta matera eco cuero",
+        peso: "Unidad",
+        categoria: "accesorios",
+        descripcion: "Canasta matera práctica y elegante para transportar yerba, mate, termo y accesorios con mejor presentación.",
+        precio: 0,
+        imagen: "canasta-matera-eco-cuero.jpg",
+        icono: "🧺",
+        etiqueta: "Nuevo ingreso",
+        notas: ["Eco cuero", "Matera", "Práctica"],
+        stock: true
+      },
+      {
+        id: "bombillon-pico-loro-cincelado",
+        nombre: "Bombillón pico loro cincelado",
+        peso: "Unidad",
+        categoria: "bombillas",
+        descripcion: "Bombillón pico loro con detalle cincelado. Una opción vistosa, firme y cómoda para el uso diario.",
+        precio: 0,
+        imagen: "bombillon-pico-loro-cincelado.jpg",
+        icono: "🥄",
+        etiqueta: "Nuevo",
+        notas: ["Cincelado", "Pico loro", "Matero"],
+        stock: true
+      },
+      {
+        id: "bombilla-pico-loro-acero",
+        nombre: "Bombilla pico loro acero",
+        peso: "Unidad",
+        categoria: "bombillas",
+        descripcion: "Bombilla pico loro de acero, resistente y fácil de limpiar. Ideal para sumar al equipo matero.",
+        precio: 0,
+        imagen: "bombilla-pico-loro-acero.jpg",
+        icono: "🥄",
+        etiqueta: "Nuevo",
+        notas: ["Acero", "Pico loro", "Resistente"],
+        stock: true
+      }
+    ];
+
+    let config = JSON.parse(localStorage.getItem("cebada_config") || "{}");
     let carrito = JSON.parse(localStorage.getItem("cebada_carrito") || "[]");
     let cantidades = JSON.parse(localStorage.getItem("cebada_cantidades") || "{}");
+    let categoriaActiva = "todos";
+    let busqueda = "";
 
-    function saveCart(){ localStorage.setItem("cebada_carrito", JSON.stringify(carrito)); }
-    function saveCantidades(){ localStorage.setItem("cebada_cantidades", JSON.stringify(cantidades)); }
-    function ars(n){ return "$" + Number(n).toLocaleString("es-AR"); }
-    function totalCantidad(){ return carrito.reduce((a,b)=>a+b.cantidad,0); }
-    function totalPrecio(){ return carrito.reduce((a,b)=>a+b.cantidad*b.precio,0); }
-    function detalleTexto(){ return carrito.map(p => `• ${p.nombre} ${p.peso} x${p.cantidad} — ${ars(p.precio * p.cantidad)}`).join("\n"); }
-    function validarTel(t){ const limpio = String(t).replace(/\D/g,""); return limpio.length >= 10 && limpio.length <= 13 && !/^0+$/.test(limpio); }
-
-    function showToast(texto){
-      const toast = document.getElementById("toast");
-      toast.textContent = texto;
-      toast.classList.add("show");
-      clearTimeout(window.__toastTimer);
-      window.__toastTimer = setTimeout(() => toast.classList.remove("show"), 1800);
-    }
-
-    function parseCSV(text) {
-      const cleanText = text.replace(/^\uFEFF/, "").trim();
-      const lines = cleanText.split(/\r?\n/);
-      if (lines.length < 2) return [];
-      const headers = lines[0].split(",").map(h => h.replace(/^\uFEFF/, "").trim().toLowerCase());
-      return lines.slice(1).map(line => {
-        const values = line.split(",").map(v => v.trim());
-        const row = {};
-        headers.forEach((header, index) => { row[header] = values[index] || ""; });
-        return row;
-      });
-    }
-
-    async function cargarStockDesdeSheets() {
-      try {
-        const url = STOCK_CSV_URL + "&t=" + Date.now();
-        const res = await fetch(url, { cache: "no-store" });
-        const text = await res.text();
-        const filas = parseCSV(text);
-
-        stockRemoto = {};
-        filas.forEach(f => {
-          const producto = (f.producto || "").trim().toLowerCase();
-          if (!producto) return;
-          stockRemoto[producto] = {
-            precio: Number(f.precio),
-            stock: (f.stock || "").trim().toLowerCase() === "si",
-            etiqueta: (f.etiqueta || "").trim()
-          };
-        });
-
-        console.log("CSV texto:", text);
-        console.log("Filas parseadas:", filas);
-        console.log("stockRemoto final:", stockRemoto);
-      } catch (error) {
-        console.error("Error cargando stock desde Google Sheets:", error);
-        stockRemoto = {};
-      }
-    }
-
-    function getProductos(){
+    function getProductos() {
       return productosOriginales.map(p => {
-        const remoto = stockRemoto[p.id];
-        if (!remoto) return p;
+        const c = config[p.id] || {};
         return {
           ...p,
-          precio: !isNaN(remoto.precio) ? remoto.precio : p.precio,
-          etiqueta: remoto.etiqueta !== "" ? remoto.etiqueta : p.etiqueta,
-          stock: remoto.stock
+          precio: Number.isFinite(c.precio) ? c.precio : p.precio,
+          etiqueta: typeof c.etiqueta === "string" ? c.etiqueta : p.etiqueta,
+          stock: typeof c.stock === "boolean" ? c.stock : p.stock
         };
       });
     }
 
-    function renderProducts(){
-      const productos = getProductos();
+    function saveConfig() {
+      localStorage.setItem("cebada_config", JSON.stringify(config));
+    }
+
+    function saveCart() {
+      localStorage.setItem("cebada_carrito", JSON.stringify(carrito));
+    }
+
+    function saveCantidades() {
+      localStorage.setItem("cebada_cantidades", JSON.stringify(cantidades));
+    }
+
+    function ars(n) {
+      return "$" + Number(n).toLocaleString("es-AR");
+    }
+
+    function precioTexto(precio) {
+      return Number(precio) > 0 ? ars(precio) : "Consultar";
+    }
+
+    function subtotalTexto(item) {
+      return Number(item.precio) > 0 ? ars(item.precio * item.cantidad) : "A confirmar";
+    }
+
+    function tienePreciosAConfirmar() {
+      return carrito.some(p => Number(p.precio) <= 0);
+    }
+
+    function totalCantidad() {
+      return carrito.reduce((a, b) => a + b.cantidad, 0);
+    }
+
+    function totalPrecio() {
+      return carrito.reduce((a, b) => a + b.cantidad * Math.max(0, Number(b.precio) || 0), 0);
+    }
+
+    function totalTexto() {
+      const base = ars(totalPrecio());
+      return tienePreciosAConfirmar() ? `${base} + productos a confirmar` : base;
+    }
+
+    function detalleTexto() {
+      return carrito.map(p => `• ${p.nombre} ${p.peso} x${p.cantidad} — ${subtotalTexto(p)}`).join("\n");
+    }
+
+    function validarTel(t) {
+      const limpio = String(t).replace(/\D/g, "");
+      return limpio.length >= 10 && limpio.length <= 13 && !/^0+$/.test(limpio);
+    }
+
+    function normalizar(texto) {
+      return String(texto || "")
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
+    }
+
+    function escapeHtml(texto) {
+      return String(texto || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function showToast(texto) {
+      const toast = document.getElementById("toast");
+      toast.textContent = texto;
+      toast.classList.add("show");
+      clearTimeout(window.__toastTimer);
+      window.__toastTimer = setTimeout(() => toast.classList.remove("show"), 1900);
+    }
+
+    function renderCategoryFilters() {
+      const wrap = document.getElementById("categoryFilters");
+      wrap.innerHTML = categorias.map(c => `
+        <button class="filter-btn ${categoriaActiva === c.id ? "active" : ""}" onclick="setCategoria('${c.id}')">${c.nombre}</button>
+      `).join("");
+    }
+
+    function setCategoria(id) {
+      categoriaActiva = id;
+      renderCategoryFilters();
+      renderProducts();
+    }
+
+    function getProductosFiltrados() {
+      const q = normalizar(busqueda);
+      return getProductos().filter(p => {
+        const coincideCategoria = categoriaActiva === "todos" || p.categoria === categoriaActiva;
+        const textoProducto = normalizar(`${p.nombre} ${p.peso} ${p.descripcion} ${p.categoria} ${p.notas.join(" ")}`);
+        const coincideBusqueda = !q || textoProducto.includes(q);
+        return coincideCategoria && coincideBusqueda;
+      });
+    }
+
+    function renderProducts() {
+      const productos = getProductosFiltrados();
+      const total = getProductos().length;
       const grid = document.getElementById("productsGrid");
+      const resultsNote = document.getElementById("resultsNote");
+      const heroCount = document.getElementById("heroProductCount");
+
+      heroCount.textContent = total;
+      resultsNote.textContent = productos.length === total
+        ? `${total} productos en catálogo.`
+        : `${productos.length} de ${total} productos encontrados.`;
+
+      if (productos.length === 0) {
+        grid.innerHTML = `
+          <div class="empty-state">
+            <h3>No encontramos productos con ese filtro</h3>
+            <p>Probá buscar “yerba”, “bombilla”, “pico loro” o “canasta”.</p>
+            <button class="secondary-btn" style="width:auto" onclick="limpiarFiltros()">Limpiar filtros</button>
+          </div>
+        `;
+        return;
+      }
+
       grid.innerHTML = productos.map(p => {
         const cant = cantidades[p.id] || 1;
+        const categoria = categorias.find(c => c.id === p.categoria)?.nombre || "Producto";
         return `
           <article class="card">
-            <div class="media">
-              ${p.etiqueta ? `<span class="tag">${p.etiqueta}</span>` : ""}
-              ${!p.stock ? `<span class="tag tag-stock">Sin stock</span>` : ""}
-              <img src="${p.imagen}" alt="${p.nombre} ${p.peso}" style="${!p.stock ? "filter:grayscale(38%) opacity(.66);" : ""}">
+            <div class="media" id="media-${p.id}">
+              ${p.etiqueta ? `<span class="tag">${escapeHtml(p.etiqueta)}</span>` : ""}
+              <span class="category-tag">${escapeHtml(categoria)}</span>
+              <span class="product-icon">${p.icono || "🧉"}</span>
+              <img src="${escapeHtml(p.imagen)}" alt="${escapeHtml(p.nombre)} ${escapeHtml(p.peso)}" onerror="this.closest('.media').classList.add('no-image')">
             </div>
             <div class="content">
-              <h3 class="product-title">${p.nombre} <span class="weight">· ${p.peso}</span></h3>
-              <p class="desc">${p.descripcion}</p>
-              <div class="chips">${p.notas.map(n => `<span class="chip">${n}</span>`).join("")}</div>
+              <h3>${escapeHtml(p.nombre)} <span class="weight">${escapeHtml(p.peso)}</span></h3>
+              <p class="desc">${escapeHtml(p.descripcion)}</p>
+              <div class="chips">
+                ${p.notas.map(n => `<span class="chip">${escapeHtml(n)}</span>`).join("")}
+              </div>
               <div class="price-row">
-                <div class="price">${ars(p.precio)}</div>
-                <div class="${p.stock ? "stock-ok" : "stock-no"}">${p.stock ? "✅ Stock disponible" : "⛔ Sin stock"}</div>
+                <div class="price ${Number(p.precio) > 0 ? "" : "consultar"}">${precioTexto(p.precio)}</div>
+                <div class="${p.stock ? "stock-ok" : "stock-no"}">${p.stock ? "Stock disponible" : "Sin stock"}</div>
               </div>
               <div class="qty">
-                <button onclick="changeQty('${p.id}', -1)">−</button>
+                <button aria-label="Restar" onclick="changeQty('${p.id}', -1)">−</button>
                 <span id="qty-${p.id}">${cant}</span>
-                <button onclick="changeQty('${p.id}', 1)">+</button>
+                <button aria-label="Sumar" onclick="changeQty('${p.id}', 1)">+</button>
               </div>
-              <button class="primary-btn" onclick="addCart('${p.id}')" ${p.stock ? "" : "disabled"} style="${p.stock ? "" : "background:#5a1f1f;color:#fff;opacity:1;cursor:not-allowed"}">${p.stock ? "Agregar al carrito" : "Sin stock"}</button>
+              <button class="primary-btn" onclick="addCart('${p.id}')">Agregar al carrito</button>
             </div>
-          </article>`;
+          </article>
+        `;
       }).join("");
     }
 
-    function changeQty(id, delta){
+    function limpiarFiltros() {
+      categoriaActiva = "todos";
+      busqueda = "";
+      document.getElementById("searchInput").value = "";
+      renderCategoryFilters();
+      renderProducts();
+    }
+
+    function changeQty(id, delta) {
       const actual = cantidades[id] || 1;
       cantidades[id] = Math.max(1, actual + delta);
       saveCantidades();
@@ -418,17 +1563,34 @@
       if (span) span.textContent = cantidades[id];
     }
 
-    function addCart(id){
+    function addCart(id) {
       const producto = getProductos().find(p => p.id === id);
       if (!producto) return;
-      if (!producto.stock){ alert("Este producto está sin stock"); return; }
+      if (!producto.stock) {
+        alert("Este producto está sin stock");
+        return;
+      }
 
       const cant = cantidades[id] || 1;
       const existe = carrito.find(i => i.id === id);
 
-      if (existe){ existe.cantidad += cant; existe.precio = producto.precio; }
-      else {
-        carrito.push({ id: producto.id, nombre: producto.nombre, peso: producto.peso, precio: producto.precio, imagen: producto.imagen, cantidad: cant });
+      if (existe) {
+        existe.cantidad += cant;
+        existe.precio = producto.precio;
+        existe.nombre = producto.nombre;
+        existe.peso = producto.peso;
+        existe.imagen = producto.imagen;
+        existe.icono = producto.icono;
+      } else {
+        carrito.push({
+          id: producto.id,
+          nombre: producto.nombre,
+          peso: producto.peso,
+          precio: producto.precio,
+          imagen: producto.imagen,
+          icono: producto.icono,
+          cantidad: cant
+        });
       }
 
       cantidades[id] = 1;
@@ -436,95 +1598,109 @@
       saveCart();
       renderProducts();
       renderCart();
-      showToast(producto.nombre + " " + producto.peso + " x" + cant + " agregado al carrito");
+      showToast(producto.nombre + " x" + cant + " agregado al carrito");
     }
 
-    function modCart(id, delta){
-      carrito = carrito.map(i => i.id === id ? { ...i, cantidad: i.cantidad + delta } : i).filter(i => i.cantidad > 0);
+    function modCart(id, delta) {
+      carrito = carrito
+        .map(i => i.id === id ? { ...i, cantidad: i.cantidad + delta } : i)
+        .filter(i => i.cantidad > 0);
       saveCart();
       renderCart();
     }
 
-    function renderCart(){
+    function renderCart() {
       document.getElementById("cartBadge").textContent = totalCantidad();
       const items = document.getElementById("cartItems");
-
-      if (carrito.length === 0){
+      if (carrito.length === 0) {
         items.innerHTML = "<p style='color:var(--muted)'>Tu carrito está vacío.</p>";
       } else {
         items.innerHTML = carrito.map(p => `
           <div class="cart-item">
-            <img src="${p.imagen}" alt="${p.nombre}">
+            <img src="${escapeHtml(p.imagen)}" alt="${escapeHtml(p.nombre)}" onerror="this.outerHTML='<div style=&quot;width:58px;height:58px;border-radius:14px;background:#131913;display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0&quot;>${p.icono || "🧉"}</div>'">
             <div class="cart-info">
-              <div class="cart-name">${p.nombre} · ${p.peso}</div>
-              <div class="cart-sub">Subtotal: ${ars(p.precio * p.cantidad)}</div>
+              <div class="cart-name">${escapeHtml(p.nombre)} · ${escapeHtml(p.peso)}</div>
+              <div class="cart-sub">Subtotal: ${subtotalTexto(p)}</div>
             </div>
             <div class="cart-controls">
               <button class="mini-btn" onclick="modCart('${p.id}', -1)">−</button>
-              <span style="width:20px;text-align:center;font-weight:900">${p.cantidad}</span>
+              <span style="width:22px;text-align:center;font-weight:900">${p.cantidad}</span>
               <button class="mini-btn" onclick="modCart('${p.id}', 1)">+</button>
             </div>
           </div>
         `).join("");
       }
-
-      document.getElementById("cartTotal").textContent = "Total: " + ars(totalPrecio());
+      document.getElementById("cartTotal").textContent = "Total: " + totalTexto();
+      document.getElementById("cartWarning").classList.toggle("show", tienePreciosAConfirmar());
       updateCheckoutSummary();
     }
 
-    function openCart(){ document.getElementById("cartOverlay").classList.add("show"); document.getElementById("cartDrawer").classList.add("show"); }
-    function closeCart(){ document.getElementById("cartOverlay").classList.remove("show"); document.getElementById("cartDrawer").classList.remove("show"); }
-
-    function showStep(step){
-      document.getElementById("stepOptions").classList.add("hidden");
-      document.getElementById("stepWhatsapp").classList.add("hidden");
-      document.getElementById("stepContact").classList.add("hidden");
-      if (step === "options") document.getElementById("stepOptions").classList.remove("hidden");
-      if (step === "whatsapp") document.getElementById("stepWhatsapp").classList.remove("hidden");
-      if (step === "contact") document.getElementById("stepContact").classList.remove("hidden");
+    function openCart() {
+      document.getElementById("cartOverlay").classList.add("show");
+      document.getElementById("cartDrawer").classList.add("show");
     }
 
-    function updateCheckoutSummary(){
-      document.getElementById("checkoutSummary").innerHTML = `<div><strong>Productos:</strong> ${totalCantidad()}</div><div><strong>Total:</strong> ${ars(totalPrecio())}</div>`;
+    function closeCart() {
+      document.getElementById("cartOverlay").classList.remove("show");
+      document.getElementById("cartDrawer").classList.remove("show");
     }
 
-    function openCheckout(){
-      if (carrito.length === 0){ alert("El carrito está vacío"); return; }
+    function showStep(step) {
+      document.getElementById("stepOptions").style.display = "none";
+      document.getElementById("stepWhatsapp").style.display = "none";
+      document.getElementById("stepContact").style.display = "none";
+
+      if (step === "options") document.getElementById("stepOptions").style.display = "block";
+      if (step === "whatsapp") document.getElementById("stepWhatsapp").style.display = "block";
+      if (step === "contact") document.getElementById("stepContact").style.display = "block";
+    }
+
+    function updateCheckoutSummary() {
+      document.getElementById("checkoutSummary").innerHTML = `
+        <div><strong>Productos:</strong> ${totalCantidad()}</div>
+        <div><strong>Total:</strong> ${totalTexto()}</div>
+        ${tienePreciosAConfirmar() ? "<div style='color:#ffe5aa;margin-top:6px'>Hay productos con precio a confirmar.</div>" : ""}
+      `;
+    }
+
+    function openCheckout() {
+      if (carrito.length === 0) {
+        alert("El carrito está vacío");
+        return;
+      }
       updateCheckoutSummary();
       showStep("options");
       document.getElementById("checkoutOverlay").classList.add("show");
       document.getElementById("checkoutModal").classList.add("show");
     }
 
-    function closeCheckout(){
+    function closeCheckout() {
       document.getElementById("checkoutOverlay").classList.remove("show");
       document.getElementById("checkoutModal").classList.remove("show");
       document.getElementById("waError").textContent = "";
       document.getElementById("contactError").textContent = "";
     }
 
-    function confirmarWhatsapp(){
+    function confirmarWhatsapp() {
       const nombre = document.getElementById("waName").value.trim();
-      if (!nombre){ document.getElementById("waError").textContent = "Por favor ingresá tu nombre y apellido."; return; }
+      if (!nombre) {
+        document.getElementById("waError").textContent = "Por favor ingresá tu nombre y apellido.";
+        return;
+      }
       document.getElementById("waError").textContent = "";
 
       const fecha = new Date().toLocaleString("es-AR");
+      const avisoPrecio = tienePreciosAConfirmar()
+        ? "\n⚠️ Algunos productos tienen precio a confirmar."
+        : "";
       const msg =
-        `¡Hola La Cebada! 👋 Quiero confirmar este pedido:
-
-` +
+        `¡Hola La Cebada! 👋 Quiero confirmar este pedido:\n\n` +
         detalleTexto() +
-        `
-
-🧉 Total de productos: ${totalCantidad()}` +
-        `
-💰 Total a abonar: ${ars(totalPrecio())}` +
-        `
-👤 Cliente: ${nombre}` +
-        `
-🕒 ${fecha}
-
-¡Gracias!`;
+        `\n\n🧉 Total de productos: ${totalCantidad()}` +
+        `\n💰 Total estimado: ${totalTexto()}` +
+        avisoPrecio +
+        `\n👤 Cliente: ${nombre}` +
+        `\n🕒 ${fecha}\n\n¡Gracias!`;
 
       window.open(`https://wa.me/${TELEFONO_VENDEDOR}?text=${encodeURIComponent(msg)}`, "_blank");
 
@@ -536,29 +1712,38 @@
       document.getElementById("waName").value = "";
     }
 
-    async function confirmarContacto(){
+    async function confirmarContacto() {
       const nombre = document.getElementById("contactName").value.trim();
       const telefono = document.getElementById("contactPhone").value.trim();
 
-      if (!nombre || !telefono){ document.getElementById("contactError").textContent = "Completá tu nombre y teléfono."; return; }
-      if (!validarTel(telefono)){ document.getElementById("contactError").textContent = "El número de teléfono no parece válido."; return; }
+      if (!nombre || !telefono) {
+        document.getElementById("contactError").textContent = "Completá tu nombre y teléfono.";
+        return;
+      }
+      if (!validarTel(telefono)) {
+        document.getElementById("contactError").textContent = "El número de teléfono no parece válido.";
+        return;
+      }
+
       document.getElementById("contactError").textContent = "";
 
       try {
         await fetch(WEBHOOK_URL, {
-          method:"POST",
-          headers:{ "Content-Type":"application/json" },
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            tipo_confirmacion:"nos_comunicamos_con_vos",
-            cliente:nombre,
+            tipo_confirmacion: "nos_comunicamos_con_vos",
+            cliente: nombre,
             telefono,
-            detalle:detalleTexto(),
-            cantidad_total:totalCantidad(),
-            total:totalPrecio(),
-            fecha:new Date().toLocaleString("es-AR")
+            detalle: detalleTexto(),
+            cantidad_total: totalCantidad(),
+            total_estimado_texto: totalTexto(),
+            total_estimado_numero: totalPrecio(),
+            precio_a_confirmar: tienePreciosAConfirmar(),
+            fecha: new Date().toLocaleString("es-AR")
           })
         });
-      } catch(e) {
+      } catch (e) {
         console.error(e);
       }
 
@@ -572,7 +1757,7 @@
       document.getElementById("successModal").classList.add("show");
     }
 
-    function openAdmin(){
+    function openAdmin() {
       const pass = prompt("Contraseña de administrador");
       if (pass !== ADMIN_PASSWORD) return;
       renderAdmin();
@@ -580,25 +1765,79 @@
       document.getElementById("adminPanel").classList.add("show");
     }
 
-    function closeAdmin(){
+    function closeAdmin() {
       document.getElementById("adminOverlay").classList.remove("show");
       document.getElementById("adminPanel").classList.remove("show");
     }
 
-    function renderAdmin(){
-      document.getElementById("adminProducts").innerHTML = `
+    function renderAdmin() {
+      const productos = getProductos();
+      const wrap = document.getElementById("adminProducts");
+
+      wrap.innerHTML = productos.map(p => `
         <div class="admin-product">
-          <div class="admin-product-title">Control de stock, precio y etiquetas</div>
-          <p style="color:var(--muted); line-height:1.6; margin:0 0 12px;">Ahora estos cambios se controlan desde Google Sheets.</p>
-          <p style="color:var(--muted); line-height:1.6; margin:0 0 12px;">Modificá en la planilla:<br>• producto<br>• precio<br>• stock (si / no)<br>• etiqueta</p>
-          <p style="color:var(--muted); line-height:1.6; margin:0;">Después recargá la web y todos los usuarios verán el cambio.</p>
-        </div>`;
+          <div class="admin-product-title">${escapeHtml(p.nombre)} · ${escapeHtml(p.peso)}</div>
+          <input class="admin-small" type="number" id="price-${p.id}" value="${p.precio}" placeholder="Precio. Usá 0 para consultar">
+          <input class="admin-small" type="text" id="tag-${p.id}" value="${escapeHtml(p.etiqueta || "")}" placeholder="Etiqueta">
+          <div class="admin-actions">
+            <button class="secondary-btn" style="margin:0" onclick="saveProduct('${p.id}')">Guardar</button>
+            <button class="${p.stock ? 'danger-btn' : 'primary-btn'}" style="margin:0" onclick="toggleStock('${p.id}')">
+              ${p.stock ? 'Poner sin stock' : 'Activar stock'}
+            </button>
+          </div>
+        </div>
+      `).join("");
+
+      document.getElementById("adminTotalProducts").textContent = productos.length;
+      document.getElementById("adminStockProducts").textContent = productos.filter(p => p.stock).length;
+      document.getElementById("adminConsultProducts").textContent = productos.filter(p => Number(p.precio) <= 0).length;
+    }
+
+    function saveProduct(id) {
+      const price = parseInt(document.getElementById("price-" + id).value, 10);
+      const tag = document.getElementById("tag-" + id).value.trim();
+
+      if (!config[id]) config[id] = {};
+      config[id].precio = isNaN(price) ? 0 : Math.max(0, price);
+      config[id].etiqueta = tag;
+      saveConfig();
+      renderProducts();
+      renderAdmin();
+      renderCart();
+      showToast("Producto actualizado");
+    }
+
+    function toggleStock(id) {
+      const producto = getProductos().find(p => p.id === id);
+      if (!producto) return;
+      if (!config[id]) config[id] = {};
+      config[id].stock = !producto.stock;
+      saveConfig();
+      renderProducts();
+      renderAdmin();
+      showToast(config[id].stock ? "Stock activado" : "Producto sin stock");
+    }
+
+    function restoreCatalog() {
+      config = {};
+      saveConfig();
+      renderProducts();
+      renderAdmin();
+      renderCart();
+      showToast("Catálogo restaurado");
     }
 
     document.getElementById("openCartBtn").addEventListener("click", openCart);
+    document.getElementById("closeCartBtn").addEventListener("click", closeCart);
     document.getElementById("cartOverlay").addEventListener("click", closeCart);
-    document.getElementById("clearCartBtn").addEventListener("click", () => { carrito = []; saveCart(); renderCart(); showToast("Carrito vaciado"); });
+    document.getElementById("clearCartBtn").addEventListener("click", () => {
+      carrito = [];
+      saveCart();
+      renderCart();
+      showToast("Carrito vaciado");
+    });
     document.getElementById("checkoutBtn").addEventListener("click", openCheckout);
+
     document.getElementById("checkoutOverlay").addEventListener("click", closeCheckout);
     document.getElementById("goWhatsappBtn").addEventListener("click", () => showStep("whatsapp"));
     document.getElementById("goContactBtn").addEventListener("click", () => showStep("contact"));
@@ -607,23 +1846,29 @@
     document.getElementById("backFromContactBtn").addEventListener("click", () => showStep("options"));
     document.getElementById("sendWhatsappBtn").addEventListener("click", confirmarWhatsapp);
     document.getElementById("sendContactBtn").addEventListener("click", confirmarContacto);
-    document.getElementById("closeSuccessBtn").addEventListener("click", () => { document.getElementById("successModal").classList.remove("show"); });
+    document.getElementById("closeSuccessBtn").addEventListener("click", () => {
+      document.getElementById("successModal").classList.remove("show");
+    });
+
     document.getElementById("adminAccess").addEventListener("click", openAdmin);
     document.getElementById("adminOverlay").addEventListener("click", closeAdmin);
     document.getElementById("closeAdminBtn").addEventListener("click", closeAdmin);
-    document.getElementById("adminVaciarCarritoBtn").addEventListener("click", () => { carrito = []; saveCart(); renderCart(); showToast("Carrito vaciado"); });
+    document.getElementById("adminVaciarCarritoBtn").addEventListener("click", () => {
+      carrito = [];
+      saveCart();
+      renderCart();
+      showToast("Carrito vaciado");
+    });
+    document.getElementById("adminRestaurarBtn").addEventListener("click", restoreCatalog);
 
-    document.querySelectorAll(".faq-q").forEach(btn => {
-      btn.addEventListener("click", () => btn.parentElement.classList.toggle("open"));
+    document.getElementById("searchInput").addEventListener("input", (e) => {
+      busqueda = e.target.value;
+      renderProducts();
     });
 
-    async function init(){
-      await cargarStockDesdeSheets();
-      renderProducts();
-      renderCart();
-    }
-
-    init();
+    renderCategoryFilters();
+    renderProducts();
+    renderCart();
   </script>
 </body>
 </html>
