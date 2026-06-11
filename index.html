@@ -6,21 +6,21 @@
   <title>La Cebada | Yerbas y accesorios materos</title>
   <style>
     :root{
-      --bg:#050604;
-      --bg-2:#09120c;
-      --panel:#0e130f;
-      --panel-2:#151c16;
-      --panel-3:#1b241d;
-      --line:rgba(235,226,199,.14);
-      --line-strong:rgba(235,226,199,.24);
+      --bg:#030303;
+      --bg-2:#070707;
+      --panel:#0b0b0b;
+      --panel-2:#121212;
+      --panel-3:#191919;
+      --line:rgba(235,226,199,.12);
+      --line-strong:rgba(235,226,199,.22);
       --text:#fffaf0;
       --muted:rgba(255,250,240,.66);
       --muted-2:rgba(255,250,240,.48);
       --cream:#f5ead0;
       --gold:#d9b56d;
       --gold-2:#f2cf83;
-      --green:#63d58f;
-      --green-deep:#123b25;
+      --accent:#d9b56d;
+      --accent-dark:#161008;
       --danger:#d45a43;
       --shadow:0 22px 70px rgba(0,0,0,.45);
       --shadow-soft:0 14px 36px rgba(0,0,0,.28);
@@ -34,9 +34,9 @@
       min-height:100vh;
       font-family:Inter, Segoe UI, Arial, sans-serif;
       background:
-        radial-gradient(circle at top left, rgba(99,213,143,.12), transparent 34%),
-        radial-gradient(circle at 80% 8%, rgba(217,181,109,.12), transparent 26%),
-        linear-gradient(180deg,#030403 0%, var(--bg) 42%, #0a0d09 100%);
+        radial-gradient(circle at top left, rgba(217,181,109,.10), transparent 28%),
+        radial-gradient(circle at 80% 8%, rgba(255,255,255,.06), transparent 24%),
+        linear-gradient(180deg,#000 0%, var(--bg) 48%, #070707 100%);
       color:var(--text);
     }
 
@@ -79,7 +79,7 @@
       top:0;
       z-index:40;
       border-bottom:1px solid var(--line);
-      background:rgba(5,6,4,.84);
+      background:rgba(0,0,0,.88);
       backdrop-filter:blur(16px);
     }
 
@@ -187,7 +187,7 @@
       border:1px solid var(--line);
       background:
         linear-gradient(135deg, rgba(255,255,255,.075), rgba(255,255,255,.025)),
-        linear-gradient(180deg, rgba(18,59,37,.25), rgba(0,0,0,.04));
+        linear-gradient(180deg, rgba(217,181,109,.10), rgba(0,0,0,.06));
       border-radius:34px;
       box-shadow:var(--shadow);
     }
@@ -246,6 +246,51 @@
       display:flex;
       gap:12px;
       flex-wrap:wrap;
+    }
+
+
+    .sync-pill{
+      margin-top:16px;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      width:max-content;
+      max-width:100%;
+      padding:10px 13px;
+      border-radius:999px;
+      border:1px solid rgba(217,181,109,.24);
+      background:rgba(217,181,109,.09);
+      color:#fff0c4;
+      font-size:13px;
+      font-weight:800;
+    }
+
+    .trust-strip{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:14px;
+      margin:-8px 0 34px;
+    }
+
+    .trust-item{
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.018));
+      border-radius:22px;
+      padding:18px;
+      box-shadow:var(--shadow-soft);
+    }
+
+    .trust-item strong{
+      display:block;
+      margin-bottom:6px;
+      color:#fff;
+      font-size:17px;
+    }
+
+    .trust-item span{
+      color:var(--muted);
+      line-height:1.45;
+      font-size:14px;
     }
 
     .hero-card{
@@ -644,7 +689,7 @@
       padding:34px;
       text-align:center;
       background:
-        radial-gradient(circle at top, rgba(99,213,143,.12), transparent 38%),
+        radial-gradient(circle at top, rgba(217,181,109,.11), transparent 38%),
         linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.02));
       box-shadow:var(--shadow-soft);
     }
@@ -730,7 +775,7 @@
       right:0;
       bottom:0;
       z-index:101;
-      background:#0a100c;
+      background:#080808;
       border-top:1px solid var(--line);
       border-top-left-radius:30px;
       border-top-right-radius:30px;
@@ -825,9 +870,9 @@
 
     .note{
       margin-top:12px;
-      background:rgba(99,213,143,.12);
-      color:#d7ffe6;
-      border:1px solid rgba(99,213,143,.18);
+      background:rgba(217,181,109,.12);
+      color:#fff0c4;
+      border:1px solid rgba(217,181,109,.18);
       border-radius:17px;
       padding:14px;
       font-size:14px;
@@ -841,7 +886,7 @@
       transform:translate(-50%,-50%) scale(.96);
       width:min(455px, calc(100% - 24px));
       z-index:201;
-      background:#0a100c;
+      background:#080808;
       border:1px solid var(--line);
       border-radius:24px;
       padding:22px;
@@ -872,7 +917,7 @@
       padding:14px 14px;
       border-radius:15px;
       border:1px solid var(--line);
-      background:#080a08;
+      background:#060606;
       color:#fff;
       outline:none;
       margin-top:12px;
@@ -901,7 +946,7 @@
 
     .success-box{
       width:min(410px,100%);
-      background:#0a100c;
+      background:#080808;
       border:1px solid var(--line);
       border-radius:24px;
       box-shadow:var(--shadow);
@@ -949,7 +994,7 @@
       position:fixed;
       inset:24px;
       z-index:250;
-      background:#0a100c;
+      background:#080808;
       border:1px solid var(--line);
       border-radius:26px;
       box-shadow:var(--shadow);
@@ -1019,7 +1064,7 @@
       padding:12px;
       border-radius:13px;
       border:1px solid var(--line);
-      background:#070907;
+      background:#070707;
       color:#fff;
       outline:none;
       margin-bottom:8px;
@@ -1038,7 +1083,7 @@
 
     @media (max-width: 1060px){
       .grid{grid-template-columns:repeat(3,1fr)}
-      .benefits{grid-template-columns:repeat(2,1fr)}
+      .benefits,.trust-strip{grid-template-columns:repeat(2,1fr)}
       .hero-grid{grid-template-columns:1fr}
       .admin-grid{grid-template-columns:1fr}
     }
@@ -1062,7 +1107,7 @@
       .header-actions{gap:6px}
       .cart-btn{padding:10px 13px}
       .cart-btn .cart-text{display:none}
-      .grid,.benefits{grid-template-columns:1fr}
+      .grid,.benefits,.trust-strip{grid-template-columns:1fr}
       .hero h1{font-size:42px}
       .desc{min-height:auto}
       .drawer{padding:18px 12px}
@@ -1101,16 +1146,32 @@
       <div class="hero-grid">
         <div>
           <h1>Todo para unos buenos mates.</h1>
-          <p>Elegí yerbas seleccionadas, sumá accesorios materos y armá tu pedido en segundos. Te confirmamos disponibilidad y entrega por WhatsApp.</p>
+          <p>Elegí yerbas seleccionadas, bombillas y accesorios materos. El catálogo se actualiza desde tu hoja de stock, así tus clientes ven precios y disponibilidad al día.</p>
           <div class="hero-actions">
             <a class="pill-link" href="#catalogo">Comprar ahora</a>
             <a class="pill-link" href="https://instagram.com/gaspichaves" target="_blank" rel="noopener">Instagram</a>
           </div>
+          <div class="sync-pill" id="sheetStatus">⏳ Conectando con la hoja de stock...</div>
         </div>
         <div class="hero-card">
           <strong id="heroProductCount">0</strong>
           <span>productos disponibles entre yerbas, bombillas y accesorios.</span>
         </div>
+      </div>
+    </section>
+
+    <section class="trust-strip" aria-label="Ventajas de compra">
+      <div class="trust-item">
+        <strong>Stock actualizado</strong>
+        <span>Los precios y disponibilidad se sincronizan con tu hoja de cálculo publicada.</span>
+      </div>
+      <div class="trust-item">
+        <strong>Pedido rápido</strong>
+        <span>Agregás al carrito y el pedido sale armado directo para confirmar por WhatsApp.</span>
+      </div>
+      <div class="trust-item">
+        <strong>Catálogo claro</strong>
+        <span>Buscador, categorías y etiquetas para encontrar yerbas, bombillas y accesorios.</span>
       </div>
     </section>
 
@@ -1265,7 +1326,7 @@
         <h4 style="margin-top:22px">Acciones rápidas</h4>
         <button class="secondary-btn" id="adminVaciarCarritoBtn">Vaciar carrito</button>
         <button class="secondary-btn" id="adminRestaurarBtn">Restaurar catálogo original</button>
-        <div class="note">Tip: para los productos nuevos, cargá el precio desde este panel cuando lo tengas definido. Si queda en 0, aparece como “Consultar”.</div>
+        <div class="note">El precio, stock y etiqueta se toman de Google Sheets. Si querés cambiar algo, editá la hoja de cálculo y actualizá la página.</div>
       </div>
     </div>
   </div>
@@ -1273,6 +1334,7 @@
   <script>
     const TELEFONO_VENDEDOR = "5493364370451";
     const WEBHOOK_URL = "https://hook.us2.make.com/ofufesknpyc3spbueo9q68v4bmasdhgu";
+    const STOCK_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQNWo2kZ0lxbKOUz00N29AqBN6clA2yf9BPmCX4ccaEf4-AyPYfiz0YNUqJzCIpQ5ZqFzx9xWgoFs0I/pub?gid=460073425&single=true&output=csv";
     const ADMIN_PASSWORD = "cebada1";
 
     const categorias = [
@@ -1381,10 +1443,151 @@
     let cantidades = JSON.parse(localStorage.getItem("cebada_cantidades") || "{}");
     let categoriaActiva = "todos";
     let busqueda = "";
+    let stockDesdeHoja = {};
+    let hojaConectada = false;
+
+    function idProducto(texto) {
+      return String(texto || "")
+        .trim()
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "");
+    }
+
+    function parsePrecio(valor) {
+      const limpio = String(valor || "").replace(/\D/g, "");
+      return limpio ? parseInt(limpio, 10) : 0;
+    }
+
+    function parseStock(valor) {
+      const v = normalizar(String(valor || "").trim());
+      return ["si", "sí", "s", "yes", "true", "1", "disponible", "stock"].includes(v);
+    }
+
+    function parseCSV(texto) {
+      const filas = [];
+      let fila = [];
+      let celda = "";
+      let entreComillas = false;
+
+      for (let i = 0; i < texto.length; i++) {
+        const char = texto[i];
+        const next = texto[i + 1];
+
+        if (char === '"' && entreComillas && next === '"') {
+          celda += '"';
+          i++;
+        } else if (char === '"') {
+          entreComillas = !entreComillas;
+        } else if (char === "," && !entreComillas) {
+          fila.push(celda);
+          celda = "";
+        } else if ((char === "\n" || char === "\r") && !entreComillas) {
+          if (char === "\r" && next === "\n") i++;
+          fila.push(celda);
+          if (fila.some(v => String(v).trim() !== "")) filas.push(fila);
+          fila = [];
+          celda = "";
+        } else {
+          celda += char;
+        }
+      }
+
+      fila.push(celda);
+      if (fila.some(v => String(v).trim() !== "")) filas.push(fila);
+      return filas;
+    }
+
+    function actualizarEstadoHoja(texto, ok = true) {
+      const el = document.getElementById("sheetStatus");
+      if (!el) return;
+      el.textContent = texto;
+      el.style.borderColor = ok ? "rgba(217,181,109,.24)" : "rgba(212,90,67,.38)";
+      el.style.background = ok ? "rgba(217,181,109,.09)" : "rgba(212,90,67,.12)";
+      el.style.color = ok ? "#fff0c4" : "#ffd9d2";
+    }
+
+    async function cargarStockDesdeHoja() {
+      actualizarEstadoHoja("⏳ Conectando con la hoja de stock...");
+
+      try {
+        const separador = STOCK_CSV_URL.includes("?") ? "&" : "?";
+        const res = await fetch(`${STOCK_CSV_URL}${separador}t=${Date.now()}`, { cache: "no-store" });
+        if (!res.ok) throw new Error("No se pudo leer la hoja");
+
+        const csv = await res.text();
+        const filas = parseCSV(csv);
+        const encabezados = (filas.shift() || []).map(h => idProducto(h));
+        const idxProducto = encabezados.indexOf("producto");
+        const idxPrecio = encabezados.indexOf("precio");
+        const idxStock = encabezados.indexOf("stock");
+        const idxEtiqueta = encabezados.indexOf("etiqueta");
+
+        if (idxProducto === -1) throw new Error("No existe la columna producto");
+
+        const nuevoStock = {};
+        filas.forEach(fila => {
+          const id = idProducto(fila[idxProducto]);
+          if (!id) return;
+          nuevoStock[id] = {
+            precio: idxPrecio >= 0 ? parsePrecio(fila[idxPrecio]) : undefined,
+            stock: idxStock >= 0 ? parseStock(fila[idxStock]) : undefined,
+            etiqueta: idxEtiqueta >= 0 ? String(fila[idxEtiqueta] || "").trim() : undefined
+          };
+        });
+
+        stockDesdeHoja = nuevoStock;
+        hojaConectada = true;
+        actualizarCarritoConHoja();
+        renderCategoryFilters();
+        renderProducts();
+        renderCart();
+        actualizarEstadoHoja(`✅ Stock sincronizado con la hoja · ${Object.keys(stockDesdeHoja).length} productos`);
+      } catch (error) {
+        console.error(error);
+        hojaConectada = false;
+        actualizarEstadoHoja("⚠️ No se pudo leer la hoja. Mostrando datos guardados en la página.", false);
+        renderCategoryFilters();
+        renderProducts();
+        renderCart();
+      }
+    }
+
+    function actualizarCarritoConHoja() {
+      carrito = carrito.map(item => {
+        const producto = getProductoPorId(item.id);
+        return producto ? {
+          ...item,
+          nombre: producto.nombre,
+          peso: producto.peso,
+          precio: producto.precio,
+          imagen: producto.imagen,
+          icono: producto.icono
+        } : item;
+      });
+      saveCart();
+    }
+
+    function getProductoPorId(id) {
+      return getProductos().find(p => p.id === id);
+    }
 
     function getProductos() {
       return productosOriginales.map(p => {
+        const h = stockDesdeHoja[p.id];
         const c = config[p.id] || {};
+
+        if (h) {
+          return {
+            ...p,
+            precio: typeof h.precio === "number" ? h.precio : p.precio,
+            etiqueta: typeof h.etiqueta === "string" ? h.etiqueta : p.etiqueta,
+            stock: typeof h.stock === "boolean" ? h.stock : p.stock
+          };
+        }
+
         return {
           ...p,
           precio: Number.isFinite(c.precio) ? c.precio : p.precio,
@@ -1777,8 +1980,8 @@
       wrap.innerHTML = productos.map(p => `
         <div class="admin-product">
           <div class="admin-product-title">${escapeHtml(p.nombre)} · ${escapeHtml(p.peso)}</div>
-          <input class="admin-small" type="number" id="price-${p.id}" value="${p.precio}" placeholder="Precio. Usá 0 para consultar">
-          <input class="admin-small" type="text" id="tag-${p.id}" value="${escapeHtml(p.etiqueta || "")}" placeholder="Etiqueta">
+          <input class="admin-small" type="number" id="price-${p.id}" value="${p.precio}" placeholder="Precio. Usá 0 para consultar" ${hojaConectada && stockDesdeHoja[p.id] ? "disabled" : ""}>
+          <input class="admin-small" type="text" id="tag-${p.id}" value="${escapeHtml(p.etiqueta || "")}" placeholder="Etiqueta" ${hojaConectada && stockDesdeHoja[p.id] ? "disabled" : ""}>
           <div class="admin-actions">
             <button class="secondary-btn" style="margin:0" onclick="saveProduct('${p.id}')">Guardar</button>
             <button class="${p.stock ? 'danger-btn' : 'primary-btn'}" style="margin:0" onclick="toggleStock('${p.id}')">
@@ -1794,6 +1997,11 @@
     }
 
     function saveProduct(id) {
+      if (hojaConectada && stockDesdeHoja[id]) {
+        showToast("Editá precio y etiqueta en la hoja de cálculo");
+        return;
+      }
+
       const price = parseInt(document.getElementById("price-" + id).value, 10);
       const tag = document.getElementById("tag-" + id).value.trim();
 
@@ -1808,6 +2016,11 @@
     }
 
     function toggleStock(id) {
+      if (hojaConectada && stockDesdeHoja[id]) {
+        showToast("Editá el stock con si/no en la hoja de cálculo");
+        return;
+      }
+
       const producto = getProductos().find(p => p.id === id);
       if (!producto) return;
       if (!config[id]) config[id] = {};
@@ -1821,10 +2034,9 @@
     function restoreCatalog() {
       config = {};
       saveConfig();
-      renderProducts();
+      cargarStockDesdeHoja();
       renderAdmin();
-      renderCart();
-      showToast("Catálogo restaurado");
+      showToast("Catálogo actualizado desde la hoja");
     }
 
     document.getElementById("openCartBtn").addEventListener("click", openCart);
@@ -1869,6 +2081,7 @@
     renderCategoryFilters();
     renderProducts();
     renderCart();
+    cargarStockDesdeHoja();
   </script>
 </body>
 </html>
