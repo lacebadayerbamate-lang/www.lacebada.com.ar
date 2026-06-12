@@ -20,9 +20,9 @@
     header{position:sticky;top:0;z-index:50;border-bottom:1px solid var(--line);background:rgba(0,0,0,.84);backdrop-filter:blur(12px)}
     .header-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0}
     .brand{display:flex;align-items:center;gap:12px;cursor:pointer;user-select:none}
-    .brand img{width:56px;height:56px;object-fit:contain;background:#000;border-radius:50%;border:1px solid var(--line)}
-    .brand-title{font-size:30px;font-weight:800;line-height:1;margin:0}
-    .brand-sub{font-size:13px;color:var(--muted);margin-top:4px}
+    .brand img{width:76px;height:76px;object-fit:contain;background:#000;border-radius:50%;border:1px solid rgba(255,255,255,.14);box-shadow:0 10px 30px rgba(231,195,90,.18)}
+    .brand-title{font-size:34px;font-weight:900;line-height:1;margin:0;letter-spacing:-.02em}
+    .brand-sub{font-size:13px;color:var(--muted);margin-top:6px}
     .header-actions{display:flex;align-items:center;gap:10px}
     .header-pill,.cart-btn{border:1px solid var(--line);background:rgba(255,255,255,.05);color:#fff;border-radius:999px;padding:12px 18px;display:flex;align-items:center;gap:10px;cursor:pointer;transition:.2s ease}
     .header-pill:hover,.cart-btn:hover{background:rgba(255,255,255,.10)}
@@ -88,6 +88,77 @@
     .secondary-btn:hover{background:rgba(255,255,255,.16);transform:translateY(-1px)}
     .danger-btn{background:linear-gradient(180deg,#8a2424,#681818);color:#fff;box-shadow:0 10px 26px rgba(192,57,43,.22)}
     .danger-btn:hover{background:linear-gradient(180deg,#962828,#741b1b)}
+    
+    .featured{margin-top:28px}
+    .featured-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:14px;
+      margin-top:14px;
+    }
+    .featured-card{
+      border:1px solid var(--line);
+      border-radius:22px;
+      background:linear-gradient(180deg, rgba(231,195,90,.10), rgba(255,255,255,.03));
+      box-shadow:var(--shadow);
+      padding:20px;
+    }
+    .featured-kicker{
+      color:#f3ecd0;
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      margin-bottom:10px;
+    }
+    .featured-card h4{
+      margin:0 0 8px;
+      font-size:24px;
+    }
+    .featured-card p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.5;
+      font-size:15px;
+    }
+    .featured-price{
+      margin-top:14px;
+      font-size:30px;
+      font-weight:900;
+    }
+    .how{
+      margin-top:28px;
+      border:1px solid var(--line);
+      border-radius:28px;
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      box-shadow:var(--shadow);
+      padding:24px;
+    }
+    .how-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:14px;
+      margin-top:14px;
+    }
+    .how-card{
+      border:1px solid var(--line);
+      border-radius:20px;
+      background:rgba(255,255,255,.03);
+      padding:18px;
+    }
+    .how-step{
+      display:inline-flex;
+      width:34px;
+      height:34px;
+      border-radius:999px;
+      align-items:center;
+      justify-content:center;
+      background:#fff;
+      color:#000;
+      font-weight:900;
+      margin-bottom:10px;
+    }
+
     .benefits,.testimonials{margin-top:28px;display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
     .testimonials{grid-template-columns:repeat(3,1fr)}
     .benefit,.testimonial{padding:18px}
@@ -214,7 +285,7 @@
     .wa-float{position:fixed;right:18px;bottom:18px;z-index:120;width:58px;height:58px;border-radius:999px;background:var(--wa);color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 34px rgba(37,211,102,.35);font-size:28px;border:none;cursor:pointer}
     .wa-float:hover{transform:translateY(-2px)}
     @media (max-width:1100px){.hero{grid-template-columns:1fr}.grid{grid-template-columns:repeat(2,1fr)}.benefits,.testimonials,.promo-strip,.combo-grid{grid-template-columns:repeat(2,1fr)}.admin-grid{grid-template-columns:1fr}footer{grid-template-columns:1fr}}
-    @media (max-width:700px){.brand img{width:44px;height:44px}.brand-title{font-size:24px}.section-title{font-size:34px}.hero h1{font-size:38px}.story h3{font-size:32px}.grid,.benefits,.testimonials,.promo-strip,.combo-grid{grid-template-columns:1fr}.filters{grid-template-columns:1fr}.header-inner{padding:10px 0}.cart-btn,.header-pill{padding:10px 14px}.admin-panel{inset:10px}}
+    @media (max-width:700px){.brand img{width:62px;height:62px}.brand-title{font-size:24px}.section-title{font-size:34px}.hero h1{font-size:38px}.story h3{font-size:32px}.grid,.benefits,.testimonials,.promo-strip,.combo-grid{grid-template-columns:1fr}.filters{grid-template-columns:1fr}.header-inner{padding:10px 0}.cart-btn,.header-pill{padding:10px 14px}.admin-panel{inset:10px}}
   </style>
 </head>
 <body>
@@ -266,66 +337,63 @@
       <div class="grid" id="productsGrid"></div>
     </section>
     
-    <section class="promo-strip">
-      <div class="promo-card">
-        <div class="promo-kicker">Oferta destacada</div>
-        <h4>Baldo + Canarias</h4>
-        <p>Dos de las más elegidas para quienes buscan sabor firme y excelente rendimiento.</p>
-        <div class="promo-price">Desde $22.000</div>
-      </div>
-      <div class="promo-card">
-        <div class="promo-kicker">Favorita del mes</div>
-        <h4>Rei Verde Premium</h4>
-        <p>Ideal para quienes prefieren una yerba noble, suave y aromática para el mate diario.</p>
-        <div class="promo-price">$10.500</div>
-      </div>
-      <div class="promo-card">
-        <div class="promo-kicker">Accesorios</div>
-        <h4>Sumá tu equipo matero</h4>
-        <p>Canasta, bombillas y más artículos para completar una compra más atractiva y completa.</p>
-        <div class="promo-price">Nuevos ingresos</div>
-      </div>
-    </section>
-
-    <section class="combos">
+        
+    <section class="featured">
       <div class="section-head">
         <div>
-          <h2 class="section-title" style="font-size:34px">Combos recomendados</h2>
-          <p class="section-sub" style="font-size:16px">Ideas listas para vender mejor y aumentar el ticket promedio.</p>
+          <h2 class="section-title" style="font-size:34px">Destacados</h2>
+          <p class="section-sub" style="font-size:16px">Lo más elegido por quienes disfrutan un buen mate.</p>
         </div>
       </div>
-      <div class="combo-grid">
-        <div class="combo-card">
-          <div class="combo-badge">Combo clásico</div>
-          <h4>Baldo + Bombilla acero</h4>
-          <p>Una combinación simple y fuerte para el cliente que quiere arrancar sin vueltas.</p>
-          <ul class="combo-list">
-            <li>Yerba Baldo 1/2 kg</li>
-            <li>Bombilla pico loro acero</li>
-          </ul>
+      <div class="featured-grid">
+        <div class="featured-card">
+          <div class="featured-kicker">Más vendido</div>
+          <h4>Yerba Baldo</h4>
+          <p>Un clásico fuerte y rendidor, ideal para quienes buscan un mate intenso.</p>
+          <div class="featured-price">$11.000</div>
         </div>
-        <div class="combo-card">
-          <div class="combo-badge">Combo premium</div>
-          <h4>Rei Verde Premium + Bombillón cincelado</h4>
-          <p>Más elegante y con mejor presencia para destacar en ventas y publicaciones.</p>
-          <ul class="combo-list">
-            <li>Rei Verde Premium 1 kg</li>
-            <li>Bombillón pico loro cincelado</li>
-          </ul>
+        <div class="featured-card">
+          <div class="featured-kicker">Elegida por muchos</div>
+          <h4>Canarias</h4>
+          <p>Molienda fina y carácter marcado para una experiencia más intensa.</p>
+          <div class="featured-price">$11.000</div>
         </div>
-        <div class="combo-card">
-          <div class="combo-badge">Combo matero</div>
-          <h4>Canarias + Canasta eco cuero</h4>
-          <p>Ideal para mostrar una compra más completa y darle valor al accesorio.</p>
-          <ul class="combo-list">
-            <li>Yerba Canarias 1 kg</li>
-            <li>Canasta matera eco cuero</li>
-          </ul>
+        <div class="featured-card">
+          <div class="featured-kicker">Premium</div>
+          <h4>Rei Verde Premium</h4>
+          <p>Una opción noble, suave y aromática para quienes prefieren equilibrio.</p>
+          <div class="featured-price">$10.500</div>
         </div>
       </div>
     </section>
 
-    <section class="benefits">
+    <section class="how">
+      <div class="section-head" style="margin-bottom:0">
+        <div>
+          <h2 class="section-title" style="font-size:34px">Cómo comprar</h2>
+          <p class="section-sub" style="font-size:16px">Simple, rápido y sin vueltas.</p>
+        </div>
+      </div>
+      <div class="how-grid">
+        <div class="how-card">
+          <div class="how-step">1</div>
+          <h4>Elegí tus productos</h4>
+          <p>Recorré el catálogo, filtrá por categoría y agregá lo que quieras al carrito.</p>
+        </div>
+        <div class="how-card">
+          <div class="how-step">2</div>
+          <h4>Confirmá el pedido</h4>
+          <p>Finalizá por WhatsApp o dejá tu teléfono para que se comuniquen con vos.</p>
+        </div>
+        <div class="how-card">
+          <div class="how-step">3</div>
+          <h4>Coordinamos la entrega</h4>
+          <p>Se revisa el pedido y se acuerda todo de forma directa y personalizada.</p>
+        </div>
+      </div>
+    </section>
+
+<section class="benefits">
       <div class="benefit"><h4>Stock claro</h4><p>Mostrás rápido qué está disponible y qué está agotado.</p></div>
       <div class="benefit"><h4>Pedido a tu medida</h4><p>Podés combinar yerbas y accesorios en un mismo carrito.</p></div>
       <div class="benefit"><h4>Respuesta rápida</h4><p>La confirmación y coordinación se hace por WhatsApp.</p></div>
@@ -385,7 +453,7 @@
     const ADMIN_PASSWORD = "cebada1";
 
     const productosOriginales = [
-      {id:"baldo",categoria:"yerba",nombre:"Yerba Baldo",peso:"1/2 kg",descripcion:"Mezcla intensa de hojas y palos seleccionados. Perfecta para los que buscan un mate fuerte y bien rendidor.",precio:11000,imagen:"baldo.jpg",etiqueta:"Más vendida",notas:["Intensa","Rendidora","Tradicional"],stock:true},
+      {id:"baldo",categoria:"yerba",nombre:"Yerba Baldo",peso:"1 kg",descripcion:"Mezcla intensa de hojas y palos seleccionados. Perfecta para los que buscan un mate fuerte y bien rendidor.",precio:11000,imagen:"baldo.jpg",etiqueta:"Más vendida",notas:["Intensa","Rendidora","Tradicional"],stock:true},
       {id:"canarias",categoria:"yerba",nombre:"Yerba Canarias",peso:"1 kg",descripcion:"La clásica uruguaya: molienda fina, sabor profundo y carácter inconfundible para los materos exigentes.",precio:11000,imagen:"canarias.jpg",etiqueta:"Origen Uruguay",notas:["Fuerte","Premium","Molienda fina"],stock:true},
       {id:"rei-premium",categoria:"yerba",nombre:"Yerba Rei Verde Premium",peso:"1 kg",descripcion:"Edición premium con secado natural y estacionamiento prolongado. Sabor noble, suave en boca y muy aromático.",precio:10500,imagen:"rei-premium.jpg",etiqueta:"Premium",notas:["Aromática","Suave","Estacionada"],stock:true},
       {id:"rei-clasica",categoria:"yerba",nombre:"Yerba Rei Verde Clásica",peso:"1/2 kg",descripcion:"La versión tradicional Rei Verde: equilibrio justo entre sabor y rendimiento para el mate de todos los días.",precio:6000,imagen:"rei-clasica.jpg",etiqueta:"Clásica",notas:["Equilibrada","Diaria","Clásica"],stock:true},
