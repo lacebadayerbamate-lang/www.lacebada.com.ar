@@ -4,1758 +4,471 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>La Cebada | Yerbas y accesorios materos</title>
+  <meta name="description" content="Comprá yerbas y accesorios materos en La Cebada. Atención personalizada, stock visible y pedidos simples por WhatsApp.">
   <style>
     :root{
-      --bg:#030303;
-      --bg-2:#070707;
-      --panel:#0b0b0b;
-      --panel-2:#121212;
-      --panel-3:#191919;
-      --line:rgba(235,226,199,.12);
-      --line-strong:rgba(235,226,199,.22);
-      --text:#fffaf0;
-      --muted:rgba(255,250,240,.66);
-      --muted-2:rgba(255,250,240,.48);
-      --cream:#f5ead0;
-      --gold:#d9b56d;
-      --gold-2:#f2cf83;
-      --accent:#d9b56d;
-      --accent-dark:#161008;
-      --danger:#d45a43;
-      --shadow:0 22px 70px rgba(0,0,0,.45);
-      --shadow-soft:0 14px 36px rgba(0,0,0,.28);
-      --radius:26px;
+      --bg:#070707; --panel:#111111; --panel-2:#171717; --line:rgba(255,255,255,.10); --line-2:rgba(255,255,255,.06);
+      --text:#ffffff; --muted:rgba(255,255,255,.68); --soft:rgba(255,255,255,.04); --green:#39d98a; --green-2:#2fc97d;
+      --danger:#c0392b; --danger-2:#ff8e8e; --accent:#e7c35a; --shadow:0 18px 50px rgba(0,0,0,.35); --radius:24px; --wa:#25D366;
     }
-
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    html,body{margin:0;padding:0}
-    body{
-      min-height:100vh;
-      font-family:Inter, Segoe UI, Arial, sans-serif;
-      background:
-        radial-gradient(circle at top left, rgba(217,181,109,.10), transparent 28%),
-        radial-gradient(circle at 80% 8%, rgba(255,255,255,.06), transparent 24%),
-        linear-gradient(180deg,#000 0%, var(--bg) 48%, #070707 100%);
-      color:var(--text);
+    *{box-sizing:border-box} html{scroll-behavior:smooth}
+    body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:radial-gradient(circle at top, rgba(231,195,90,.08), transparent 20%),linear-gradient(180deg,#000 0%,#0a0a0a 42%,#111 100%);color:var(--text)}
+    img{max-width:100%;display:block} button,input{font:inherit} a{color:inherit;text-decoration:none} .hidden{display:none !important}
+    .container{width:min(1220px,calc(100% - 32px));margin:0 auto}
+    .topbar{border-bottom:1px solid var(--line);background:linear-gradient(90deg,#0f0f0f,#191919,#0f0f0f);color:#f3ecd0;font-size:13px;font-weight:700}
+    .topbar-inner{min-height:38px;display:flex;align-items:center;justify-content:center;text-align:center;letter-spacing:.01em}
+    header{position:sticky;top:0;z-index:50;border-bottom:1px solid var(--line);background:rgba(0,0,0,.84);backdrop-filter:blur(12px)}
+    .header-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0}
+    .brand{display:flex;align-items:center;gap:12px;cursor:pointer;user-select:none}
+    .brand img{width:56px;height:56px;object-fit:contain;background:#000;border-radius:50%;border:1px solid var(--line)}
+    .brand-title{font-size:30px;font-weight:800;line-height:1;margin:0}
+    .brand-sub{font-size:13px;color:var(--muted);margin-top:4px}
+    .header-actions{display:flex;align-items:center;gap:10px}
+    .header-pill,.cart-btn{border:1px solid var(--line);background:rgba(255,255,255,.05);color:#fff;border-radius:999px;padding:12px 18px;display:flex;align-items:center;gap:10px;cursor:pointer;transition:.2s ease}
+    .header-pill:hover,.cart-btn:hover{background:rgba(255,255,255,.10)}
+    .badge{min-width:24px;height:24px;border-radius:999px;background:#fff;color:#000;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;padding:0 8px}
+    main{padding:28px 0 64px}
+    .hero{display:grid;grid-template-columns:1.15fr .85fr;gap:18px;margin-bottom:28px}
+    .hero-main,.hero-side,.filters-wrap,.card,.benefit,.story,footer,.admin-card,.testimonial,.faq{border:1px solid var(--line);box-shadow:var(--shadow);background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02))}
+    .hero-main,.hero-side,.filters-wrap,.story,footer,.faq{border-radius:28px}
+    .card,.benefit,.admin-card,.testimonial{border-radius:22px}
+    .hero-main{padding:32px;position:relative;overflow:hidden;min-height:320px;display:flex;flex-direction:column;justify-content:center}
+    .hero-main::before{content:"";position:absolute;right:-90px;top:-80px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle, rgba(231,195,90,.16), transparent 70%);pointer-events:none}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;width:max-content;padding:8px 12px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.04);color:#f3ecd0;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:16px}
+    .hero h1{margin:0 0 12px;font-size:54px;line-height:.96;letter-spacing:-.04em}
+    .hero p{margin:0;color:var(--muted);max-width:720px;line-height:1.58;font-size:18px}
+    .hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
+    .hero-side{padding:22px;display:grid;gap:12px;align-content:center}
+    .side-box{border:1px solid var(--line-2);border-radius:18px;background:rgba(255,255,255,.03);padding:16px}
+    .side-box h4{margin:0 0 8px;font-size:18px}
+    .side-box p{margin:0;color:var(--muted);font-size:15px;line-height:1.5}
+    .btn,.btn-secondary,.btn-danger{border:none;cursor:pointer;border-radius:16px;padding:14px 16px;font-weight:700;transition:.2s ease}
+    .btn{background:#fff;color:#000}.btn:hover{background:#eaeaea}
+    .btn-secondary{background:rgba(255,255,255,.10);color:#fff;border:1px solid var(--line)} .btn-secondary:hover{background:rgba(255,255,255,.16)}
+    .btn-danger{background:#6a1f1a;color:#fff}.btn-danger:hover{background:#7a241d}
+    .section-head{display:flex;align-items:end;justify-content:space-between;gap:18px;margin:0 0 18px}
+    .section-title{margin:0 0 4px;font-size:42px;font-weight:800}
+    .section-sub{margin:0;color:var(--muted);font-size:18px}
+    .filters-wrap{margin-bottom:24px;padding:18px}
+    .filters{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center}
+    .search{width:100%;padding:14px 16px;border-radius:16px;border:1px solid var(--line);background:#0c0c0c;color:#fff;outline:none}
+    .tabs{display:flex;gap:10px;flex-wrap:wrap}
+    .tab{border:1px solid var(--line);background:rgba(255,255,255,.05);color:#fff;border-radius:999px;padding:11px 14px;cursor:pointer;transition:.2s ease}
+    .tab.active,.tab:hover{background:#fff;color:#000}
+    .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+    .card{overflow:hidden;background:linear-gradient(180deg,#131313,#0f0f0f);display:flex;flex-direction:column;position:relative;transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease}
+    .card:hover{transform:translateY(-6px);box-shadow:0 24px 60px rgba(0,0,0,.42);border-color:rgba(255,255,255,.16)}
+    .media{position:relative;aspect-ratio:1/1;background:#000;overflow:hidden}
+    .media img{width:100%;height:100%;object-fit:cover}
+    .placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:radial-gradient(circle at top, rgba(231,195,90,.12), transparent 30%),linear-gradient(180deg,#111,#1a1a1a);color:#f6edd2;text-align:center;padding:18px}
+    .placeholder-icon{font-size:56px;line-height:1}
+    .placeholder-text{font-size:16px;font-weight:700;line-height:1.3}
+    .tag{position:absolute;top:12px;left:12px;z-index:2;padding:8px 12px;border-radius:999px;background:#fff;color:#000;font-weight:800;font-size:12px;box-shadow:var(--shadow)}
+    .tag-stock{top:auto;bottom:12px;background:linear-gradient(135deg,#ff5a5a,#b71c1c);color:#fff;border:1px solid rgba(255,255,255,.12)}
+    .stock-ribbon{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:linear-gradient(135deg,#2b0f10,#5a1719);color:#ffd8d8;font-size:12px;font-weight:800;border:1px solid rgba(255,255,255,.08)}
+    .content{padding:18px;display:flex;flex-direction:column;flex:1}
+    .category{color:#f3ecd0;font-size:12px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;font-weight:700}
+    .content h3{margin:0;font-size:24px;line-height:1.15}
+    .weight{color:var(--muted);font-size:15px;font-weight:600}
+    .desc{margin:10px 0 0;color:var(--muted);line-height:1.45;font-size:15px;min-height:66px}
+    .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+    .chip{font-size:12px;padding:6px 10px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:rgba(255,255,255,.75)}
+    .price-row{margin-top:16px;display:flex;justify-content:space-between;align-items:flex-end;gap:10px}
+    .price{font-size:36px;font-weight:900}
+    .stock-ok{font-size:13px;color:#92ffb8;font-weight:700}.stock-no{font-size:13px;color:var(--danger-2);font-weight:700}
+    .consult-price{font-size:14px;color:#f3ecd0;font-weight:700}
+    .qty{margin-top:16px;display:flex;align-items:center;justify-content:center;gap:14px}
+    .qty button,.mini-btn{width:38px;height:38px;border:none;border-radius:999px;background:rgba(255,255,255,.10);color:#fff;cursor:pointer;font-size:20px;transition:.2s ease}
+    .qty button:hover,.mini-btn:hover{background:rgba(255,255,255,.18)}
+    .qty span{min-width:24px;text-align:center;font-weight:800;font-size:20px}
+    .primary-btn,.secondary-btn,.danger-btn{width:100%;border:none;cursor:pointer;border-radius:16px;padding:14px 16px;margin-top:16px;font-weight:700;transition:.2s ease}
+    .primary-btn{background:linear-gradient(180deg,#ffffff,#ededed);color:#000;box-shadow:0 10px 26px rgba(255,255,255,.14)}
+    .primary-btn:hover{background:linear-gradient(180deg,#ffffff,#e6e6e6);transform:translateY(-1px)}
+    .secondary-btn{background:rgba(255,255,255,.10);color:#fff;border:1px solid rgba(255,255,255,.08)}
+    .secondary-btn:hover{background:rgba(255,255,255,.16);transform:translateY(-1px)}
+    .danger-btn{background:linear-gradient(180deg,#8a2424,#681818);color:#fff;box-shadow:0 10px 26px rgba(192,57,43,.22)}
+    .danger-btn:hover{background:linear-gradient(180deg,#962828,#741b1b)}
+    .benefits,.testimonials{margin-top:28px;display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+    .testimonials{grid-template-columns:repeat(3,1fr)}
+    .benefit,.testimonial{padding:18px}
+    .benefit h4{margin:0 0 8px;font-size:18px}
+    .benefit p,.testimonial p{margin:0;color:var(--muted);line-height:1.45;font-size:15px}
+    .stars{margin:0 0 10px;font-size:18px;color:#f3ecd0}
+    .testimonial strong{display:block;margin-top:14px;font-size:14px}
+    .faq{margin-top:28px;padding:24px}
+    .faq h3{margin:0 0 14px;font-size:34px}
+    .faq-list{display:grid;gap:12px}
+    .faq-item{border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.03);overflow:hidden}
+    .faq-question{width:100%;text-align:left;background:none;color:#fff;border:none;padding:16px 18px;font-weight:700;cursor:pointer}
+    .faq-answer{display:none;padding:0 18px 16px;color:var(--muted);line-height:1.5;font-size:15px}
+    .faq-item.open .faq-answer{display:block}
+    
+    .promo-strip,.combos{margin-top:28px}
+    .promo-strip{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:14px;
     }
-
-    body::before{
-      content:"";
-      position:fixed;
-      inset:0;
-      pointer-events:none;
-      opacity:.06;
-      background-image:
-        linear-gradient(rgba(255,255,255,.16) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.16) 1px, transparent 1px);
-      background-size:46px 46px;
-      mask-image:linear-gradient(180deg,#000,transparent 74%);
-    }
-
-    img{max-width:100%;display:block}
-    button,input,select{font:inherit}
-    button{border:none}
-
-    .container{
-      width:min(1200px, calc(100% - 32px));
-      margin:0 auto;
-    }
-
-    .sr-only{
-      position:absolute;
-      width:1px;
-      height:1px;
-      padding:0;
-      margin:-1px;
-      overflow:hidden;
-      clip:rect(0,0,0,0);
-      white-space:nowrap;
-      border:0;
-    }
-
-    header{
-      position:sticky;
-      top:0;
-      z-index:40;
-      border-bottom:1px solid var(--line);
-      background:rgba(0,0,0,.88);
-      backdrop-filter:blur(16px);
-    }
-
-    .header-inner{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:16px;
-      padding:14px 0;
-    }
-
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:13px;
-      cursor:pointer;
-      user-select:none;
-      min-width:0;
-    }
-
-    .brand img{
-      width:58px;
-      height:58px;
-      object-fit:contain;
-      background:#000;
-      border:1px solid var(--line-strong);
-      border-radius:50%;
-      box-shadow:0 0 0 6px rgba(217,181,109,.06);
-      flex-shrink:0;
-    }
-
-    .brand-title{
-      font-size:30px;
-      font-weight:900;
-      letter-spacing:-.04em;
-      line-height:1;
-      margin:0;
-    }
-
-    .brand-sub{
-      font-size:13px;
-      color:var(--muted);
-      margin-top:5px;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-    }
-
-    .header-actions{
-      display:flex;
-      align-items:center;
-      gap:10px;
-    }
-
-    .pill-link,
-    .cart-btn{
+    .promo-card,.combo-card{
       border:1px solid var(--line);
-      background:rgba(255,255,255,.055);
-      color:#fff;
-      border-radius:999px;
-      padding:12px 18px;
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      cursor:pointer;
-      transition:.22s ease;
-      text-decoration:none;
-      white-space:nowrap;
-    }
-
-    .pill-link:hover,
-    .cart-btn:hover{
-      transform:translateY(-1px);
-      background:rgba(255,255,255,.10);
-      border-color:var(--line-strong);
-    }
-
-    .cart-btn{
-      background:linear-gradient(135deg, var(--cream), var(--gold-2));
-      color:#151008;
-      font-weight:800;
-    }
-
-    .badge{
-      min-width:24px;
-      height:24px;
-      border-radius:999px;
-      background:#111;
-      color:#fff;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      font-size:12px;
-      font-weight:900;
-      padding:0 8px;
-    }
-
-    main{padding:28px 0 70px}
-
-    .hero{
-      position:relative;
-      overflow:hidden;
-      margin-bottom:34px;
-      padding:34px;
-      border:1px solid var(--line);
-      background:
-        linear-gradient(135deg, rgba(255,255,255,.075), rgba(255,255,255,.025)),
-        linear-gradient(180deg, rgba(217,181,109,.10), rgba(0,0,0,.06));
-      border-radius:34px;
+      background:linear-gradient(180deg, rgba(231,195,90,.10), rgba(255,255,255,.03));
       box-shadow:var(--shadow);
     }
-
-    .hero::after{
-      content:"🧉";
-      position:absolute;
-      right:34px;
-      bottom:-30px;
-      font-size:170px;
-      opacity:.08;
-      transform:rotate(-10deg);
+    .promo-card{
+      border-radius:22px;
+      padding:20px;
     }
-
-    .hero-kicker{
-      width:max-content;
-      max-width:100%;
-      padding:8px 12px;
-      border-radius:999px;
-      color:#17120a;
-      background:linear-gradient(135deg, var(--gold-2), var(--cream));
+    .promo-kicker{
+      color:#f3ecd0;
       font-size:12px;
-      font-weight:900;
-      letter-spacing:.12em;
+      font-weight:800;
+      letter-spacing:.08em;
       text-transform:uppercase;
-      margin-bottom:18px;
+      margin-bottom:10px;
     }
-
-    .hero-grid{
-      position:relative;
-      z-index:1;
-      display:grid;
-      grid-template-columns:1.3fr .7fr;
-      gap:24px;
-      align-items:end;
-    }
-
-    .hero h1{
-      margin:0 0 12px;
-      font-size:clamp(38px, 6vw, 74px);
-      line-height:.94;
-      letter-spacing:-.07em;
-      max-width:780px;
-    }
-
-    .hero p{
-      margin:0;
-      color:var(--muted);
-      max-width:760px;
-      line-height:1.62;
-      font-size:18px;
-    }
-
-    .hero-actions{
-      margin-top:24px;
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
-    }
-
-
-    .sync-pill{
-      margin-top:16px;
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      width:max-content;
-      max-width:100%;
-      padding:10px 13px;
-      border-radius:999px;
-      border:1px solid rgba(217,181,109,.24);
-      background:rgba(217,181,109,.09);
-      color:#fff0c4;
-      font-size:13px;
-      font-weight:800;
-    }
-
-    .trust-strip{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:14px;
-      margin:-8px 0 34px;
-    }
-
-    .trust-item{
-      border:1px solid var(--line);
-      background:linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.018));
-      border-radius:22px;
-      padding:18px;
-      box-shadow:var(--shadow-soft);
-    }
-
-    .trust-item strong{
-      display:block;
-      margin-bottom:6px;
-      color:#fff;
-      font-size:17px;
-    }
-
-    .trust-item span{
-      color:var(--muted);
-      line-height:1.45;
-      font-size:14px;
-    }
-
-    .hero-card{
-      border:1px solid var(--line);
-      background:rgba(0,0,0,.22);
-      border-radius:24px;
-      padding:18px;
-      box-shadow:var(--shadow-soft);
-    }
-
-    .hero-card strong{
-      display:block;
-      font-size:42px;
-      line-height:1;
-      color:var(--gold-2);
-      letter-spacing:-.05em;
-    }
-
-    .hero-card span{
-      display:block;
-      margin-top:8px;
-      color:var(--muted);
-      line-height:1.35;
-    }
-
-    .section-head{
-      display:flex;
-      align-items:end;
-      justify-content:space-between;
-      gap:18px;
-      margin-bottom:18px;
-    }
-
-    .section-title{
-      margin:0 0 6px;
-      font-size:clamp(34px, 4vw, 50px);
-      font-weight:900;
-      letter-spacing:-.06em;
-    }
-
-    .section-sub{
-      margin:0;
-      color:var(--muted);
-      font-size:17px;
-      line-height:1.45;
-    }
-
-    .catalog-tools{
-      display:grid;
-      grid-template-columns:1fr auto;
-      gap:12px;
-      align-items:center;
-      margin:18px 0 22px;
-    }
-
-    .search-wrap{
-      position:relative;
-    }
-
-    .search-wrap span{
-      position:absolute;
-      left:16px;
-      top:50%;
-      transform:translateY(-50%);
-      color:var(--muted-2);
-      pointer-events:none;
-    }
-
-    .search{
-      width:100%;
-      padding:15px 16px 15px 46px;
-      border-radius:18px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.05);
-      color:#fff;
-      outline:none;
-      transition:.2s ease;
-    }
-
-    .search:focus{
-      border-color:rgba(242,207,131,.55);
-      box-shadow:0 0 0 4px rgba(242,207,131,.10);
-    }
-
-    .filters{
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
-      justify-content:flex-end;
-    }
-
-    .filter-btn{
-      padding:12px 15px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.045);
-      color:var(--muted);
-      cursor:pointer;
-      transition:.2s ease;
-      font-weight:700;
-    }
-
-    .filter-btn:hover,
-    .filter-btn.active{
-      color:#17120a;
-      background:linear-gradient(135deg, var(--gold-2), var(--cream));
-      border-color:transparent;
-    }
-
-    .results-note{
-      margin:-6px 0 18px;
-      color:var(--muted-2);
-      font-size:14px;
-    }
-
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:20px;
-    }
-
-    .card{
-      position:relative;
-      border:1px solid var(--line);
-      background:linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.02));
-      border-radius:28px;
-      overflow:hidden;
-      box-shadow:var(--shadow-soft);
-      display:flex;
-      flex-direction:column;
-      min-height:100%;
-      transition:.22s ease;
-    }
-
-    .card:hover{
-      transform:translateY(-4px);
-      border-color:rgba(242,207,131,.34);
-      box-shadow:0 22px 60px rgba(0,0,0,.38);
-    }
-
-    .media{
-      position:relative;
-      aspect-ratio:1/1;
-      background:
-        radial-gradient(circle at 50% 30%, rgba(242,207,131,.18), transparent 42%),
-        linear-gradient(135deg,#070907,#121912);
-      overflow:hidden;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-    }
-
-    .media img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      transition:.28s ease;
-    }
-
-    .card:hover .media img{transform:scale(1.035)}
-
-    .product-icon{
-      display:none;
-      font-size:82px;
-      opacity:.9;
-      filter:drop-shadow(0 12px 24px rgba(0,0,0,.35));
-    }
-
-    .media.no-image img{display:none}
-    .media.no-image .product-icon{display:block}
-
-    .tag{
-      position:absolute;
-      top:13px;
-      left:13px;
-      z-index:2;
-      padding:8px 12px;
-      border-radius:999px;
-      background:rgba(245,234,208,.94);
-      color:#17120a;
-      font-weight:900;
-      font-size:12px;
-      box-shadow:var(--shadow-soft);
-    }
-
-    .category-tag{
-      position:absolute;
-      top:13px;
-      right:13px;
-      z-index:2;
-      padding:8px 12px;
-      border-radius:999px;
-      background:rgba(0,0,0,.46);
-      border:1px solid var(--line);
-      color:rgba(255,255,255,.82);
-      font-size:12px;
-      font-weight:800;
-      backdrop-filter:blur(8px);
-    }
-
-    .content{
-      padding:18px;
-      display:flex;
-      flex-direction:column;
-      flex:1;
-    }
-
-    .content h3{
-      margin:0;
-      font-size:23px;
-      line-height:1.08;
-      letter-spacing:-.035em;
-    }
-
-    .weight{
-      display:block;
-      margin-top:7px;
-      color:var(--muted);
-      font-size:14px;
-      font-weight:700;
-      letter-spacing:0;
-    }
-
-    .desc{
-      margin:12px 0 0;
-      color:var(--muted);
-      line-height:1.48;
-      font-size:15px;
-      min-height:88px;
-    }
-
-    .chips{
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-      margin-top:auto;
-      padding-top:14px;
-    }
-
-    .chip{
-      font-size:12px;
-      padding:6px 10px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.045);
-      color:rgba(255,255,255,.75);
-    }
-
-    .price-row{
-      margin-top:16px;
-      display:flex;
-      justify-content:space-between;
-      align-items:flex-end;
-      gap:10px;
-    }
-
-    .price{
-      font-size:32px;
-      line-height:1;
-      font-weight:950;
-      letter-spacing:-.06em;
-      color:#fff;
-    }
-
-    .price.consultar{
-      font-size:24px;
-      letter-spacing:-.03em;
-      color:var(--gold-2);
-    }
-
-    .stock-ok,.stock-no{
-      font-size:12px;
-      font-weight:900;
-      white-space:nowrap;
-    }
-    .stock-ok{color:#9df7ba}
-    .stock-no{color:#ff9b8c}
-
-    .qty{
-      margin-top:16px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:14px;
-      padding:7px;
-      border:1px solid var(--line);
-      border-radius:18px;
-      background:rgba(0,0,0,.18);
-    }
-
-    .qty button,
-    .mini-btn{
-      width:38px;
-      height:38px;
-      border-radius:999px;
-      background:rgba(255,255,255,.09);
-      color:#fff;
-      cursor:pointer;
-      font-size:20px;
-      transition:.2s ease;
-    }
-
-    .qty button:hover,
-    .mini-btn:hover{background:rgba(255,255,255,.18)}
-
-    .qty span{
-      min-width:24px;
-      text-align:center;
-      font-weight:900;
-      font-size:20px;
-    }
-
-    .primary-btn,
-    .secondary-btn,
-    .danger-btn{
-      width:100%;
-      cursor:pointer;
-      border-radius:17px;
-      padding:14px 16px;
-      margin-top:14px;
-      font-weight:850;
-      transition:.22s ease;
-    }
-
-    .primary-btn{
-      background:linear-gradient(135deg, var(--cream), var(--gold-2));
-      color:#17120a;
-      box-shadow:0 10px 24px rgba(217,181,109,.16);
-    }
-    .primary-btn:hover{transform:translateY(-1px);filter:brightness(1.02)}
-
-    .secondary-btn{
-      background:rgba(255,255,255,.085);
-      border:1px solid var(--line);
-      color:#fff;
-    }
-    .secondary-btn:hover{background:rgba(255,255,255,.14)}
-
-    .danger-btn{
-      background:rgba(212,90,67,.16);
-      border:1px solid rgba(212,90,67,.3);
-      color:#ffd9d2;
-    }
-    .danger-btn:hover{background:rgba(212,90,67,.24)}
-
-    .empty-state{
-      grid-column:1/-1;
-      border:1px dashed var(--line-strong);
-      background:rgba(255,255,255,.035);
-      border-radius:24px;
-      padding:32px;
-      text-align:center;
-      color:var(--muted);
-    }
-
-    .benefits{
-      margin-top:36px;
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:14px;
-    }
-
-    .benefit{
-      border:1px solid var(--line);
-      border-radius:22px;
-      background:rgba(255,255,255,.04);
-      padding:19px;
-    }
-
-    .benefit-icon{
-      width:38px;
-      height:38px;
-      border-radius:14px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background:rgba(242,207,131,.12);
-      margin-bottom:12px;
-    }
-
-    .benefit h4{
+    .promo-card h4,.combo-card h4{
       margin:0 0 8px;
-      font-size:18px;
+      font-size:22px;
     }
-    .benefit p{
-      margin:0;
-      color:var(--muted);
-      line-height:1.45;
-      font-size:15px;
-    }
-
-    .story{
-      margin-top:30px;
-      border:1px solid var(--line);
-      border-radius:34px;
-      padding:34px;
-      text-align:center;
-      background:
-        radial-gradient(circle at top, rgba(217,181,109,.11), transparent 38%),
-        linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.02));
-      box-shadow:var(--shadow-soft);
-    }
-
-    .story-top{
-      letter-spacing:.22em;
-      text-transform:uppercase;
-      color:var(--gold-2);
-      font-size:12px;
-      font-weight:900;
-    }
-
-    .story h3{
-      margin:10px 0 10px;
-      font-size:clamp(32px, 4vw, 48px);
-      letter-spacing:-.06em;
-    }
-
-    .story p{
-      max-width:790px;
-      margin:0 auto;
-      color:var(--muted);
-      font-size:18px;
-      line-height:1.55;
-    }
-
-    .story-links{
-      margin-top:22px;
-      display:flex;
-      gap:12px;
-      justify-content:center;
-      flex-wrap:wrap;
-    }
-
-    .story-links a{
-      color:#fff;
-      text-decoration:none;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.055);
-      padding:12px 18px;
-      border-radius:999px;
-      transition:.2s ease;
-    }
-
-    .story-links a:hover{background:rgba(255,255,255,.11);transform:translateY(-1px)}
-
-    footer{
-      margin-top:26px;
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:14px;
-      border:1px solid var(--line);
-      border-radius:30px;
-      background:rgba(255,255,255,.035);
-      padding:24px;
-    }
-
-    footer h4{
-      margin:0 0 10px;
-      font-size:18px;
-    }
-    footer p{
+    .promo-card p,.combo-card p{
       margin:0;
       color:var(--muted);
       line-height:1.5;
+      font-size:15px;
     }
-    footer a{color:#fff}
-
-    .overlay{
-      position:fixed;
-      inset:0;
-      background:rgba(0,0,0,.72);
-      z-index:100;
-      display:none;
-      backdrop-filter:blur(3px);
-    }
-
-    .overlay.show{display:block}
-
-    .drawer{
-      position:fixed;
-      left:0;
-      right:0;
-      bottom:0;
-      z-index:101;
-      background:#080808;
-      border-top:1px solid var(--line);
-      border-top-left-radius:30px;
-      border-top-right-radius:30px;
-      max-height:84vh;
-      overflow:auto;
-      padding:22px;
-      transform:translateY(110%);
-      transition:.25s ease;
-      box-shadow:0 -18px 55px rgba(0,0,0,.52);
-    }
-
-    .drawer.show{transform:translateY(0)}
-
-    .drawer-inner{
-      width:min(780px,100%);
-      margin:0 auto;
-    }
-
-    .drawer-top{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      margin-bottom:12px;
-    }
-
-    .drawer h3,
-    .modal h3{
-      margin:0;
+    .promo-price{
+      margin-top:14px;
       font-size:30px;
-      letter-spacing:-.045em;
+      font-weight:900;
     }
-
-    .cart-item{
-      display:flex;
-      gap:12px;
-      align-items:center;
-      padding:12px;
-      border-radius:18px;
-      background:rgba(255,255,255,.055);
-      border:1px solid var(--line);
+    .combo-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:14px;
+      margin-top:14px;
+    }
+    .combo-card{
+      border-radius:22px;
+      padding:20px;
+    }
+    .combo-badge{
+      display:inline-flex;
+      padding:7px 11px;
+      border-radius:999px;
+      background:#fff;
+      color:#000;
+      font-size:12px;
+      font-weight:800;
       margin-bottom:10px;
     }
-
-    .cart-item img{
-      width:58px;
-      height:58px;
-      object-fit:cover;
-      background:#131913;
-      border-radius:14px;
-      flex-shrink:0;
-    }
-
-    .cart-info{
-      flex:1;
-      min-width:0;
-    }
-
-    .cart-name{
-      font-weight:900;
+    .combo-list{
+      margin:12px 0 0;
+      padding-left:18px;
+      color:var(--muted);
+      line-height:1.6;
       font-size:15px;
     }
 
-    .cart-sub{
-      color:var(--muted);
-      font-size:14px;
-      margin-top:4px;
-    }
-
-    .cart-controls{
-      display:flex;
-      align-items:center;
-      gap:8px;
-    }
-
-    .cart-total{
-      margin-top:14px;
-      font-size:26px;
-      font-weight:950;
-      letter-spacing:-.04em;
-    }
-
-    .cart-warning{
-      display:none;
-      margin-top:8px;
-      color:#ffe5aa;
-      font-size:13px;
-      line-height:1.45;
-    }
-
-    .cart-warning.show{display:block}
-
-    .note{
-      margin-top:12px;
-      background:rgba(217,181,109,.12);
-      color:#fff0c4;
-      border:1px solid rgba(217,181,109,.18);
-      border-radius:17px;
-      padding:14px;
-      font-size:14px;
-      line-height:1.45;
-    }
-
-    .modal{
-      position:fixed;
-      left:50%;
-      top:50%;
-      transform:translate(-50%,-50%) scale(.96);
-      width:min(455px, calc(100% - 24px));
-      z-index:201;
-      background:#080808;
-      border:1px solid var(--line);
-      border-radius:24px;
-      padding:22px;
-      box-shadow:var(--shadow);
-      display:none;
-      opacity:0;
-      transition:.2s ease;
-    }
-
-    .modal.show{
-      display:block;
-      opacity:1;
-      transform:translate(-50%,-50%) scale(1);
-    }
-
-    .summary{
-      border-radius:16px;
-      background:rgba(255,255,255,.055);
-      border:1px solid var(--line);
-      padding:13px;
-      font-size:14px;
-      line-height:1.55;
-      margin-bottom:14px;
-    }
-
-    .field{
-      width:100%;
-      padding:14px 14px;
-      border-radius:15px;
-      border:1px solid var(--line);
-      background:#060606;
-      color:#fff;
-      outline:none;
-      margin-top:12px;
-    }
-
-    .field:focus{border-color:rgba(242,207,131,.5)}
-
-    .error{
-      color:#ff9b8c;
-      font-size:14px;
-      margin-top:10px;
-    }
-
-    .success-modal{
-      position:fixed;
-      inset:0;
-      z-index:300;
-      display:none;
-      align-items:center;
-      justify-content:center;
-      background:rgba(0,0,0,.76);
-      padding:16px;
-    }
-
+    .story{margin-top:30px;padding:28px;text-align:center}
+    .story-top{letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.45);font-size:12px}
+    .story h3{margin:10px 0 10px;font-size:42px}
+    .story p{max-width:760px;margin:0 auto;color:var(--muted);font-size:18px;line-height:1.5}
+    .story-links{margin-top:20px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+    .story-links a{color:#fff;border:1px solid var(--line);background:rgba(255,255,255,.05);padding:12px 18px;border-radius:999px}
+    footer{margin-top:26px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding:24px}
+    footer h4{margin:0 0 10px;font-size:18px} footer p{margin:0;color:var(--muted);line-height:1.5}
+    .overlay{position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:100;display:none} .overlay.show{display:block}
+    .drawer{position:fixed;left:0;right:0;bottom:0;z-index:101;background:#0d130f;border-top:1px solid var(--line);border-top-left-radius:28px;border-top-right-radius:28px;max-height:82vh;overflow:auto;padding:22px;transform:translateY(110%);transition:.25s ease;box-shadow:0 -16px 40px rgba(0,0,0,.45)}
+    .drawer.show{transform:translateY(0)} .drawer-inner{width:min(760px,100%);margin:0 auto}
+    .drawer h3,.modal h3{margin:0 0 14px;font-size:28px}
+    .cart-item{display:flex;gap:12px;align-items:center;padding:12px;border-radius:16px;background:rgba(255,255,255,.05);margin-bottom:10px}
+    .cart-item img,.cart-icon-box{width:56px;height:56px;object-fit:contain;background:#fff;border-radius:12px;padding:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;color:#111;font-size:26px}
+    .cart-info{flex:1;min-width:0} .cart-name{font-weight:800;font-size:15px} .cart-sub{color:var(--muted);font-size:14px;margin-top:4px}
+    .cart-controls{display:flex;align-items:center;gap:8px} .cart-total{margin-top:14px;font-size:24px;font-weight:900}
+    .note{margin-top:12px;background:rgba(57,217,138,.12);color:#c9ffe0;border-radius:16px;padding:14px;font-size:14px;line-height:1.45}
+    .modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%) scale(.96);width:min(430px, calc(100% - 24px));z-index:201;background:#0d130f;border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow);display:none;opacity:0;transition:.2s ease}
+    .modal.show{display:block;opacity:1;transform:translate(-50%,-50%) scale(1)}
+    .summary{border-radius:14px;background:rgba(255,255,255,.05);padding:12px;font-size:14px;line-height:1.5;margin-bottom:14px}
+    .field{width:100%;padding:14px;border-radius:14px;border:1px solid var(--line);background:#0c0c0c;color:#fff;outline:none;margin-bottom:10px}
+    .error{color:#ff8e8e;font-size:14px;margin-bottom:10px}
+    .success-modal{position:fixed;inset:0;z-index:300;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.76);padding:16px}
     .success-modal.show{display:flex}
-
-    .success-box{
-      width:min(410px,100%);
-      background:#080808;
-      border:1px solid var(--line);
-      border-radius:24px;
-      box-shadow:var(--shadow);
-      padding:25px;
-      text-align:center;
-    }
-
-    .success-box h3{
-      margin:0 0 12px;
-      font-size:30px;
-      letter-spacing:-.04em;
-    }
-
-    .success-box p{
-      margin:0;
-      color:var(--muted);
-      line-height:1.55;
-    }
-
-    .toast{
-      position:fixed;
-      left:50%;
-      bottom:24px;
-      transform:translateX(-50%) translateY(16px);
-      z-index:400;
-      background:rgba(0,0,0,.94);
-      border:1px solid var(--line);
-      color:#fff;
-      padding:14px 18px;
-      border-radius:999px;
-      box-shadow:var(--shadow);
-      opacity:0;
-      pointer-events:none;
-      transition:.22s ease;
-      font-size:14px;
-      max-width:calc(100% - 24px);
-    }
-
-    .toast.show{
-      opacity:1;
-      transform:translateX(-50%) translateY(0);
-    }
-
-    .admin-panel{
-      position:fixed;
-      inset:24px;
-      z-index:250;
-      background:#080808;
-      border:1px solid var(--line);
-      border-radius:26px;
-      box-shadow:var(--shadow);
-      display:none;
-      overflow:auto;
-      padding:20px;
-    }
-
+    .success-box{width:min(390px,100%);background:#0d130f;border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);padding:24px;text-align:center}
+    .success-box h3{margin:0 0 12px;font-size:28px}.success-box p{margin:0;color:var(--muted);line-height:1.55}
+    .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(16px);z-index:400;background:rgba(0,0,0,.92);border:1px solid var(--line);color:#fff;padding:14px 18px;border-radius:999px;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:.22s ease;font-size:14px}
+    .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+    .admin-panel{position:fixed;inset:24px;z-index:250;background:#0d130f;border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);display:none;overflow:auto;padding:20px}
     .admin-panel.show{display:block}
-
-    .admin-top{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:10px;
-      margin-bottom:18px;
-    }
-
-    .admin-top h3{
-      margin:0;
-      font-size:30px;
-      letter-spacing:-.05em;
-    }
-
-    .admin-grid{
-      display:grid;
-      grid-template-columns:1.35fr .65fr;
-      gap:18px;
-    }
-
-    .admin-card{
-      background:rgba(255,255,255,.04);
-      border:1px solid var(--line);
-      border-radius:20px;
-      padding:16px;
-    }
-
-    .admin-card h4{
-      margin:0 0 12px;
-      font-size:18px;
-    }
-
-    .admin-product{
-      border:1px solid var(--line);
-      border-radius:17px;
-      padding:14px;
-      margin-bottom:12px;
-      background:rgba(255,255,255,.035);
-    }
-
+    .admin-top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:18px}
+    .admin-top h3{margin:0;font-size:28px}
+    .admin-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+    .admin-card{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:18px;padding:16px}
+    .admin-card h4{margin:0 0 12px;font-size:18px}
+    .admin-product{border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:12px;background:rgba(255,255,255,.03)}
     .admin-product:last-child{margin-bottom:0}
-
-    .admin-product-title{
-      font-weight:900;
-      margin-bottom:10px;
-    }
-
-    .admin-actions{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:10px;
-      margin-top:10px;
-    }
-
-    .admin-small{
-      width:100%;
-      padding:12px;
-      border-radius:13px;
-      border:1px solid var(--line);
-      background:#070707;
-      color:#fff;
-      outline:none;
-      margin-bottom:8px;
-    }
-
-    .mini-stat{
-      display:flex;
-      justify-content:space-between;
-      gap:12px;
-      padding:12px 0;
-      border-bottom:1px solid var(--line);
-      color:var(--muted);
-    }
-    .mini-stat strong{color:#fff}
-    .mini-stat:last-child{border-bottom:none}
-
-    @media (max-width: 1060px){
-      .grid{grid-template-columns:repeat(3,1fr)}
-      .benefits,.trust-strip{grid-template-columns:repeat(2,1fr)}
-      .hero-grid{grid-template-columns:1fr}
-      .admin-grid{grid-template-columns:1fr}
-    }
-
-    @media (max-width: 760px){
-      .grid{grid-template-columns:repeat(2,1fr)}
-      .catalog-tools{grid-template-columns:1fr}
-      .filters{justify-content:flex-start}
-      .section-head{display:block}
-      .pill-link{display:none}
-      .hero{padding:25px;border-radius:28px}
-      .hero::after{font-size:120px;right:10px}
-      footer{grid-template-columns:1fr}
-    }
-
-    @media (max-width: 560px){
-      .container{width:min(100% - 22px, 1200px)}
-      .brand img{width:46px;height:46px}
-      .brand-title{font-size:24px}
-      .brand-sub{font-size:12px}
-      .header-actions{gap:6px}
-      .cart-btn{padding:10px 13px}
-      .cart-btn .cart-text{display:none}
-      .grid,.benefits,.trust-strip{grid-template-columns:1fr}
-      .hero h1{font-size:42px}
-      .desc{min-height:auto}
-      .drawer{padding:18px 12px}
-      .cart-item{align-items:flex-start}
-      .cart-controls{flex-direction:column}
-      .admin-panel{inset:10px;padding:14px}
-      .admin-actions{grid-template-columns:1fr}
-    }
+    .admin-product-title{font-weight:800;margin-bottom:10px}
+    .admin-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+    .admin-small{width:100%;padding:12px;border-radius:12px;border:1px solid var(--line);background:#0a0a0a;color:#fff;outline:none;margin-bottom:8px}
+    .admin-list{display:flex;flex-direction:column;gap:10px}
+    .admin-list-item{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:14px;padding:12px;font-size:14px;line-height:1.45}
+    .wa-float{position:fixed;right:18px;bottom:18px;z-index:120;width:58px;height:58px;border-radius:999px;background:var(--wa);color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 34px rgba(37,211,102,.35);font-size:28px;border:none;cursor:pointer}
+    .wa-float:hover{transform:translateY(-2px)}
+    @media (max-width:1100px){.hero{grid-template-columns:1fr}.grid{grid-template-columns:repeat(2,1fr)}.benefits,.testimonials,.promo-strip,.combo-grid{grid-template-columns:repeat(2,1fr)}.admin-grid{grid-template-columns:1fr}footer{grid-template-columns:1fr}}
+    @media (max-width:700px){.brand img{width:44px;height:44px}.brand-title{font-size:24px}.section-title{font-size:34px}.hero h1{font-size:38px}.story h3{font-size:32px}.grid,.benefits,.testimonials,.promo-strip,.combo-grid{grid-template-columns:1fr}.filters{grid-template-columns:1fr}.header-inner{padding:10px 0}.cart-btn,.header-pill{padding:10px 14px}.admin-panel{inset:10px}}
   </style>
 </head>
 <body>
+  <div class="topbar"><div class="container topbar-inner">🧉 Atención personalizada · Envío y coordinación por WhatsApp · Stock visible</div></div>
   <header>
     <div class="container header-inner">
-      <div class="brand" id="adminAccess" title="Acceso administrador">
+      <div class="brand" id="adminAccess">
         <img src="logo.png" alt="Logo La Cebada">
         <div>
           <div class="brand-title">La Cebada</div>
-          <div class="brand-sub">Yerbas y accesorios materos</div>
+          <div class="brand-sub">Yerba mate seleccionada y accesorios materos</div>
         </div>
       </div>
-
       <div class="header-actions">
-        <a class="pill-link" href="#catalogo">Ver catálogo</a>
-        <button class="cart-btn" id="openCartBtn">
-          <span>🛒</span>
-          <span class="cart-text">Carrito</span>
-          <span class="badge" id="cartBadge">0</span>
-        </button>
+        <a class="header-pill" href="#catalogo">Ver catálogo</a>
+        <button class="cart-btn" id="openCartBtn"><span>🛒</span><span>Carrito</span><span class="badge" id="cartBadge">0</span></button>
       </div>
     </div>
   </header>
-
   <main class="container">
     <section class="hero">
-      <div class="hero-kicker">La Cebada · tienda matera</div>
-      <div class="hero-grid">
-        <div>
-          <h1>Todo para unos buenos mates.</h1>
-          <p>Elegí yerbas seleccionadas, bombillas y accesorios materos. El catálogo se actualiza desde tu hoja de stock, así tus clientes ven precios y disponibilidad al día.</p>
-          <div class="hero-actions">
-            <a class="pill-link" href="#catalogo">Comprar ahora</a>
-            <a class="pill-link" href="https://instagram.com/gaspichaves" target="_blank" rel="noopener">Instagram</a>
-          </div>
-          <div class="sync-pill" id="sheetStatus">⏳ Conectando con la hoja de stock...</div>
-        </div>
-        <div class="hero-card">
-          <strong id="heroProductCount">0</strong>
-          <span>productos disponibles entre yerbas, bombillas y accesorios.</span>
+      <div class="hero-main">
+        <div class="eyebrow">La Cebada</div>
+        <h1>Todo para disfrutar un buen mate.</h1>
+        <p>Yerbas seleccionadas, accesorios útiles y atención real para que comprar sea fácil, rápido y claro.</p>
+        <div class="hero-cta">
+          <a class="btn" href="#catalogo">Comprar ahora</a>
+          <a class="btn-secondary" href="https://wa.me/5493364370451" target="_blank">Escribir por WhatsApp</a>
         </div>
       </div>
-    </section>
-
-    <section class="trust-strip" aria-label="Ventajas de compra">
-      <div class="trust-item">
-        <strong>Stock actualizado</strong>
-        <span>Los precios y disponibilidad se sincronizan con tu hoja de cálculo publicada.</span>
-      </div>
-      <div class="trust-item">
-        <strong>Pedido rápido</strong>
-        <span>Agregás al carrito y el pedido sale armado directo para confirmar por WhatsApp.</span>
-      </div>
-      <div class="trust-item">
-        <strong>Catálogo claro</strong>
-        <span>Buscador, categorías y etiquetas para encontrar yerbas, bombillas y accesorios.</span>
+      <div class="hero-side">
+        <div class="side-box"><h4>Selección cuidada</h4><p>Yerbas y accesorios elegidos para ofrecer calidad y una compra prolija.</p></div>
+        <div class="side-box"><h4>Compra simple</h4><p>Elegís, agregás al carrito y confirmás en pocos pasos.</p></div>
+        <div class="side-box"><h4>Atención humana</h4><p>Cada pedido se revisa y se coordina personalmente por WhatsApp.</p></div>
       </div>
     </section>
-
     <section id="catalogo">
+      <div class="section-head"><div><h2 class="section-title">Catálogo</h2><p class="section-sub">Yerbas y accesorios para completar la experiencia matera.</p></div></div>
+      <div class="filters-wrap">
+        <div class="filters">
+          <input class="search" id="searchInput" type="text" placeholder="Buscar producto...">
+          <div class="tabs">
+            <button class="tab active" data-filter="todos">Todos</button>
+            <button class="tab" data-filter="yerba">Yerbas</button>
+            <button class="tab" data-filter="accesorio">Accesorios</button>
+          </div>
+        </div>
+      </div>
+      <div class="grid" id="productsGrid"></div>
+    </section>
+    
+    <section class="promo-strip">
+      <div class="promo-card">
+        <div class="promo-kicker">Oferta destacada</div>
+        <h4>Baldo + Canarias</h4>
+        <p>Dos de las más elegidas para quienes buscan sabor firme y excelente rendimiento.</p>
+        <div class="promo-price">Desde $22.000</div>
+      </div>
+      <div class="promo-card">
+        <div class="promo-kicker">Favorita del mes</div>
+        <h4>Rei Verde Premium</h4>
+        <p>Ideal para quienes prefieren una yerba noble, suave y aromática para el mate diario.</p>
+        <div class="promo-price">$10.500</div>
+      </div>
+      <div class="promo-card">
+        <div class="promo-kicker">Accesorios</div>
+        <h4>Sumá tu equipo matero</h4>
+        <p>Canasta, bombillas y más artículos para completar una compra más atractiva y completa.</p>
+        <div class="promo-price">Nuevos ingresos</div>
+      </div>
+    </section>
+
+    <section class="combos">
       <div class="section-head">
         <div>
-          <h2 class="section-title">Catálogo</h2>
-          <p class="section-sub">Yerbas, bombillas y accesorios para completar tu equipo matero.</p>
+          <h2 class="section-title" style="font-size:34px">Combos recomendados</h2>
+          <p class="section-sub" style="font-size:16px">Ideas listas para vender mejor y aumentar el ticket promedio.</p>
         </div>
       </div>
-
-      <div class="catalog-tools">
-        <div class="search-wrap">
-          <span>🔎</span>
-          <label class="sr-only" for="searchInput">Buscar producto</label>
-          <input class="search" id="searchInput" type="search" placeholder="Buscar por marca, accesorio, bombilla...">
+      <div class="combo-grid">
+        <div class="combo-card">
+          <div class="combo-badge">Combo clásico</div>
+          <h4>Baldo + Bombilla acero</h4>
+          <p>Una combinación simple y fuerte para el cliente que quiere arrancar sin vueltas.</p>
+          <ul class="combo-list">
+            <li>Yerba Baldo 1/2 kg</li>
+            <li>Bombilla pico loro acero</li>
+          </ul>
         </div>
-        <div class="filters" id="categoryFilters"></div>
+        <div class="combo-card">
+          <div class="combo-badge">Combo premium</div>
+          <h4>Rei Verde Premium + Bombillón cincelado</h4>
+          <p>Más elegante y con mejor presencia para destacar en ventas y publicaciones.</p>
+          <ul class="combo-list">
+            <li>Rei Verde Premium 1 kg</li>
+            <li>Bombillón pico loro cincelado</li>
+          </ul>
+        </div>
+        <div class="combo-card">
+          <div class="combo-badge">Combo matero</div>
+          <h4>Canarias + Canasta eco cuero</h4>
+          <p>Ideal para mostrar una compra más completa y darle valor al accesorio.</p>
+          <ul class="combo-list">
+            <li>Yerba Canarias 1 kg</li>
+            <li>Canasta matera eco cuero</li>
+          </ul>
+        </div>
       </div>
-
-      <div class="results-note" id="resultsNote"></div>
-      <div class="grid" id="productsGrid"></div>
     </section>
 
     <section class="benefits">
-      <div class="benefit">
-        <div class="benefit-icon">💬</div>
-        <h4>Atención por WhatsApp</h4>
-        <p>Respondemos rápido, confirmamos stock y coordinamos cada pedido de forma personalizada.</p>
-      </div>
-      <div class="benefit">
-        <div class="benefit-icon">🧉</div>
-        <h4>Selección matera</h4>
-        <p>Trabajamos productos pensados para quienes disfrutan el mate todos los días.</p>
-      </div>
-      <div class="benefit">
-        <div class="benefit-icon">✅</div>
-        <h4>Compra clara</h4>
-        <p>Antes de confirmar ves cantidades, subtotales y el detalle completo de tu pedido.</p>
-      </div>
-      <div class="benefit">
-        <div class="benefit-icon">📦</div>
-        <h4>Pedido a medida</h4>
-        <p>Combiná yerbas, bombillas y accesorios según lo que estés necesitando.</p>
+      <div class="benefit"><h4>Stock claro</h4><p>Mostrás rápido qué está disponible y qué está agotado.</p></div>
+      <div class="benefit"><h4>Pedido a tu medida</h4><p>Podés combinar yerbas y accesorios en un mismo carrito.</p></div>
+      <div class="benefit"><h4>Respuesta rápida</h4><p>La confirmación y coordinación se hace por WhatsApp.</p></div>
+      <div class="benefit"><h4>Imagen profesional</h4><p>Diseño limpio, mejor jerarquía visual y catálogo más completo.</p></div>
+    </section>
+    <section class="testimonials">
+      <div class="testimonial"><div class="stars">★★★★★</div><p>Excelente atención y muy buena presentación. Todo se coordinó rápido y sin complicaciones.</p><strong>— Cliente verificado</strong></div>
+      <div class="testimonial"><div class="stars">★★★★★</div><p>El stock está claro y la compra se confirma enseguida. Muy prolijo.</p><strong>— Matero frecuente</strong></div>
+      <div class="testimonial"><div class="stars">★★★★★</div><p>Ahora el catálogo se ve mucho más completo y profesional.</p><strong>— Nuevo cliente</strong></div>
+    </section>
+    <section class="faq">
+      <h3>Preguntas frecuentes</h3>
+      <div class="faq-list">
+        <div class="faq-item"><button class="faq-question">¿Cómo hago el pedido?</button><div class="faq-answer">Elegís los productos, los agregás al carrito y finalizás por WhatsApp o dejando tu teléfono.</div></div>
+        <div class="faq-item"><button class="faq-question">¿Puedo combinar yerbas y accesorios?</button><div class="faq-answer">Sí. Podés sumar distintos productos al mismo carrito y enviar un solo pedido.</div></div>
+        <div class="faq-item"><button class="faq-question">¿Qué pasa si no tiene precio?</button><div class="faq-answer">Si un producto todavía no tiene precio cargado, la web muestra “Consultar precio” y te lleva directo a WhatsApp.</div></div>
       </div>
     </section>
-
     <section class="story">
       <div class="story-top">Detrás de La Cebada</div>
-      <h3>Un emprendimiento de amigos materos</h3>
-      <p>Seleccionamos productos con una idea simple: que cada cliente pueda armar su mate ideal, con buena atención y sin vueltas.</p>
+      <h3>Un emprendimiento de dos amigos materos</h3>
+      <p>Seleccionamos cada producto personalmente. Si querés conocernos o consultarnos algo, escribinos por Instagram.</p>
       <div class="story-links">
-        <a href="https://instagram.com/gaspichaves" target="_blank" rel="noopener">@gaspichaves</a>
-        <a href="https://instagram.com/matu_aparisi" target="_blank" rel="noopener">@matu_aparisi</a>
+        <a href="https://instagram.com/gaspichaves" target="_blank">@gaspichaves</a>
+        <a href="https://instagram.com/matu_aparisi" target="_blank">@matu_aparisi</a>
       </div>
     </section>
-
     <footer>
-      <div>
-        <h4>La Cebada</h4>
-        <p>Yerbas y accesorios para el matero exigente. Compra simple y atención humana.</p>
-      </div>
-      <div>
-        <h4>Confirmación segura</h4>
-        <p>Cada pedido se revisa por WhatsApp antes de cerrar la compra y coordinar entrega.</p>
-      </div>
-      <div>
-        <h4>Seguinos</h4>
-        <p>
-          Instagram:
-          <a href="https://instagram.com/gaspichaves" target="_blank" rel="noopener">@gaspichaves</a>
-          ·
-          <a href="https://instagram.com/matu_aparisi" target="_blank" rel="noopener">@matu_aparisi</a>
-        </p>
-      </div>
+      <div><h4>La Cebada</h4><p>Yerbas premium y accesorios materos. Compra simple, atención humana y catálogo claro.</p></div>
+      <div><h4>Compra segura</h4><p>Confirmamos cada pedido por WhatsApp antes de coordinar. Sin vueltas.</p></div>
+      <div><h4>Seguinos</h4><p>Instagram: <a href="https://instagram.com/gaspichaves" target="_blank">@gaspichaves</a> · <a href="https://instagram.com/matu_aparisi" target="_blank">@matu_aparisi</a></p></div>
     </footer>
   </main>
-
+  <button class="wa-float" onclick="window.open('https://wa.me/5493364370451','_blank')" aria-label="WhatsApp">✆</button>
   <div class="overlay" id="cartOverlay"></div>
-  <div class="drawer" id="cartDrawer">
-    <div class="drawer-inner">
-      <div class="drawer-top">
-        <h3>Tu carrito</h3>
-        <button class="secondary-btn" id="closeCartBtn" style="width:auto;margin:0">Cerrar</button>
-      </div>
-      <div id="cartItems"></div>
-      <div class="cart-total" id="cartTotal">Total: $0</div>
-      <div class="cart-warning" id="cartWarning">Algunos productos tienen precio a confirmar. Te pasamos el valor final por WhatsApp.</div>
-      <div class="note">✔ Podés seguir agregando productos antes de finalizar.</div>
-      <button class="secondary-btn" id="clearCartBtn">Vaciar carrito</button>
-      <button class="primary-btn" id="checkoutBtn">Finalizar compra</button>
-    </div>
-  </div>
-
+  <div class="drawer" id="cartDrawer"><div class="drawer-inner"><h3>Tu carrito</h3><div id="cartItems"></div><div class="cart-total" id="cartTotal">Total: $0</div><div class="note">✔ Podés seguir agregando productos antes de finalizar.</div><button class="secondary-btn" id="clearCartBtn">Vaciar carrito</button><button class="primary-btn" id="checkoutBtn">Finalizar compra</button></div></div>
   <div class="overlay" id="checkoutOverlay"></div>
   <div class="modal" id="checkoutModal">
     <div class="summary" id="checkoutSummary"></div>
-
-    <div id="stepOptions">
-      <h3>¿Cómo querés finalizar?</h3>
-      <button class="primary-btn" id="goWhatsappBtn">💬 Confirmar por WhatsApp</button>
-      <button class="secondary-btn" id="goContactBtn">📞 Que nos comuniquemos con vos</button>
-      <button class="danger-btn" id="cancelCheckoutBtn">Cancelar</button>
-    </div>
-
-    <div id="stepWhatsapp" style="display:none">
-      <h3>Confirmar por WhatsApp</h3>
-      <input class="field" id="waName" type="text" placeholder="Tu nombre y apellido">
-      <div class="error" id="waError"></div>
-      <button class="primary-btn" id="sendWhatsappBtn">Enviar pedido</button>
-      <button class="secondary-btn" id="backFromWhatsappBtn">Volver</button>
-    </div>
-
-    <div id="stepContact" style="display:none">
-      <h3>Te contactamos nosotros</h3>
-      <input class="field" id="contactName" type="text" placeholder="Tu nombre y apellido">
-      <input class="field" id="contactPhone" type="tel" placeholder="Tu número de teléfono">
-      <div class="error" id="contactError"></div>
-      <button class="primary-btn" id="sendContactBtn">Enviar solicitud</button>
-      <button class="secondary-btn" id="backFromContactBtn">Volver</button>
-    </div>
+    <div id="stepOptions"><h3>¿Cómo querés finalizar tu pedido?</h3><button class="primary-btn" id="goWhatsappBtn">💬 Confirmar por WhatsApp</button><button class="secondary-btn" id="goContactBtn">📞 Que nos comuniquemos con vos</button><button class="danger-btn" id="cancelCheckoutBtn">Cancelar</button></div>
+    <div id="stepWhatsapp" class="hidden"><h3>Confirmar por WhatsApp</h3><input class="field" id="waName" type="text" placeholder="Tu nombre y apellido"><div class="error" id="waError"></div><button class="primary-btn" id="sendWhatsappBtn">Enviar pedido</button><button class="secondary-btn" id="backFromWhatsappBtn">Volver</button></div>
+    <div id="stepContact" class="hidden"><h3>Te contactamos nosotros</h3><input class="field" id="contactName" type="text" placeholder="Tu nombre y apellido"><input class="field" id="contactPhone" type="tel" placeholder="Tu número de teléfono"><div class="error" id="contactError"></div><button class="primary-btn" id="sendContactBtn">Enviar solicitud</button><button class="secondary-btn" id="backFromContactBtn">Volver</button></div>
   </div>
-
-  <div class="success-modal" id="successModal">
-    <div class="success-box">
-      <h3>✅ ¡Pedido recibido!</h3>
-      <p>En breve <strong>La Cebada</strong> se comunicará con vos por WhatsApp para confirmar disponibilidad, precio final y entrega.</p>
-      <button class="primary-btn" id="closeSuccessBtn">Entendido</button>
-    </div>
-  </div>
-
+  <div class="success-modal" id="successModal"><div class="success-box"><h3>✅ ¡Pedido recibido!</h3><p>En breve <strong>La Cebada</strong> se comunicará con vos por WhatsApp para confirmar tu pedido.</p><button class="primary-btn" id="closeSuccessBtn">Entendido</button></div></div>
   <div class="toast" id="toast"></div>
-
   <div class="overlay" id="adminOverlay"></div>
   <div class="admin-panel" id="adminPanel">
-    <div class="admin-top">
-      <h3>Panel de administrador</h3>
-      <button class="secondary-btn" id="closeAdminBtn" style="width:auto;margin:0">Cerrar</button>
-    </div>
-
+    <div class="admin-top"><h3>Panel de administrador</h3><button class="secondary-btn" id="closeAdminBtn" style="width:auto;margin:0">Cerrar</button></div>
     <div class="admin-grid">
-      <div class="admin-card">
-        <h4>Productos</h4>
-        <div id="adminProducts"></div>
-      </div>
-
-      <div class="admin-card">
-        <h4>Resumen</h4>
-        <div class="mini-stat"><span>Total productos</span><strong id="adminTotalProducts">0</strong></div>
-        <div class="mini-stat"><span>Con stock</span><strong id="adminStockProducts">0</strong></div>
-        <div class="mini-stat"><span>Precio a confirmar</span><strong id="adminConsultProducts">0</strong></div>
-        <h4 style="margin-top:22px">Acciones rápidas</h4>
-        <button class="secondary-btn" id="adminVaciarCarritoBtn">Vaciar carrito</button>
-        <button class="secondary-btn" id="adminRestaurarBtn">Restaurar catálogo original</button>
-        <div class="note">El precio, stock y etiqueta se toman de Google Sheets. Si querés cambiar algo, editá la hoja de cálculo y actualizá la página.</div>
-      </div>
+      <div class="admin-card"><h4>Productos</h4><div id="adminProducts"></div></div>
+      <div class="admin-card"><h4>Acciones rápidas</h4><div class="admin-list"><div class="admin-list-item">Podés editar precio, etiqueta y stock de cada producto.</div><div class="admin-list-item">Los accesorios nuevos ya quedaron agregados al catálogo.</div><div class="admin-list-item">Si un precio queda en 0, la web muestra “Consultar precio”.</div></div><button class="secondary-btn" id="adminVaciarCarritoBtn">Vaciar carrito</button><button class="secondary-btn" id="adminRestaurarBtn">Restaurar catálogo original</button></div>
     </div>
   </div>
-
   <script>
     const TELEFONO_VENDEDOR = "5493364370451";
     const WEBHOOK_URL = "https://hook.us2.make.com/ofufesknpyc3spbueo9q68v4bmasdhgu";
-    const STOCK_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQNWo2kZ0lxbKOUz00N29AqBN6clA2yf9BPmCX4ccaEf4-AyPYfiz0YNUqJzCIpQ5ZqFzx9xWgoFs0I/pub?gid=460073425&single=true&output=csv";
     const ADMIN_PASSWORD = "cebada1";
 
-    const categorias = [
-      { id: "todos", nombre: "Todo" },
-      { id: "yerbas", nombre: "Yerbas" },
-      { id: "bombillas", nombre: "Bombillas" },
-      { id: "accesorios", nombre: "Accesorios" }
-    ];
-
     const productosOriginales = [
-      {
-        id: "baldo",
-        nombre: "Yerba Baldo",
-        peso: "1/2 kg",
-        categoria: "yerbas",
-        descripcion: "Mezcla intensa de hojas y palos seleccionados. Perfecta para quienes buscan un mate fuerte y rendidor.",
-        precio: 6500,
-        imagen: "baldo.jpg",
-        icono: "🧉",
-        etiqueta: "Más vendida",
-        notas: ["Intensa", "Rendidora", "Tradicional"],
-        stock: true
-      },
-      {
-        id: "canarias",
-        nombre: "Yerba Canarias",
-        peso: "1 kg",
-        categoria: "yerbas",
-        descripcion: "La clásica uruguaya: molienda fina, sabor profundo y carácter inconfundible para materos exigentes.",
-        precio: 10500,
-        imagen: "canarias.jpg",
-        icono: "🧉",
-        etiqueta: "Origen Uruguay",
-        notas: ["Fuerte", "Premium", "Molienda fina"],
-        stock: true
-      },
-      {
-        id: "rei-premium",
-        nombre: "Yerba Rei Verde Premium",
-        peso: "1 kg",
-        categoria: "yerbas",
-        descripcion: "Edición premium con secado natural y estacionamiento prolongado. Sabor noble, suave y aromático.",
-        precio: 10000,
-        imagen: "rei-premium.jpg",
-        icono: "🧉",
-        etiqueta: "Premium",
-        notas: ["Aromática", "Suave", "Estacionada"],
-        stock: true
-      },
-      {
-        id: "rei-clasica",
-        nombre: "Yerba Rei Verde Clásica",
-        peso: "1/2 kg",
-        categoria: "yerbas",
-        descripcion: "La versión tradicional Rei Verde: equilibrio justo entre sabor y rendimiento para el mate de todos los días.",
-        precio: 6000,
-        imagen: "rei-clasica.jpg",
-        icono: "🧉",
-        etiqueta: "Clásica",
-        notas: ["Equilibrada", "Diaria", "Clásica"],
-        stock: true
-      },
-      {
-        id: "canasta-matera-eco-cuero",
-        nombre: "Canasta matera eco cuero",
-        peso: "Unidad",
-        categoria: "accesorios",
-        descripcion: "Canasta matera práctica y elegante para transportar yerba, mate, termo y accesorios con mejor presentación.",
-        precio: 0,
-        imagen: "canasta-matera-eco-cuero.jpg",
-        icono: "🧺",
-        etiqueta: "Nuevo ingreso",
-        notas: ["Eco cuero", "Matera", "Práctica"],
-        stock: true
-      },
-      {
-        id: "bombillon-pico-loro-cincelado",
-        nombre: "Bombillón pico loro cincelado",
-        peso: "Unidad",
-        categoria: "bombillas",
-        descripcion: "Bombillón pico loro con detalle cincelado. Una opción vistosa, firme y cómoda para el uso diario.",
-        precio: 0,
-        imagen: "bombillon-pico-loro-cincelado.jpg",
-        icono: "🥄",
-        etiqueta: "Nuevo",
-        notas: ["Cincelado", "Pico loro", "Matero"],
-        stock: true
-      },
-      {
-        id: "bombilla-pico-loro-acero",
-        nombre: "Bombilla pico loro acero",
-        peso: "Unidad",
-        categoria: "bombillas",
-        descripcion: "Bombilla pico loro de acero, resistente y fácil de limpiar. Ideal para sumar al equipo matero.",
-        precio: 0,
-        imagen: "bombilla-pico-loro-acero.jpg",
-        icono: "🥄",
-        etiqueta: "Nuevo",
-        notas: ["Acero", "Pico loro", "Resistente"],
-        stock: true
-      }
+      {id:"baldo",categoria:"yerba",nombre:"Yerba Baldo",peso:"1/2 kg",descripcion:"Mezcla intensa de hojas y palos seleccionados. Perfecta para los que buscan un mate fuerte y bien rendidor.",precio:11000,imagen:"baldo.jpg",etiqueta:"Más vendida",notas:["Intensa","Rendidora","Tradicional"],stock:true},
+      {id:"canarias",categoria:"yerba",nombre:"Yerba Canarias",peso:"1 kg",descripcion:"La clásica uruguaya: molienda fina, sabor profundo y carácter inconfundible para los materos exigentes.",precio:11000,imagen:"canarias.jpg",etiqueta:"Origen Uruguay",notas:["Fuerte","Premium","Molienda fina"],stock:true},
+      {id:"rei-premium",categoria:"yerba",nombre:"Yerba Rei Verde Premium",peso:"1 kg",descripcion:"Edición premium con secado natural y estacionamiento prolongado. Sabor noble, suave en boca y muy aromático.",precio:10500,imagen:"rei-premium.jpg",etiqueta:"Premium",notas:["Aromática","Suave","Estacionada"],stock:true},
+      {id:"rei-clasica",categoria:"yerba",nombre:"Yerba Rei Verde Clásica",peso:"1/2 kg",descripcion:"La versión tradicional Rei Verde: equilibrio justo entre sabor y rendimiento para el mate de todos los días.",precio:6000,imagen:"rei-clasica.jpg",etiqueta:"Clásica",notas:["Equilibrada","Diaria","Clásica"],stock:true},
+      {id:"canasta-eco-cuero",categoria:"accesorio",nombre:"Canasta matera eco cuero",peso:"Accesorio",descripcion:"Canasta práctica y elegante para llevar el equipo matero con un estilo más prolijo y funcional.",precio:21000,imagen:"",placeholder:"🧺",etiqueta:"accesorio",notas:["Matera","Eco cuero","Práctica"],stock:false},
+      {id:"bombillon-cincelado",categoria:"accesorio",nombre:"Bombillón pico loro cincelado",peso:"Accesorio",descripcion:"Bombillón con diseño cincelado, ideal para quienes buscan detalle y una terminación más premium.",precio:23000,imagen:"",placeholder:"🥄",etiqueta:"cincelado",notas:["Bombillón","Cincelado","Premium"],stock:true},
+      {id:"bombilla-acero",categoria:"accesorio",nombre:"Bombilla pico loro acero",peso:"Accesorio",descripcion:"Bombilla resistente de acero, clásica y funcional para el uso diario.",precio:10000,imagen:"",placeholder:"🥄",etiqueta:"acero inoxidable",notas:["Acero","Resistente","Diaria"],stock:true}
     ];
 
+    let filtroActivo = "todos";
+    let textoBusqueda = "";
     let config = JSON.parse(localStorage.getItem("cebada_config") || "{}");
     let carrito = JSON.parse(localStorage.getItem("cebada_carrito") || "[]");
     let cantidades = JSON.parse(localStorage.getItem("cebada_cantidades") || "{}");
-    let categoriaActiva = "todos";
-    let busqueda = "";
-    let stockDesdeHoja = {};
-    let hojaConectada = false;
-
-    function idProducto(texto) {
-      return String(texto || "")
-        .trim()
-        .toLowerCase()
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "")
-        .replace(/[^a-z0-9]+/g, "-")
-        .replace(/^-+|-+$/g, "");
-    }
-
-    function parsePrecio(valor) {
-      const limpio = String(valor || "").replace(/\D/g, "");
-      return limpio ? parseInt(limpio, 10) : 0;
-    }
-
-    function parseStock(valor) {
-      const v = normalizar(String(valor || "").trim());
-      return ["si", "sí", "s", "yes", "true", "1", "disponible", "stock"].includes(v);
-    }
-
-    function parseCSV(texto) {
-      const filas = [];
-      let fila = [];
-      let celda = "";
-      let entreComillas = false;
-
-      for (let i = 0; i < texto.length; i++) {
-        const char = texto[i];
-        const next = texto[i + 1];
-
-        if (char === '"' && entreComillas && next === '"') {
-          celda += '"';
-          i++;
-        } else if (char === '"') {
-          entreComillas = !entreComillas;
-        } else if (char === "," && !entreComillas) {
-          fila.push(celda);
-          celda = "";
-        } else if ((char === "\n" || char === "\r") && !entreComillas) {
-          if (char === "\r" && next === "\n") i++;
-          fila.push(celda);
-          if (fila.some(v => String(v).trim() !== "")) filas.push(fila);
-          fila = [];
-          celda = "";
-        } else {
-          celda += char;
-        }
-      }
-
-      fila.push(celda);
-      if (fila.some(v => String(v).trim() !== "")) filas.push(fila);
-      return filas;
-    }
-
-    function actualizarEstadoHoja(texto, ok = true) {
-      const el = document.getElementById("sheetStatus");
-      if (!el) return;
-      el.textContent = texto;
-      el.style.borderColor = ok ? "rgba(217,181,109,.24)" : "rgba(212,90,67,.38)";
-      el.style.background = ok ? "rgba(217,181,109,.09)" : "rgba(212,90,67,.12)";
-      el.style.color = ok ? "#fff0c4" : "#ffd9d2";
-    }
-
-    async function cargarStockDesdeHoja() {
-      actualizarEstadoHoja("⏳ Conectando con la hoja de stock...");
-
-      try {
-        const separador = STOCK_CSV_URL.includes("?") ? "&" : "?";
-        const res = await fetch(`${STOCK_CSV_URL}${separador}t=${Date.now()}`, { cache: "no-store" });
-        if (!res.ok) throw new Error("No se pudo leer la hoja");
-
-        const csv = await res.text();
-        const filas = parseCSV(csv);
-        const encabezados = (filas.shift() || []).map(h => idProducto(h));
-        const idxProducto = encabezados.indexOf("producto");
-        const idxPrecio = encabezados.indexOf("precio");
-        const idxStock = encabezados.indexOf("stock");
-        const idxEtiqueta = encabezados.indexOf("etiqueta");
-
-        if (idxProducto === -1) throw new Error("No existe la columna producto");
-
-        const nuevoStock = {};
-        filas.forEach(fila => {
-          const id = idProducto(fila[idxProducto]);
-          if (!id) return;
-          nuevoStock[id] = {
-            precio: idxPrecio >= 0 ? parsePrecio(fila[idxPrecio]) : undefined,
-            stock: idxStock >= 0 ? parseStock(fila[idxStock]) : undefined,
-            etiqueta: idxEtiqueta >= 0 ? String(fila[idxEtiqueta] || "").trim() : undefined
-          };
-        });
-
-        stockDesdeHoja = nuevoStock;
-        hojaConectada = true;
-        actualizarCarritoConHoja();
-        renderCategoryFilters();
-        renderProducts();
-        renderCart();
-        actualizarEstadoHoja(`✅ Stock sincronizado con la hoja · ${Object.keys(stockDesdeHoja).length} productos`);
-      } catch (error) {
-        console.error(error);
-        hojaConectada = false;
-        actualizarEstadoHoja("⚠️ No se pudo leer la hoja. Mostrando datos guardados en la página.", false);
-        renderCategoryFilters();
-        renderProducts();
-        renderCart();
-      }
-    }
-
-    function actualizarCarritoConHoja() {
-      carrito = carrito.map(item => {
-        const producto = getProductoPorId(item.id);
-        return producto ? {
-          ...item,
-          nombre: producto.nombre,
-          peso: producto.peso,
-          precio: producto.precio,
-          imagen: producto.imagen,
-          icono: producto.icono
-        } : item;
-      });
-      saveCart();
-    }
-
-    function getProductoPorId(id) {
-      return getProductos().find(p => p.id === id);
-    }
 
     function getProductos() {
       return productosOriginales.map(p => {
-        const h = stockDesdeHoja[p.id];
         const c = config[p.id] || {};
-
-        if (h) {
-          return {
-            ...p,
-            precio: typeof h.precio === "number" ? h.precio : p.precio,
-            etiqueta: typeof h.etiqueta === "string" ? h.etiqueta : p.etiqueta,
-            stock: typeof h.stock === "boolean" ? h.stock : p.stock
-          };
-        }
-
-        return {
-          ...p,
-          precio: Number.isFinite(c.precio) ? c.precio : p.precio,
-          etiqueta: typeof c.etiqueta === "string" ? c.etiqueta : p.etiqueta,
-          stock: typeof c.stock === "boolean" ? c.stock : p.stock
-        };
+        return {...p, precio:Number.isFinite(c.precio)?c.precio:p.precio, etiqueta:typeof c.etiqueta==="string"?c.etiqueta:p.etiqueta, stock:typeof c.stock==="boolean"?c.stock:p.stock};
       });
     }
 
-    function saveConfig() {
-      localStorage.setItem("cebada_config", JSON.stringify(config));
+    function getProductosFiltrados() {
+      return getProductos().filter(p => {
+        const coincideFiltro = filtroActivo === "todos" ? true : p.categoria === filtroActivo;
+        const coincideTexto = !textoBusqueda || p.nombre.toLowerCase().includes(textoBusqueda) || p.descripcion.toLowerCase().includes(textoBusqueda) || (p.etiqueta || "").toLowerCase().includes(textoBusqueda);
+        return coincideFiltro && coincideTexto;
+      });
     }
 
-    function saveCart() {
-      localStorage.setItem("cebada_carrito", JSON.stringify(carrito));
-    }
-
-    function saveCantidades() {
-      localStorage.setItem("cebada_cantidades", JSON.stringify(cantidades));
-    }
-
-    function ars(n) {
-      return "$" + Number(n).toLocaleString("es-AR");
-    }
-
-    function precioTexto(precio) {
-      return Number(precio) > 0 ? ars(precio) : "Consultar";
-    }
-
-    function subtotalTexto(item) {
-      return Number(item.precio) > 0 ? ars(item.precio * item.cantidad) : "A confirmar";
-    }
-
-    function tienePreciosAConfirmar() {
-      return carrito.some(p => Number(p.precio) <= 0);
-    }
-
-    function totalCantidad() {
-      return carrito.reduce((a, b) => a + b.cantidad, 0);
-    }
-
-    function totalPrecio() {
-      return carrito.reduce((a, b) => a + b.cantidad * Math.max(0, Number(b.precio) || 0), 0);
-    }
-
-    function totalTexto() {
-      const base = ars(totalPrecio());
-      return tienePreciosAConfirmar() ? `${base} + productos a confirmar` : base;
-    }
-
-    function detalleTexto() {
-      return carrito.map(p => `• ${p.nombre} ${p.peso} x${p.cantidad} — ${subtotalTexto(p)}`).join("\n");
-    }
-
-    function validarTel(t) {
-      const limpio = String(t).replace(/\D/g, "");
-      return limpio.length >= 10 && limpio.length <= 13 && !/^0+$/.test(limpio);
-    }
-
-    function normalizar(texto) {
-      return String(texto || "")
-        .toLowerCase()
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "");
-    }
-
-    function escapeHtml(texto) {
-      return String(texto || "")
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-    }
+    function saveConfig(){ localStorage.setItem("cebada_config", JSON.stringify(config)); }
+    function saveCart(){ localStorage.setItem("cebada_carrito", JSON.stringify(carrito)); }
+    function saveCantidades(){ localStorage.setItem("cebada_cantidades", JSON.stringify(cantidades)); }
+    function ars(n){ return "$" + Number(n).toLocaleString("es-AR"); }
+    function totalCantidad(){ return carrito.reduce((a,b)=>a+b.cantidad,0); }
+    function totalPrecio(){ return carrito.reduce((a,b)=>a+b.cantidad*b.precio,0); }
+    function detalleTexto(){ return carrito.map(p => `• ${p.nombre} ${p.peso} x${p.cantidad} — ${ars(p.precio * p.cantidad)}`).join("\n"); }
+    function validarTel(t){ const limpio = String(t).replace(/\D/g, ""); return limpio.length >= 10 && limpio.length <= 13 && !/^0+$/.test(limpio); }
 
     function showToast(texto) {
       const toast = document.getElementById("toast");
       toast.textContent = texto;
       toast.classList.add("show");
       clearTimeout(window.__toastTimer);
-      window.__toastTimer = setTimeout(() => toast.classList.remove("show"), 1900);
+      window.__toastTimer = setTimeout(() => toast.classList.remove("show"), 1800);
     }
 
-    function renderCategoryFilters() {
-      const wrap = document.getElementById("categoryFilters");
-      wrap.innerHTML = categorias.map(c => `
-        <button class="filter-btn ${categoriaActiva === c.id ? "active" : ""}" onclick="setCategoria('${c.id}')">${c.nombre}</button>
-      `).join("");
-    }
-
-    function setCategoria(id) {
-      categoriaActiva = id;
-      renderCategoryFilters();
-      renderProducts();
-    }
-
-    function getProductosFiltrados() {
-      const q = normalizar(busqueda);
-      return getProductos().filter(p => {
-        const coincideCategoria = categoriaActiva === "todos" || p.categoria === categoriaActiva;
-        const textoProducto = normalizar(`${p.nombre} ${p.peso} ${p.descripcion} ${p.categoria} ${p.notas.join(" ")}`);
-        const coincideBusqueda = !q || textoProducto.includes(q);
-        return coincideCategoria && coincideBusqueda;
-      });
+    function mediaHTML(p) {
+      if (p.imagen) return `<img src="${p.imagen}" alt="${p.nombre} ${p.peso}">`;
+      return `<div class="placeholder"><div class="placeholder-icon">${p.placeholder || "🧉"}</div><div class="placeholder-text">${p.nombre}</div></div>`;
     }
 
     function renderProducts() {
       const productos = getProductosFiltrados();
-      const total = getProductos().length;
       const grid = document.getElementById("productsGrid");
-      const resultsNote = document.getElementById("resultsNote");
-      const heroCount = document.getElementById("heroProductCount");
-
-      heroCount.textContent = total;
-      resultsNote.textContent = productos.length === total
-        ? `${total} productos en catálogo.`
-        : `${productos.length} de ${total} productos encontrados.`;
-
       if (productos.length === 0) {
-        grid.innerHTML = `
-          <div class="empty-state">
-            <h3>No encontramos productos con ese filtro</h3>
-            <p>Probá buscar “yerba”, “bombilla”, “pico loro” o “canasta”.</p>
-            <button class="secondary-btn" style="width:auto" onclick="limpiarFiltros()">Limpiar filtros</button>
-          </div>
-        `;
+        grid.innerHTML = `<div class="benefit" style="grid-column:1/-1"><h4>No encontramos resultados</h4><p>Probá con otra búsqueda o cambiá el filtro.</p></div>`;
         return;
       }
 
       grid.innerHTML = productos.map(p => {
         const cant = cantidades[p.id] || 1;
-        const categoria = categorias.find(c => c.id === p.categoria)?.nombre || "Producto";
+        const sinPrecio = !p.precio || p.precio <= 0;
         return `
           <article class="card">
-            <div class="media" id="media-${p.id}">
-              ${p.etiqueta ? `<span class="tag">${escapeHtml(p.etiqueta)}</span>` : ""}
-              <span class="category-tag">${escapeHtml(categoria)}</span>
-              <span class="product-icon">${p.icono || "🧉"}</span>
-              <img src="${escapeHtml(p.imagen)}" alt="${escapeHtml(p.nombre)} ${escapeHtml(p.peso)}" onerror="this.closest('.media').classList.add('no-image')">
+            <div class="media">
+              ${p.etiqueta ? `<span class="tag">${p.etiqueta}</span>` : ""}
+              ${!p.stock ? `<span class="tag tag-stock">Sin stock</span>` : ""}
+              ${mediaHTML(p)}
             </div>
             <div class="content">
-              <h3>${escapeHtml(p.nombre)} <span class="weight">${escapeHtml(p.peso)}</span></h3>
-              <p class="desc">${escapeHtml(p.descripcion)}</p>
-              <div class="chips">
-                ${p.notas.map(n => `<span class="chip">${escapeHtml(n)}</span>`).join("")}
-              </div>
+              <div class="category">${p.categoria === "yerba" ? "Yerba" : "Accesorio"}</div>
+              <h3>${p.nombre} <span class="weight">· ${p.peso}</span></h3>
+              <p class="desc">${p.descripcion}</p>
+              <div class="chips">${p.notas.map(n => `<span class="chip">${n}</span>`).join("")}</div>
               <div class="price-row">
-                <div class="price ${Number(p.precio) > 0 ? "" : "consultar"}">${precioTexto(p.precio)}</div>
-                <div class="${p.stock ? "stock-ok" : "stock-no"}">${p.stock ? "Stock disponible" : "Sin stock"}</div>
+                <div class="${sinPrecio ? "consult-price" : "price"}">${sinPrecio ? "Consultar precio" : ars(p.precio)}</div>
+                <div class="${p.stock ? "stock-ok" : "stock-no"}">${p.stock ? "Stock disponible" : `<span class="stock-ribbon">⛔ Sin stock</span>`}</div>
               </div>
-              <div class="qty">
-                <button aria-label="Restar" onclick="changeQty('${p.id}', -1)">−</button>
-                <span id="qty-${p.id}">${cant}</span>
-                <button aria-label="Sumar" onclick="changeQty('${p.id}', 1)">+</button>
-              </div>
-              <button class="primary-btn" onclick="addCart('${p.id}')">Agregar al carrito</button>
+              ${sinPrecio ? "" : `<div class="qty"><button onclick="changeQty('${p.id}', -1)">−</button><span id="qty-${p.id}">${cant}</span><button onclick="changeQty('${p.id}', 1)">+</button></div>`}
+              <button class="${!p.stock ? "danger-btn" : "primary-btn"}" onclick="${sinPrecio ? `consultarProducto('${p.id}')` : `addCart('${p.id}')`}">${!p.stock ? "Sin stock" : sinPrecio ? "Consultar" : "Agregar al carrito"}</button>
             </div>
-          </article>
-        `;
+          </article>`;
       }).join("");
-    }
-
-    function limpiarFiltros() {
-      categoriaActiva = "todos";
-      busqueda = "";
-      document.getElementById("searchInput").value = "";
-      renderCategoryFilters();
-      renderProducts();
     }
 
     function changeQty(id, delta) {
@@ -1766,113 +479,69 @@
       if (span) span.textContent = cantidades[id];
     }
 
+    function consultarProducto(id) {
+      const producto = getProductos().find(p => p.id === id);
+      if (!producto) return;
+      const msg = `Hola La Cebada 👋 Quiero consultar precio por: ${producto.nombre}.`;
+      window.open(`https://wa.me/${TELEFONO_VENDEDOR}?text=${encodeURIComponent(msg)}`, "_blank");
+    }
+
     function addCart(id) {
       const producto = getProductos().find(p => p.id === id);
       if (!producto) return;
-      if (!producto.stock) {
-        alert("Este producto está sin stock");
-        return;
-      }
+      if (!producto.stock) return alert("Este producto está sin stock");
+      if (!producto.precio || producto.precio <= 0) return consultarProducto(id);
 
       const cant = cantidades[id] || 1;
       const existe = carrito.find(i => i.id === id);
-
       if (existe) {
         existe.cantidad += cant;
         existe.precio = producto.precio;
-        existe.nombre = producto.nombre;
-        existe.peso = producto.peso;
-        existe.imagen = producto.imagen;
-        existe.icono = producto.icono;
       } else {
-        carrito.push({
-          id: producto.id,
-          nombre: producto.nombre,
-          peso: producto.peso,
-          precio: producto.precio,
-          imagen: producto.imagen,
-          icono: producto.icono,
-          cantidad: cant
-        });
+        carrito.push({id:producto.id,nombre:producto.nombre,peso:producto.peso,precio:producto.precio,imagen:producto.imagen,placeholder:producto.placeholder || "🧉",cantidad:cant});
       }
-
       cantidades[id] = 1;
-      saveCantidades();
-      saveCart();
-      renderProducts();
-      renderCart();
-      showToast(producto.nombre + " x" + cant + " agregado al carrito");
+      saveCantidades(); saveCart(); renderProducts(); renderCart(); showToast(producto.nombre + " x" + cant + " agregado al carrito");
     }
 
     function modCart(id, delta) {
-      carrito = carrito
-        .map(i => i.id === id ? { ...i, cantidad: i.cantidad + delta } : i)
-        .filter(i => i.cantidad > 0);
-      saveCart();
-      renderCart();
+      carrito = carrito.map(i => i.id === id ? {...i, cantidad:i.cantidad + delta} : i).filter(i => i.cantidad > 0);
+      saveCart(); renderCart();
     }
 
     function renderCart() {
       document.getElementById("cartBadge").textContent = totalCantidad();
       const items = document.getElementById("cartItems");
-      if (carrito.length === 0) {
-        items.innerHTML = "<p style='color:var(--muted)'>Tu carrito está vacío.</p>";
-      } else {
-        items.innerHTML = carrito.map(p => `
-          <div class="cart-item">
-            <img src="${escapeHtml(p.imagen)}" alt="${escapeHtml(p.nombre)}" onerror="this.outerHTML='<div style=&quot;width:58px;height:58px;border-radius:14px;background:#131913;display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0&quot;>${p.icono || "🧉"}</div>'">
-            <div class="cart-info">
-              <div class="cart-name">${escapeHtml(p.nombre)} · ${escapeHtml(p.peso)}</div>
-              <div class="cart-sub">Subtotal: ${subtotalTexto(p)}</div>
-            </div>
-            <div class="cart-controls">
-              <button class="mini-btn" onclick="modCart('${p.id}', -1)">−</button>
-              <span style="width:22px;text-align:center;font-weight:900">${p.cantidad}</span>
-              <button class="mini-btn" onclick="modCart('${p.id}', 1)">+</button>
-            </div>
-          </div>
-        `).join("");
-      }
-      document.getElementById("cartTotal").textContent = "Total: " + totalTexto();
-      document.getElementById("cartWarning").classList.toggle("show", tienePreciosAConfirmar());
+      if (carrito.length === 0) items.innerHTML = "<p style='color:var(--muted)'>Tu carrito está vacío.</p>";
+      else items.innerHTML = carrito.map(p => `
+        <div class="cart-item">
+          ${p.imagen ? `<img src="${p.imagen}" alt="${p.nombre}">` : `<div class="cart-icon-box">${p.placeholder || "🧉"}</div>`}
+          <div class="cart-info"><div class="cart-name">${p.nombre} · ${p.peso}</div><div class="cart-sub">Subtotal: ${ars(p.precio * p.cantidad)}</div></div>
+          <div class="cart-controls"><button class="mini-btn" onclick="modCart('${p.id}', -1)">−</button><span style="width:20px;text-align:center;font-weight:800">${p.cantidad}</span><button class="mini-btn" onclick="modCart('${p.id}', 1)">+</button></div>
+        </div>`).join("");
+      document.getElementById("cartTotal").textContent = "Total: " + ars(totalPrecio());
       updateCheckoutSummary();
     }
 
-    function openCart() {
-      document.getElementById("cartOverlay").classList.add("show");
-      document.getElementById("cartDrawer").classList.add("show");
-    }
-
-    function closeCart() {
-      document.getElementById("cartOverlay").classList.remove("show");
-      document.getElementById("cartDrawer").classList.remove("show");
-    }
+    function openCart(){ document.getElementById("cartOverlay").classList.add("show"); document.getElementById("cartDrawer").classList.add("show"); }
+    function closeCart(){ document.getElementById("cartOverlay").classList.remove("show"); document.getElementById("cartDrawer").classList.remove("show"); }
 
     function showStep(step) {
-      document.getElementById("stepOptions").style.display = "none";
-      document.getElementById("stepWhatsapp").style.display = "none";
-      document.getElementById("stepContact").style.display = "none";
-
-      if (step === "options") document.getElementById("stepOptions").style.display = "block";
-      if (step === "whatsapp") document.getElementById("stepWhatsapp").style.display = "block";
-      if (step === "contact") document.getElementById("stepContact").style.display = "block";
+      document.getElementById("stepOptions").classList.add("hidden");
+      document.getElementById("stepWhatsapp").classList.add("hidden");
+      document.getElementById("stepContact").classList.add("hidden");
+      if (step === "options") document.getElementById("stepOptions").classList.remove("hidden");
+      if (step === "whatsapp") document.getElementById("stepWhatsapp").classList.remove("hidden");
+      if (step === "contact") document.getElementById("stepContact").classList.remove("hidden");
     }
 
     function updateCheckoutSummary() {
-      document.getElementById("checkoutSummary").innerHTML = `
-        <div><strong>Productos:</strong> ${totalCantidad()}</div>
-        <div><strong>Total:</strong> ${totalTexto()}</div>
-        ${tienePreciosAConfirmar() ? "<div style='color:#ffe5aa;margin-top:6px'>Hay productos con precio a confirmar.</div>" : ""}
-      `;
+      document.getElementById("checkoutSummary").innerHTML = `<div><strong>Productos:</strong> ${totalCantidad()}</div><div><strong>Total:</strong> ${ars(totalPrecio())}</div>`;
     }
 
     function openCheckout() {
-      if (carrito.length === 0) {
-        alert("El carrito está vacío");
-        return;
-      }
-      updateCheckoutSummary();
-      showStep("options");
+      if (carrito.length === 0) return alert("El carrito está vacío");
+      updateCheckoutSummary(); showStep("options");
       document.getElementById("checkoutOverlay").classList.add("show");
       document.getElementById("checkoutModal").classList.add("show");
     }
@@ -1886,77 +555,25 @@
 
     function confirmarWhatsapp() {
       const nombre = document.getElementById("waName").value.trim();
-      if (!nombre) {
-        document.getElementById("waError").textContent = "Por favor ingresá tu nombre y apellido.";
-        return;
-      }
+      if (!nombre) return document.getElementById("waError").textContent = "Por favor ingresá tu nombre y apellido.";
       document.getElementById("waError").textContent = "";
-
       const fecha = new Date().toLocaleString("es-AR");
-      const avisoPrecio = tienePreciosAConfirmar()
-        ? "\n⚠️ Algunos productos tienen precio a confirmar."
-        : "";
-      const msg =
-        `¡Hola La Cebada! 👋 Quiero confirmar este pedido:\n\n` +
-        detalleTexto() +
-        `\n\n🧉 Total de productos: ${totalCantidad()}` +
-        `\n💰 Total estimado: ${totalTexto()}` +
-        avisoPrecio +
-        `\n👤 Cliente: ${nombre}` +
-        `\n🕒 ${fecha}\n\n¡Gracias!`;
-
+      const msg = `¡Hola La Cebada! 👋 Quiero confirmar este pedido:\n\n` + detalleTexto() + `\n\n🧉 Total de productos: ${totalCantidad()}\n💰 Total a abonar: ${ars(totalPrecio())}\n👤 Cliente: ${nombre}\n🕒 ${fecha}\n\n¡Gracias!`;
       window.open(`https://wa.me/${TELEFONO_VENDEDOR}?text=${encodeURIComponent(msg)}`, "_blank");
-
-      carrito = [];
-      saveCart();
-      renderCart();
-      closeCheckout();
-      closeCart();
-      document.getElementById("waName").value = "";
+      carrito = []; saveCart(); renderCart(); closeCheckout(); closeCart(); document.getElementById("waName").value = "";
     }
 
     async function confirmarContacto() {
       const nombre = document.getElementById("contactName").value.trim();
       const telefono = document.getElementById("contactPhone").value.trim();
-
-      if (!nombre || !telefono) {
-        document.getElementById("contactError").textContent = "Completá tu nombre y teléfono.";
-        return;
-      }
-      if (!validarTel(telefono)) {
-        document.getElementById("contactError").textContent = "El número de teléfono no parece válido.";
-        return;
-      }
-
+      if (!nombre || !telefono) return document.getElementById("contactError").textContent = "Completá tu nombre y teléfono.";
+      if (!validarTel(telefono)) return document.getElementById("contactError").textContent = "El número de teléfono no parece válido.";
       document.getElementById("contactError").textContent = "";
-
       try {
-        await fetch(WEBHOOK_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            tipo_confirmacion: "nos_comunicamos_con_vos",
-            cliente: nombre,
-            telefono,
-            detalle: detalleTexto(),
-            cantidad_total: totalCantidad(),
-            total_estimado_texto: totalTexto(),
-            total_estimado_numero: totalPrecio(),
-            precio_a_confirmar: tienePreciosAConfirmar(),
-            fecha: new Date().toLocaleString("es-AR")
-          })
-        });
-      } catch (e) {
-        console.error(e);
-      }
-
-      carrito = [];
-      saveCart();
-      renderCart();
-      closeCheckout();
-      closeCart();
-      document.getElementById("contactName").value = "";
-      document.getElementById("contactPhone").value = "";
+        await fetch(WEBHOOK_URL, {method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({tipo_confirmacion:"nos_comunicamos_con_vos",cliente:nombre,telefono,detalle:detalleTexto(),cantidad_total:totalCantidad(),total:totalPrecio(),fecha:new Date().toLocaleString("es-AR")})});
+      } catch(e) { console.error(e); }
+      carrito = []; saveCart(); renderCart(); closeCheckout(); closeCart();
+      document.getElementById("contactName").value = ""; document.getElementById("contactPhone").value = "";
       document.getElementById("successModal").classList.add("show");
     }
 
@@ -1967,89 +584,48 @@
       document.getElementById("adminOverlay").classList.add("show");
       document.getElementById("adminPanel").classList.add("show");
     }
-
-    function closeAdmin() {
-      document.getElementById("adminOverlay").classList.remove("show");
-      document.getElementById("adminPanel").classList.remove("show");
-    }
+    function closeAdmin(){ document.getElementById("adminOverlay").classList.remove("show"); document.getElementById("adminPanel").classList.remove("show"); }
 
     function renderAdmin() {
-      const productos = getProductos();
       const wrap = document.getElementById("adminProducts");
-
-      wrap.innerHTML = productos.map(p => `
+      wrap.innerHTML = getProductos().map(p => `
         <div class="admin-product">
-          <div class="admin-product-title">${escapeHtml(p.nombre)} · ${escapeHtml(p.peso)}</div>
-          <input class="admin-small" type="number" id="price-${p.id}" value="${p.precio}" placeholder="Precio. Usá 0 para consultar" ${hojaConectada && stockDesdeHoja[p.id] ? "disabled" : ""}>
-          <input class="admin-small" type="text" id="tag-${p.id}" value="${escapeHtml(p.etiqueta || "")}" placeholder="Etiqueta" ${hojaConectada && stockDesdeHoja[p.id] ? "disabled" : ""}>
+          <div class="admin-product-title">${p.nombre} · ${p.peso}</div>
+          <input class="admin-small" type="number" id="price-${p.id}" value="${p.precio}" placeholder="Precio">
+          <input class="admin-small" type="text" id="tag-${p.id}" value="${p.etiqueta || ""}" placeholder="Etiqueta">
           <div class="admin-actions">
             <button class="secondary-btn" style="margin:0" onclick="saveProduct('${p.id}')">Guardar</button>
-            <button class="${p.stock ? 'danger-btn' : 'primary-btn'}" style="margin:0" onclick="toggleStock('${p.id}')">
-              ${p.stock ? 'Poner sin stock' : 'Activar stock'}
-            </button>
+            <button class="${p.stock ? 'danger-btn' : 'primary-btn'}" style="margin:0" onclick="toggleStock('${p.id}')">${p.stock ? 'Poner sin stock' : 'Activar stock'}</button>
           </div>
-        </div>
-      `).join("");
-
-      document.getElementById("adminTotalProducts").textContent = productos.length;
-      document.getElementById("adminStockProducts").textContent = productos.filter(p => p.stock).length;
-      document.getElementById("adminConsultProducts").textContent = productos.filter(p => Number(p.precio) <= 0).length;
+        </div>`).join("");
     }
 
     function saveProduct(id) {
-      if (hojaConectada && stockDesdeHoja[id]) {
-        showToast("Editá precio y etiqueta en la hoja de cálculo");
-        return;
-      }
-
       const price = parseInt(document.getElementById("price-" + id).value, 10);
       const tag = document.getElementById("tag-" + id).value.trim();
-
       if (!config[id]) config[id] = {};
-      config[id].precio = isNaN(price) ? 0 : Math.max(0, price);
+      config[id].precio = isNaN(price) ? 0 : price;
       config[id].etiqueta = tag;
-      saveConfig();
-      renderProducts();
-      renderAdmin();
-      renderCart();
-      showToast("Producto actualizado");
+      saveConfig(); renderProducts(); renderAdmin(); renderCart(); showToast("Producto actualizado");
     }
 
     function toggleStock(id) {
-      if (hojaConectada && stockDesdeHoja[id]) {
-        showToast("Editá el stock con si/no en la hoja de cálculo");
-        return;
-      }
-
       const producto = getProductos().find(p => p.id === id);
       if (!producto) return;
       if (!config[id]) config[id] = {};
       config[id].stock = !producto.stock;
-      saveConfig();
-      renderProducts();
-      renderAdmin();
-      showToast(config[id].stock ? "Stock activado" : "Producto sin stock");
+      saveConfig(); renderProducts(); renderAdmin(); showToast(config[id].stock ? "Stock activado" : "Producto sin stock");
     }
 
     function restoreCatalog() {
       config = {};
-      saveConfig();
-      cargarStockDesdeHoja();
-      renderAdmin();
-      showToast("Catálogo actualizado desde la hoja");
+      saveConfig(); renderProducts(); renderAdmin(); renderCart(); showToast("Catálogo restaurado");
     }
 
     document.getElementById("openCartBtn").addEventListener("click", openCart);
-    document.getElementById("closeCartBtn").addEventListener("click", closeCart);
     document.getElementById("cartOverlay").addEventListener("click", closeCart);
-    document.getElementById("clearCartBtn").addEventListener("click", () => {
-      carrito = [];
-      saveCart();
-      renderCart();
-      showToast("Carrito vaciado");
-    });
+    document.getElementById("clearCartBtn").addEventListener("click", () => { carrito = []; saveCart(); renderCart(); showToast("Carrito vaciado"); });
     document.getElementById("checkoutBtn").addEventListener("click", openCheckout);
-
     document.getElementById("checkoutOverlay").addEventListener("click", closeCheckout);
     document.getElementById("goWhatsappBtn").addEventListener("click", () => showStep("whatsapp"));
     document.getElementById("goContactBtn").addEventListener("click", () => showStep("contact"));
@@ -2058,30 +634,16 @@
     document.getElementById("backFromContactBtn").addEventListener("click", () => showStep("options"));
     document.getElementById("sendWhatsappBtn").addEventListener("click", confirmarWhatsapp);
     document.getElementById("sendContactBtn").addEventListener("click", confirmarContacto);
-    document.getElementById("closeSuccessBtn").addEventListener("click", () => {
-      document.getElementById("successModal").classList.remove("show");
-    });
-
+    document.getElementById("closeSuccessBtn").addEventListener("click", () => { document.getElementById("successModal").classList.remove("show"); });
     document.getElementById("adminAccess").addEventListener("click", openAdmin);
     document.getElementById("adminOverlay").addEventListener("click", closeAdmin);
     document.getElementById("closeAdminBtn").addEventListener("click", closeAdmin);
-    document.getElementById("adminVaciarCarritoBtn").addEventListener("click", () => {
-      carrito = [];
-      saveCart();
-      renderCart();
-      showToast("Carrito vaciado");
-    });
+    document.getElementById("adminVaciarCarritoBtn").addEventListener("click", () => { carrito = []; saveCart(); renderCart(); showToast("Carrito vaciado"); });
     document.getElementById("adminRestaurarBtn").addEventListener("click", restoreCatalog);
-
-    document.getElementById("searchInput").addEventListener("input", (e) => {
-      busqueda = e.target.value;
-      renderProducts();
-    });
-
-    renderCategoryFilters();
-    renderProducts();
-    renderCart();
-    cargarStockDesdeHoja();
+    document.getElementById("searchInput").addEventListener("input", (e) => { textoBusqueda = e.target.value.trim().toLowerCase(); renderProducts(); });
+    document.querySelectorAll(".tab").forEach(btn => btn.addEventListener("click", () => { document.querySelectorAll(".tab").forEach(b => b.classList.remove("active")); btn.classList.add("active"); filtroActivo = btn.dataset.filter; renderProducts(); }));
+    document.querySelectorAll(".faq-question").forEach(btn => btn.addEventListener("click", () => btn.parentElement.classList.toggle("open")));
+    renderProducts(); renderCart();
   </script>
 </body>
 </html>
