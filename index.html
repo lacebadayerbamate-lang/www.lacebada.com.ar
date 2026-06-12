@@ -444,12 +444,13 @@
     <div class="admin-top"><h3>Panel de administrador</h3><button class="secondary-btn" id="closeAdminBtn" style="width:auto;margin:0">Cerrar</button></div>
     <div class="admin-grid">
       <div class="admin-card"><h4>Productos</h4><div id="adminProducts"></div></div>
-      <div class="admin-card"><h4>Acciones rápidas</h4><div class="admin-list"><div class="admin-list-item">Podés editar precio, etiqueta y stock de cada producto.</div><div class="admin-list-item">Los accesorios nuevos ya quedaron agregados al catálogo.</div><div class="admin-list-item">Si un precio queda en 0, la web muestra “Consultar precio”.</div></div><button class="secondary-btn" id="adminVaciarCarritoBtn">Vaciar carrito</button><button class="secondary-btn" id="adminRestaurarBtn">Restaurar catálogo original</button></div>
+      <div class="admin-card"><h4>Acciones rápidas</h4><div class="admin-list"><div class="admin-list-item">Precio, stock y etiqueta se actualizan desde Google Sheets.</div><div class="admin-list-item">Los productos nuevos ya usan sus imágenes reales del repositorio.</div><div class="admin-list-item">Si cambiás la planilla y recargás, la página toma los valores nuevos.</div></div><button class="secondary-btn" id="adminVaciarCarritoBtn">Vaciar carrito</button><button class="secondary-btn" id="adminRecargarBtn">Recargar stock</button></div>
     </div>
   </div>
   <script>
     const TELEFONO_VENDEDOR = "5493364370451";
     const WEBHOOK_URL = "https://hook.us2.make.com/ofufesknpyc3spbueo9q68v4bmasdhgu";
+    const STOCK_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQNWo2kZ0lxbKOUz00N29AqBN6clA2yf9BPmCX4ccaEf4-AyPYfiz0YNUqJzCIpQ5ZqFzx9xWgoFs0I/pub?gid=460073425&single=true&output=csv";
     const ADMIN_PASSWORD = "cebada1";
 
     const productosOriginales = [
@@ -464,14 +465,90 @@
 
     let filtroActivo = "todos";
     let textoBusqueda = "";
-    let config = JSON.parse(localStorage.getItem("cebada_config") || "{}");
+    let stockRemoto = {};
     let carrito = JSON.parse(localStorage.getItem("cebada_carrito") || "[]");
     let cantidades = JSON.parse(localStorage.getItem("cebada_cantidades") || "{}");
 
+    function normalizeKey(texto){
+      return String(texto || "")
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "");
+    }
+
+    function mapSheetId(raw){
+      const k = normalizeKey(raw);
+
+      if (k === "baldo") return "baldo";
+      if (k === "canarias") return "canarias";
+      if (k === "rei-premium") return "rei-premium";
+      if (k === "rei-clasica") return "rei-clasica";
+      if (k.includes("canasta-matera")) return "canasta-eco-cuero";
+      if (k.includes("bombillon-pico-loro")) return "bombillon-cincelado";
+      if (k.includes("bombilla-pico-loro")) return "bombilla-acero";
+
+      return k;
+    }
+
+    function parseCSV(text) {
+      const cleanText = text.replace(/^\uFEFF/, "").trim();
+      const lines = cleanText.split(/\r?\n/);
+      if (lines.length < 2) return [];
+
+      const headers = lines[0]
+        .split(",")
+        .map(h => h.replace(/^\uFEFF/, "").trim().toLowerCase());
+
+      return lines.slice(1).map(line => {
+        const values = line.split(",").map(v => v.trim());
+        const row = {};
+        headers.forEach((header, index) => {
+          row[header] = values[index] || "";
+        });
+        return row;
+      });
+    }
+
+    async function cargarStockDesdeSheets() {
+      try {
+        const url = STOCK_CSV_URL + "&t=" + Date.now();
+        const res = await fetch(url, { cache: "no-store" });
+        const text = await res.text();
+        const filas = parseCSV(text);
+
+        stockRemoto = {};
+
+        filas.forEach(f => {
+          const producto = mapSheetId(f.producto || "");
+          if (!producto) return;
+
+          stockRemoto[producto] = {
+            precio: Number(f.precio),
+            stock: String(f.stock || "").trim().toLowerCase() === "si",
+            etiqueta: String(f.etiqueta || "").trim()
+          };
+        });
+
+        console.log("stockRemoto:", stockRemoto);
+      } catch (error) {
+        console.error("Error cargando stock desde Google Sheets:", error);
+        stockRemoto = {};
+      }
+    }
+
     function getProductos() {
       return productosOriginales.map(p => {
-        const c = config[p.id] || {};
-        return {...p, precio:Number.isFinite(c.precio)?c.precio:p.precio, etiqueta:typeof c.etiqueta==="string"?c.etiqueta:p.etiqueta, stock:typeof c.stock==="boolean"?c.stock:p.stock};
+        const remoto = stockRemoto[p.id];
+        if (!remoto) return p;
+
+        return {
+          ...p,
+          precio: !isNaN(remoto.precio) && remoto.precio > 0 ? remoto.precio : p.precio,
+          etiqueta: remoto.etiqueta !== "" ? remoto.etiqueta : p.etiqueta,
+          stock: typeof remoto.stock === "boolean" ? remoto.stock : p.stock
+        };
       });
     }
 
@@ -483,7 +560,6 @@
       });
     }
 
-    function saveConfig(){ localStorage.setItem("cebada_config", JSON.stringify(config)); }
     function saveCart(){ localStorage.setItem("cebada_carrito", JSON.stringify(carrito)); }
     function saveCantidades(){ localStorage.setItem("cebada_cantidades", JSON.stringify(cantidades)); }
     function ars(n){ return "$" + Number(n).toLocaleString("es-AR"); }
@@ -659,35 +735,20 @@
       wrap.innerHTML = getProductos().map(p => `
         <div class="admin-product">
           <div class="admin-product-title">${p.nombre} · ${p.peso}</div>
-          <input class="admin-small" type="number" id="price-${p.id}" value="${p.precio}" placeholder="Precio">
-          <input class="admin-small" type="text" id="tag-${p.id}" value="${p.etiqueta || ""}" placeholder="Etiqueta">
-          <div class="admin-actions">
-            <button class="secondary-btn" style="margin:0" onclick="saveProduct('${p.id}')">Guardar</button>
-            <button class="${p.stock ? 'danger-btn' : 'primary-btn'}" style="margin:0" onclick="toggleStock('${p.id}')">${p.stock ? 'Poner sin stock' : 'Activar stock'}</button>
+          <div style="color:var(--muted);font-size:14px;line-height:1.5">
+            Precio: ${p.precio > 0 ? ars(p.precio) : "Consultar"}<br>
+            Stock: ${p.stock ? "Disponible" : "Sin stock"}<br>
+            Etiqueta: ${p.etiqueta || "-"}
           </div>
         </div>`).join("");
     }
 
-    function saveProduct(id) {
-      const price = parseInt(document.getElementById("price-" + id).value, 10);
-      const tag = document.getElementById("tag-" + id).value.trim();
-      if (!config[id]) config[id] = {};
-      config[id].precio = isNaN(price) ? 0 : price;
-      config[id].etiqueta = tag;
-      saveConfig(); renderProducts(); renderAdmin(); renderCart(); showToast("Producto actualizado");
-    }
-
-    function toggleStock(id) {
-      const producto = getProductos().find(p => p.id === id);
-      if (!producto) return;
-      if (!config[id]) config[id] = {};
-      config[id].stock = !producto.stock;
-      saveConfig(); renderProducts(); renderAdmin(); showToast(config[id].stock ? "Stock activado" : "Producto sin stock");
-    }
-
-    function restoreCatalog() {
-      config = {};
-      saveConfig(); renderProducts(); renderAdmin(); renderCart(); showToast("Catálogo restaurado");
+    async function recargarStockManual() {
+      await cargarStockDesdeSheets();
+      renderProducts();
+      renderAdmin();
+      renderCart();
+      showToast("Stock actualizado");
     }
 
     document.getElementById("openCartBtn").addEventListener("click", openCart);
@@ -707,11 +768,12 @@
     document.getElementById("adminOverlay").addEventListener("click", closeAdmin);
     document.getElementById("closeAdminBtn").addEventListener("click", closeAdmin);
     document.getElementById("adminVaciarCarritoBtn").addEventListener("click", () => { carrito = []; saveCart(); renderCart(); showToast("Carrito vaciado"); });
-    document.getElementById("adminRestaurarBtn").addEventListener("click", restoreCatalog);
+    document.getElementById("adminRecargarBtn").addEventListener("click", recargarStockManual);
     document.getElementById("searchInput").addEventListener("input", (e) => { textoBusqueda = e.target.value.trim().toLowerCase(); renderProducts(); });
     document.querySelectorAll(".tab").forEach(btn => btn.addEventListener("click", () => { document.querySelectorAll(".tab").forEach(b => b.classList.remove("active")); btn.classList.add("active"); filtroActivo = btn.dataset.filter; renderProducts(); }));
     document.querySelectorAll(".faq-question").forEach(btn => btn.addEventListener("click", () => btn.parentElement.classList.toggle("open")));
-    renderProducts(); renderCart();
+    async function init(){ await cargarStockDesdeSheets(); renderProducts(); renderCart(); }
+    init();
   </script>
 </body>
 </html>
